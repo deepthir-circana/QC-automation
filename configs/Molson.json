@@ -1,0 +1,71 @@
+{
+  "report_name": "Molson",
+  "expected_sa_stores": "",
+  "server": "10.106.10.49",
+  "database": "Imputations_sa",
+  "sources": {
+    "SA": {
+      "server": "10.106.10.49",
+      "database": "Imputations_sa",
+      "table": "Audit_Rollup_Final_3147",
+      "store_col": "STORE_NUMBER",
+      "upc_col": "UPC_NUMBER",
+      "grain": [
+        "STORE_NUMBER",
+        "UPC_NUMBER"
+      ],
+      "measures": [
+        "SHELF_FEET",
+        "Facing",
+        "CAPACITY"
+      ],
+      "delivery_col": "DELIVERY_ID"
+    },
+    "IMP": {
+      "server": "10.106.10.49",
+      "database": "Imputations_sa",
+      "table": "Audit_Delivery_Store_Sample",
+      "store_col": "store_number",
+      "delivery_col": "delivery_id",
+      "status_col": "imputed_status",
+      "imputed_value": "Y",
+      "delivery_value": "3147"
+    },
+    "MDM": {
+      "server": "10.106.11.180",
+      "database": "product_attributes",
+      "table": "MOLSON_BEER_MDM",
+      "upc_col": "upc_number",
+      "grain": [
+        "upc_number"
+      ]
+    },
+    "PROJ": {
+      "server": "10.106.10.49",
+      "database": "Audit_projections",
+      "table": "MLSN_COORS_2026_2442_Projections_Translation_allver",
+      "store_col": "store_number",
+      "weight_col": "weight",
+      "grain": [
+        "store_number",
+        "acv",
+        "weight"
+      ]
+    },
+    "POS": {
+      "server": "10.106.10.49",
+      "database": "Pointofsales_landing",
+      "table": "ISG_11717795433_Molson_2025_beer_thc_sales",
+      "store_col": "STORE",
+      "upc_col": "UPC",
+      "grain": [
+        "STORE",
+        "UPC"
+      ],
+      "measures": [
+        "UNITS",
+        "CURRENCY"
+      ]
+    }
+  }
+}

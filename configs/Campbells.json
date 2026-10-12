@@ -1,0 +1,157 @@
+{
+  "report_name": "Campbells",
+  "expected_sa_stores": "",
+  "expected_delivery_id": "3342",
+  "expected_task": "8916",
+  "expected_weeks": "2382, 2383, 2384",
+  "server": "10.106.10.49",
+  "database": "Imputations_sa",
+  "sources": {
+    "SA": {
+      "server": "10.106.10.49",
+      "database": "Imputations_sa",
+      "table": "Audit_Rollup_Final_3342",
+      "store_col": "STORE_NUMBER",
+      "upc_col": "UPC_NUMBER",
+      "grain": [
+        "STORE_NUMBER",
+        "AISLE",
+        "SIDE",
+        "SECTION",
+        "SHELF",
+        "UPC_SEQ",
+        "UPC_NUMBER"
+      ],
+      "measures": [
+        "Facing",
+        "CAPACITY",
+        "SHELF_FEET"
+      ],
+      "delivery_col": "DELIVERY_ID",
+      "task_col": "TASK_NUMBER",
+      "week_col": "IRI_WEEK",
+      "location_col": "LOCATION",
+      "category_col": "CATEGORY",
+      "delete_tstamp_col": "DELETE_TSTAMP",
+      "status_cd_col": "STATUS_CD",
+      "dropped_reason_col": "DROPPED_REASON",
+      "shelf_feet_col": "SHELF_FEET",
+      "facings_col": "Facing",
+      "capacity_col": "CAPACITY",
+      "upc_width_col": "UPC_WIDTH",
+      "units_deep_col": "UNITS_DEEP",
+      "units_high_col": "UNITS_HIGH"
+    },
+    "IMP": {
+      "server": "10.106.10.49",
+      "database": "Imputations_sa",
+      "table": "Audit_Delivery_Store_Sample",
+      "store_col": "store_number",
+      "delivery_col": "delivery_id",
+      "status_col": "imputed_status",
+      "imputed_value": "Y"
+    },
+    "PRIOR": {
+      "server": "10.106.10.49",
+      "database": "Imputations_sa",
+      "table": "Audit_Rollup_Final_3361",
+      "store_col": "STORE_NUMBER",
+      "shelf_feet_col": "SHELF_FEET",
+      "facings_col": "Facing",
+      "capacity_col": "CAPACITY"
+    },
+    "SHELFVAR": {
+      "server": "10.106.10.49",
+      "database": "Imputations_sa",
+      "table": "shelf_var_master",
+      "id_col": "shelf_var_id",
+      "desc_col": "description"
+    },
+    "MDM": {
+      "server": "10.106.11.180",
+      "database": "Product_Attributes",
+      "table": "Campbells_SSjuice_2026_MDM",
+      "upc_col": "upc_number",
+      "grain": [
+        "upc_number"
+      ],
+      "sys_col": "sys",
+      "vendor_col": "vendor",
+      "item_col": "item",
+      "product_col": "CAMPBELLS_BEVERAGE_"
+    },
+    "PROJ": {
+      "server": "10.106.10.49",
+      "database": "Audit_projections",
+      "table": "Campbells_11574201272_projections_V3803_2025",
+      "store_col": "store_number",
+      "weight_col": "weight",
+      "grain": [
+        "outlet",
+        "geo_level",
+        "cdm_geo",
+        "store_number",
+        "acv",
+        "weight"
+      ],
+      "geo_col": "cdm_geo",
+      "outlet_col": "outlet",
+      "geo_level_col": "geo_level",
+      "week_col": "iri_week",
+      "version_col": "version"
+    },
+    "POS": {
+      "server": "10.106.10.49",
+      "database": "pointofsales_landing",
+      "table": "Campbells_11574201272_2370_2382_2025_raw_sales",
+      "store_col": "STORE",
+      "upc_col": "UPC",
+      "grain": [
+        "STORE",
+        "WEEK",
+        "UPC"
+      ],
+      "measures": [
+        "UNITS",
+        "CURRENCY"
+      ],
+      "week_col": "UNITS",
+      "dollars_col": "CURRENCY",
+      "units_col": "CURRENCY"
+    }
+  },
+  "products": {
+    "SA": {
+      "owner": "",
+      "slo": ""
+    },
+    "MDM": {
+      "owner": "",
+      "slo": ""
+    },
+    "PROJ": {
+      "owner": "",
+      "slo": ""
+    },
+    "POS": {
+      "owner": "",
+      "slo": ""
+    },
+    "PREP": {
+      "owner": "",
+      "slo": ""
+    },
+    "STAGING": {
+      "owner": "",
+      "slo": ""
+    },
+    "PREDELIVERY": {
+      "owner": "",
+      "slo": ""
+    },
+    "DELIVERY": {
+      "owner": "",
+      "slo": ""
+    }
+  }
+}

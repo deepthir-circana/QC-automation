@@ -1,0 +1,42 @@
+[
+  {
+    "report_name": "Campbells",
+    "check_id": "LIVE_SA_IN_002_AISLE",
+    "run_id": "20261007T202857",
+    "is_correct": true,
+    "reason": "Other",
+    "comment": "Expected if this is showing null where category is null its valid",
+    "by": "Deepthi",
+    "at": "2026-10-07T20:30:00"
+  },
+  {
+    "report_name": "Campbells",
+    "check_id": "LIVE_SA_IN_002_AISLE",
+    "run_id": "20261008T204053",
+    "is_correct": true,
+    "reason": "Expected",
+    "comment": "Because category is null, so these will be valid",
+    "by": "",
+    "at": "2026-10-08T21:48:26"
+  },
+  {
+    "report_name": "Campbells",
+    "check_id": "LIVE_SA_IN_002_SIDE",
+    "run_id": "20261008T204053",
+    "is_correct": true,
+    "reason": "Expected",
+    "comment": "Category is null this should be valid we do not QC when category is null",
+    "by": "",
+    "at": "2026-10-08T21:49:06"
+  },
+  {
+    "report_name": "Campbells",
+    "check_id": "LIVE_PROJ_XS_002_store",
+    "run_id": "20261009T182910",
+    "is_correct": true,
+    "reason": "Expected",
+    "comment": "The sample stores in projections is different to collected audit stores hence this is expected we will see drop in stores in each and every client, this would be probably sorted with new projections process pull.",
+    "by": "Deepthi",
+    "at": "2026-10-09T18:32:02"
+  }
+]
