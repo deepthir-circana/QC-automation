@@ -40,7 +40,11 @@
       "capacity_col": "CAPACITY",
       "upc_width_col": "UPC_WIDTH",
       "units_deep_col": "UNITS_DEEP",
-      "units_high_col": "UNITS_HIGH"
+      "units_high_col": "UNITS_HIGH",
+      "aisle_col": "AISLE",
+      "side_col": "SIDE",
+      "section_col": "SECTION",
+      "shelf_col": "SHELF"
     },
     "IMP": {
       "server": "10.106.10.49",
@@ -78,7 +82,11 @@
       "sys_col": "sys",
       "vendor_col": "vendor",
       "item_col": "item",
-      "product_col": "CAMPBELLS_BEVERAGE_"
+      "product_col": [
+        "CAMPBELLS_BEVERAGE_",
+        "PRIVATE_LABLE_KIDS",
+        "JUICY_JUICE_MULTI_SERVE"
+      ]
     },
     "PROJ": {
       "server": "10.106.10.49",
@@ -153,5 +161,7 @@
       "owner": "",
       "slo": ""
     }
-  }
+  },
+  "rules_off": [],
+  "custom_checks": []
 }

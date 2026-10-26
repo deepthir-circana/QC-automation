@@ -1,0 +1,3933 @@
+{
+  "report_name": "Campbells",
+  "run_id": "20261023T162119",
+  "source": "LIVE",
+  "timestamp": "2026-10-23T16:21:19",
+  "summary": {
+    "total_checks": 76,
+    "passed": 68,
+    "failed": 8,
+    "critical_failures": 2,
+    "high_failures": 3,
+    "manual_required": 0,
+    "blocks_delivery": true,
+    "final_status": "FAIL",
+    "stage_runtime_s": {
+      "SA": 4.9,
+      "MDM": 2.4,
+      "PROJ": 3.1,
+      "POS": 5.3,
+      "SPEC": 57.9
+    },
+    "total_runtime_s": 88.3
+  },
+  "live_profile": {
+    "SA": {
+      "table": "Audit_Rollup_Final_3342",
+      "rows": 4117998,
+      "stores": 2930,
+      "upcs": 57350,
+      "collected_stores": 1951,
+      "imputed_stores": 979
+    },
+    "MDM": {
+      "table": "Campbells_SSjuice_2026_MDM",
+      "rows": 13922,
+      "upcs": 13922
+    },
+    "PROJ": {
+      "table": "Campbells_11574201272_projections_V3803_2025",
+      "rows": 31354,
+      "stores": 2850
+    },
+    "POS": {
+      "table": "Campbells_11574201272_2370_2382_2025_raw_sales",
+      "rows": 8587421,
+      "stores": 2930,
+      "upcs": 5515
+    }
+  },
+  "schema": {
+    "SA": {
+      "table": "Audit_Rollup_Final_3342",
+      "columns": {
+        "DELIVERY_ID": "int",
+        "TASK_NUMBER": "smallint",
+        "IRI_WEEK": "smallint",
+        "STORE_NUMBER": "bigint",
+        "EMP_ID": "varchar",
+        "DEVICE_ID": "varchar",
+        "OPEN_TSTAMP": "datetime",
+        "MOD_TAG": "varchar",
+        "COLLECT_METHOD": "varchar",
+        "CORRECTED_FLAG": "varchar",
+        "AISLE_KEY": "numeric",
+        "AISLETYPE": "int",
+        "AISLE": "int",
+        "UNNUMAISLE": "int",
+        "STOREWALL": "int",
+        "DISPLAYLOCATION": "int",
+        "AISLE_SIDE_KEY": "numeric",
+        "SIDE": "int",
+        "SECTION_KEY": "numeric",
+        "SECTION": "int",
+        "POSWIDTH": "int",
+        "CUSTOMPOSWIDTH": "int",
+        "DEPARTMENT": "int",
+        "METHOD": "int",
+        "SECTIONTYPE": "int",
+        "COOLERTYPE": "int",
+        "SHELFSECTIONWIDTH": "int",
+        "CUSTOMSHELFSECTIONWIDTH": "int",
+        "COFFINSECTIONWIDTH": "int",
+        "CUSTOMCOFFINSECTIONWIDTH": "int",
+        "UPRIGHTSECTIONWIDTH": "int",
+        "CUSTOMUPRIGHTSECTIONWIDTH": "int",
+        "LOCATION": "int",
+        "SECTIONDEPTH": "int",
+        "CUSTOMSECTIONDEPTH": "int",
+        "SHELF_KEY": "numeric",
+        "SHELF": "int",
+        "SHELFTYPE": "int",
+        "SHELFHEIGHT": "int",
+        "CUSTOMSHELFHEIGHT": "int",
+        "UPC_NUMBER": "bigint",
+        "UPC_SEQ": "int",
+        "UPC_DESCRIPTION": "varchar",
+        "CATEGORY": "varchar",
+        "SUBCATEGORY": "varchar",
+        "UPC_HEIGHT": "numeric",
+        "UPC_WIDTH": "numeric",
+        "UPC_DEPTH": "numeric",
+        "COLL_SEQ": "int",
+        "INIT_ADD_TSTAMP": "datetime",
+        "LAST_UPD_TSTAMP": "datetime",
+        "LAST_UPD_USER_ID": "varchar",
+        "QA_TSTAMP": "datetime",
+        "WAREHOUSE_TSTAMP": "datetime",
+        "DELIVERED_TSTAMP": "datetime",
+        "STATUS_CD": "varchar",
+        "DELETE_TSTAMP": "datetime",
+        "DROPPED_REASON": "varchar",
+        "OOS": "int",
+        "TOTAL_SHELVES": "int",
+        "KEYCAT_ID": "int",
+        "KEYCAT_NAME": "varchar",
+        "Dimension_Type_Flag": "varchar",
+        "QA_ID": "bigint",
+        "SHELF_FEET": "numeric",
+        "UNITS_DEEP": "int",
+        "UNITS_HIGH": "int",
+        "CAPACITY": "numeric",
+        "section_width": "int",
+        "section_depth": "int",
+        "shelf_height": "int",
+        "BusinessRules_Log": "varchar",
+        "Facing": "int",
+        "Row_id": "bigint",
+        "section_share": "numeric",
+        "Product_Coord_bottom_Left_X": "numeric",
+        "Product_Coord_bottom_left_Y": "numeric",
+        "Product_Coord_Width": "numeric",
+        "Product_Coord_Height": "numeric",
+        "Image_identifier": "varchar",
+        "shelf_position": "int"
+      }
+    },
+    "IMP": {
+      "table": "Audit_Delivery_Store_Sample",
+      "columns": {
+        "delivery_id": "int",
+        "store_number": "int",
+        "outlet_type": "varchar",
+        "imputed_status": "varchar",
+        "created_date": "datetime",
+        "delivery_action": "varchar"
+      }
+    },
+    "PRIOR": {
+      "table": "Audit_Rollup_Final_3361",
+      "columns": {
+        "DELIVERY_ID": "int",
+        "TASK_NUMBER": "smallint",
+        "IRI_WEEK": "smallint",
+        "STORE_NUMBER": "bigint",
+        "EMP_ID": "varchar",
+        "DEVICE_ID": "varchar",
+        "OPEN_TSTAMP": "datetime",
+        "MOD_TAG": "varchar",
+        "COLLECT_METHOD": "varchar",
+        "CORRECTED_FLAG": "varchar",
+        "AISLE_KEY": "numeric",
+        "AISLETYPE": "int",
+        "AISLE": "int",
+        "UNNUMAISLE": "int",
+        "STOREWALL": "int",
+        "DISPLAYLOCATION": "int",
+        "AISLE_SIDE_KEY": "numeric",
+        "SIDE": "int",
+        "SECTION_KEY": "numeric",
+        "SECTION": "int",
+        "POSWIDTH": "int",
+        "CUSTOMPOSWIDTH": "int",
+        "DEPARTMENT": "int",
+        "METHOD": "int",
+        "SECTIONTYPE": "int",
+        "COOLERTYPE": "int",
+        "SHELFSECTIONWIDTH": "int",
+        "CUSTOMSHELFSECTIONWIDTH": "int",
+        "COFFINSECTIONWIDTH": "int",
+        "CUSTOMCOFFINSECTIONWIDTH": "int",
+        "UPRIGHTSECTIONWIDTH": "int",
+        "CUSTOMUPRIGHTSECTIONWIDTH": "int",
+        "LOCATION": "int",
+        "SECTIONDEPTH": "int",
+        "CUSTOMSECTIONDEPTH": "int",
+        "SHELF_KEY": "numeric",
+        "SHELF": "int",
+        "SHELFTYPE": "int",
+        "SHELFHEIGHT": "int",
+        "CUSTOMSHELFHEIGHT": "int",
+        "UPC_NUMBER": "bigint",
+        "UPC_SEQ": "int",
+        "UPC_DESCRIPTION": "varchar",
+        "CATEGORY": "varchar",
+        "SUBCATEGORY": "varchar",
+        "UPC_HEIGHT": "numeric",
+        "UPC_WIDTH": "numeric",
+        "UPC_DEPTH": "numeric",
+        "COLL_SEQ": "int",
+        "INIT_ADD_TSTAMP": "datetime",
+        "LAST_UPD_TSTAMP": "datetime",
+        "LAST_UPD_USER_ID": "varchar",
+        "QA_TSTAMP": "datetime",
+        "WAREHOUSE_TSTAMP": "datetime",
+        "DELIVERED_TSTAMP": "datetime",
+        "STATUS_CD": "varchar",
+        "DELETE_TSTAMP": "datetime",
+        "DROPPED_REASON": "varchar",
+        "OOS": "int",
+        "TOTAL_SHELVES": "int",
+        "KEYCAT_ID": "int",
+        "KEYCAT_NAME": "varchar",
+        "Dimension_Type_Flag": "varchar",
+        "QA_ID": "bigint",
+        "SHELF_FEET": "numeric",
+        "UNITS_DEEP": "int",
+        "UNITS_HIGH": "int",
+        "CAPACITY": "numeric",
+        "section_width": "int",
+        "section_depth": "int",
+        "shelf_height": "int",
+        "BusinessRules_Log": "varchar",
+        "Facing": "int",
+        "Row_id": "bigint",
+        "section_share": "numeric",
+        "Product_Coord_bottom_Left_X": "numeric",
+        "Product_Coord_bottom_left_Y": "numeric",
+        "Product_Coord_Width": "numeric",
+        "Product_Coord_Height": "numeric",
+        "Image_identifier": "varchar",
+        "shelf_position": "int"
+      }
+    },
+    "SHELFVAR": {
+      "table": "shelf_var_master",
+      "columns": {
+        "shelf_var_id": "int",
+        "description": "varchar"
+      }
+    },
+    "MDM": {
+      "table": "Campbells_SSjuice_2026_MDM",
+      "columns": {
+        "Grocery": "nvarchar",
+        "Drug": "nvarchar",
+        "Mass": "nvarchar",
+        "C&G": "nvarchar",
+        "Walmart": "nvarchar",
+        "Club": "nvarchar",
+        "Custom_Flagging": "nvarchar",
+        "Custom_Flagging1": "nvarchar",
+        "ISG_Delivery_Category_Flagging": "nvarchar",
+        "ISG_Delivery_Sub_Category_Flagging": "nvarchar",
+        "Private_Label_Flag": "float",
+        "Alcohol_Flag": "float",
+        "Category_Flag": "nvarchar",
+        "SGVI": "float",
+        "sys": "float",
+        "gen": "float",
+        "vendor": "float",
+        "item": "float",
+        "upc_number": "float",
+        "item_dim_key": "float",
+        "hierarchy_id": "float",
+        "client_id": "float",
+        "BRAND": "nvarchar",
+        "CALORIE_LEVEL": "nvarchar",
+        "CARBONATION_INFO": "nvarchar",
+        "CATEGORY": "nvarchar",
+        "COUNT": "nvarchar",
+        "COUNT/SIZE": "nvarchar",
+        "DESCRIPTION": "nvarchar",
+        "ENERGY_CLAIM": "nvarchar",
+        "FLAVOR/SCENT_GROUPING": "nvarchar",
+        "FLAVOR_GROUPING": "nvarchar",
+        "FORM": "nvarchar",
+        "JUICE-CONTENT": "nvarchar",
+        "MANUFACTURER": "nvarchar",
+        "MULTI_VS_SINGLE": "nvarchar",
+        "ORGANIC_INFO": "nvarchar",
+        "PACK_TYPE": "nvarchar",
+        "PACKAGE": "nvarchar",
+        "SEGMENT": "nvarchar",
+        "SERV/COUNT/PKG": "nvarchar",
+        "SERVING": "nvarchar",
+        "SERVING/PACK": "nvarchar",
+        "SIZE_RANGE": "nvarchar",
+        "SIZE_RANGE_ENERGY_DRINKS": "nvarchar",
+        "SUB-BRAND": "nvarchar",
+        "TOTAL_OUNCE": "nvarchar",
+        "VOLUME_EQUIVALENCY_VALUE": "float",
+        "F49": "nvarchar",
+        "BEVERAGE": "nvarchar",
+        "SINGLE_SERVE": "nvarchar",
+        "MULTI_PACK_(single_serve)": "nvarchar",
+        "MULTI_SERVE_ALL_FAMILY,_KIDS,_ADULT": "nvarchar",
+        "SINGLE_SERVE_KIDS": "nvarchar",
+        "SINGLE_SERVE_ADULT_&_ALL_FAMILY": "nvarchar",
+        "MULTI_SERVE_ALL_FAMILY,_KIDS,_ADULT_x_GLASS_32oz": "nvarchar",
+        "GLASS_32oz": "nvarchar",
+        "CAMPBELLS_BEVERAGE_": "nvarchar",
+        "V8_ENERGY": "nvarchar",
+        "V8_VEG": "nvarchar",
+        "V8_VEG_MULTI_SERVE": "nvarchar",
+        "V8_VEG_SINGLE_SERVE": "nvarchar",
+        "V8_SPLASH": "nvarchar",
+        "V8_SPLASH_MULTI_SERVE": "nvarchar",
+        "V8_SPLASH_SINGLE_SERVE": "nvarchar",
+        "V8_BLENDS": "nvarchar",
+        "V8_BLENDS_MULTI_SERVE": "nvarchar",
+        "V8_BLENDS_SINGLE_SERVE": "nvarchar",
+        "CAMPBELLS_TOMATO_JUICE": "nvarchar",
+        "CAMPBELLS_TOMATO_JUICE_MULTI_SERVE": "nvarchar",
+        "CAMPBELLS_TOMATO_JUICE_SINGLE_SERVE": "nvarchar",
+        "OCEAN_SPRAY": "nvarchar",
+        "OCEAN_SPRAY_MULTI_SERVE": "nvarchar",
+        "OCEAN_SPRAY_SINGLE_SERVE": "nvarchar",
+        "HAWAIIAN_PUNCH": "nvarchar",
+        "HAWAIIAN_PUNCH_MULTI_SERVE": "nvarchar",
+        "HAWAIIAN_PUNCH_SINGLE_SERVE": "nvarchar",
+        "CAPRI_SUN": "nvarchar",
+        "KOOL_AID": "nvarchar",
+        "PRIVATE_LABEL": "nvarchar",
+        "PRIVATE_LABLE_KIDS": "nvarchar",
+        "PRIVATE_LABEL_ADULT": "nvarchar",
+        "PRIVATE_LABEL_ALL_FAMILY": "nvarchar",
+        "PRIVATE_LABEL_ALL_FAMILY_MULTI_SERVE": "nvarchar",
+        "PRIVATE_LABEL_ALL_FAMILY_SINGLE_SERVE": "nvarchar",
+        "MOTTS": "nvarchar",
+        "MOTTS_MULTI_SERVE": "nvarchar",
+        "MOTTS_SINGLE_SERVE": "nvarchar",
+        "WELCHS_": "nvarchar",
+        "WELCHS_MULTI_SERVE": "nvarchar",
+        "WELCHS_SINGLE_SERVE": "nvarchar",
+        "JUICY_JUICE": "nvarchar",
+        "JUICY_JUICE_MULTI_SERVE": "nvarchar",
+        "JUICY_JUICE_SINGLE_SERVE": "nvarchar",
+        "REGULAR_CALORIE": "nvarchar",
+        "REGULAR_CALORIE_MULTI_SERVE": "nvarchar",
+        "REGULAR_CALORIE_SINGLE_SERVE": "nvarchar",
+        "DIET": "nvarchar",
+        "DIET_MULTI_SERVE": "nvarchar",
+        "DIET_SINGLE_SERVE": "nvarchar",
+        "LOW/REDUCED_SUGAR": "nvarchar",
+        "LOW/REDUCED_SUGAR_MULTI_SERVE": "nvarchar",
+        "LOW/REDUCED_SUGAR_SINGLE_SERVE": "nvarchar",
+        "KIDS_MULTIPACK": "nvarchar",
+        "ADULT_&_FAMILY_MULTIPACK": "nvarchar",
+        "PRIVATE_LABEL_MULTI_SERVE": "nvarchar",
+        "NATIONAL_BRAND": "nvarchar",
+        "V8_ENERGY_MULTIPACK": "nvarchar",
+        "V8_Multipack_excl_V8_Energy_Multipack": "nvarchar",
+        "V8_Multiserve_excl_V8_Splash_Multiserve": "nvarchar",
+        "ZERO_SUGAR_": "nvarchar",
+        "ZERO_SUGAR_MULTI_SERVE": "nvarchar",
+        "ZERO_SUGAR_SINGLE_SERVE": "nvarchar",
+        "NOT_PREMIUM_JUICE": "nvarchar"
+      }
+    },
+    "PROJ": {
+      "table": "Campbells_11574201272_projections_V3803_2025",
+      "columns": {
+        "outlet": "nvarchar",
+        "geo_level": "nvarchar",
+        "cdm_geo": "nvarchar",
+        "vgkey": "bigint",
+        "version": "nvarchar",
+        "iri_week": "bigint",
+        "rma_name": "nvarchar",
+        "store_number": "int",
+        "acv": "float",
+        "weight": "nvarchar",
+        "projected_acv": "float",
+        "releasable": "nvarchar",
+        "load_timestamp": "datetime"
+      }
+    },
+    "POS": {
+      "table": "Campbells_11574201272_2370_2382_2025_raw_sales",
+      "columns": {
+        "STORE": "bigint",
+        "WEEK": "varchar",
+        "UPC": "bigint",
+        "UNITS": "decimal",
+        "CURRENCY": "decimal"
+      }
+    }
+  },
+  "checks": [
+    {
+      "check_id": "LIVE_SA_IN_000_10_106_10_49",
+      "rule": "IN-000",
+      "stage": "SA",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "INFO",
+      "message": "10.106.10.49: SQL Server 2016 (build 13.0.6465.1), Standard Edition (64-bit)",
+      "error_message": "10.106.10.49: SQL Server 2016 (build 13.0.6465.1), Standard Edition (64-bit)",
+      "affected_pct": 0.0,
+      "actual_value": null,
+      "expected_value": null,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-23T16:19:51"
+    },
+    {
+      "check_id": "LIVE_SA_IN_001",
+      "rule": "IN-001",
+      "stage": "SA",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "CRITICAL",
+      "message": "4,117,998 rows",
+      "error_message": "4,117,998 rows",
+      "affected_pct": 0.0,
+      "actual_value": 4117998,
+      "expected_value": null,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-23T16:19:52"
+    },
+    {
+      "check_id": "LIVE_SA_IN_002_STORE_NUMBER",
+      "rule": "IN-002",
+      "stage": "SA",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "CRITICAL",
+      "message": "STORE_NUMBER: 0 null rows",
+      "error_message": "STORE_NUMBER: 0 null rows",
+      "affected_pct": 0.0,
+      "actual_value": 0,
+      "expected_value": 0,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-23T16:19:55"
+    },
+    {
+      "check_id": "LIVE_SA_IN_002_UPC_NUMBER",
+      "rule": "IN-002",
+      "stage": "SA",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "CRITICAL",
+      "message": "UPC_NUMBER: 0 null rows",
+      "error_message": "UPC_NUMBER: 0 null rows",
+      "affected_pct": 0.0,
+      "actual_value": 0,
+      "expected_value": 0,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-23T16:19:55"
+    },
+    {
+      "check_id": "LIVE_SA_IN_002_AISLE",
+      "rule": "IN-002",
+      "stage": "SA",
+      "source": "LIVE",
+      "status": "FAIL",
+      "passed": false,
+      "severity": "CRITICAL",
+      "message": "AISLE: 64 null rows",
+      "error_message": "AISLE: 64 null rows",
+      "affected_pct": 0.0016,
+      "actual_value": 64,
+      "expected_value": 0,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-23T16:19:55"
+    },
+    {
+      "check_id": "LIVE_SA_IN_002_SIDE",
+      "rule": "IN-002",
+      "stage": "SA",
+      "source": "LIVE",
+      "status": "FAIL",
+      "passed": false,
+      "severity": "CRITICAL",
+      "message": "SIDE: 129 null rows",
+      "error_message": "SIDE: 129 null rows",
+      "affected_pct": 0.0031,
+      "actual_value": 129,
+      "expected_value": 0,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-23T16:19:55"
+    },
+    {
+      "check_id": "LIVE_SA_IN_002_SECTION",
+      "rule": "IN-002",
+      "stage": "SA",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "CRITICAL",
+      "message": "SECTION: 0 null rows",
+      "error_message": "SECTION: 0 null rows",
+      "affected_pct": 0.0,
+      "actual_value": 0,
+      "expected_value": 0,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-23T16:19:55"
+    },
+    {
+      "check_id": "LIVE_SA_IN_002_SHELF",
+      "rule": "IN-002",
+      "stage": "SA",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "CRITICAL",
+      "message": "SHELF: 0 null rows",
+      "error_message": "SHELF: 0 null rows",
+      "affected_pct": 0.0,
+      "actual_value": 0,
+      "expected_value": 0,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-23T16:19:55"
+    },
+    {
+      "check_id": "LIVE_SA_IN_002_UPC_SEQ",
+      "rule": "IN-002",
+      "stage": "SA",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "CRITICAL",
+      "message": "UPC_SEQ: 0 null rows",
+      "error_message": "UPC_SEQ: 0 null rows",
+      "affected_pct": 0.0,
+      "actual_value": 0,
+      "expected_value": 0,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-23T16:19:55"
+    },
+    {
+      "check_id": "LIVE_SA_IN_005_Facing",
+      "rule": "IN-005",
+      "stage": "SA",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "HIGH",
+      "message": "Facing: 0 negative values",
+      "error_message": "Facing: 0 negative values",
+      "affected_pct": 0.0,
+      "actual_value": 0,
+      "expected_value": 0,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-23T16:19:56"
+    },
+    {
+      "check_id": "LIVE_SA_IN_005_CAPACITY",
+      "rule": "IN-005",
+      "stage": "SA",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "HIGH",
+      "message": "CAPACITY: 0 negative values",
+      "error_message": "CAPACITY: 0 negative values",
+      "affected_pct": 0.0,
+      "actual_value": 0,
+      "expected_value": 0,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-23T16:19:56"
+    },
+    {
+      "check_id": "LIVE_SA_IN_005_SHELF_FEET",
+      "rule": "IN-005",
+      "stage": "SA",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "HIGH",
+      "message": "SHELF_FEET: 0 negative values",
+      "error_message": "SHELF_FEET: 0 negative values",
+      "affected_pct": 0.0,
+      "actual_value": 0,
+      "expected_value": 0,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-23T16:19:56"
+    },
+    {
+      "check_id": "LIVE_MDM_IN_000_10_106_11_180",
+      "rule": "IN-000",
+      "stage": "MDM",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "INFO",
+      "message": "10.106.11.180: SQL Server 2016 (build 13.0.6465.1), Standard Edition (64-bit)",
+      "error_message": "10.106.11.180: SQL Server 2016 (build 13.0.6465.1), Standard Edition (64-bit)",
+      "affected_pct": 0.0,
+      "actual_value": null,
+      "expected_value": null,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-23T16:19:56"
+    },
+    {
+      "check_id": "LIVE_MDM_IN_001",
+      "rule": "IN-001",
+      "stage": "MDM",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "CRITICAL",
+      "message": "13,922 rows",
+      "error_message": "13,922 rows",
+      "affected_pct": 0.0,
+      "actual_value": 13922,
+      "expected_value": null,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-23T16:19:57"
+    },
+    {
+      "check_id": "LIVE_MDM_IN_002_upc_number",
+      "rule": "IN-002",
+      "stage": "MDM",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "CRITICAL",
+      "message": "upc_number: 0 null rows",
+      "error_message": "upc_number: 0 null rows",
+      "affected_pct": 0.0,
+      "actual_value": 0,
+      "expected_value": 0,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-23T16:19:58"
+    },
+    {
+      "check_id": "LIVE_PROJ_IN_001",
+      "rule": "IN-001",
+      "stage": "PROJ",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "CRITICAL",
+      "message": "31,354 rows",
+      "error_message": "31,354 rows",
+      "affected_pct": 0.0,
+      "actual_value": 31354,
+      "expected_value": null,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-23T16:20:00"
+    },
+    {
+      "check_id": "LIVE_PROJ_IN_002_store_number",
+      "rule": "IN-002",
+      "stage": "PROJ",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "CRITICAL",
+      "message": "store_number: 0 null rows",
+      "error_message": "store_number: 0 null rows",
+      "affected_pct": 0.0,
+      "actual_value": 0,
+      "expected_value": 0,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-23T16:20:01"
+    },
+    {
+      "check_id": "LIVE_PROJ_IN_002_outlet",
+      "rule": "IN-002",
+      "stage": "PROJ",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "CRITICAL",
+      "message": "outlet: 0 null rows",
+      "error_message": "outlet: 0 null rows",
+      "affected_pct": 0.0,
+      "actual_value": 0,
+      "expected_value": 0,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-23T16:20:01"
+    },
+    {
+      "check_id": "LIVE_PROJ_IN_002_geo_level",
+      "rule": "IN-002",
+      "stage": "PROJ",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "CRITICAL",
+      "message": "geo_level: 0 null rows",
+      "error_message": "geo_level: 0 null rows",
+      "affected_pct": 0.0,
+      "actual_value": 0,
+      "expected_value": 0,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-23T16:20:01"
+    },
+    {
+      "check_id": "LIVE_PROJ_IN_002_cdm_geo",
+      "rule": "IN-002",
+      "stage": "PROJ",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "CRITICAL",
+      "message": "cdm_geo: 0 null rows",
+      "error_message": "cdm_geo: 0 null rows",
+      "affected_pct": 0.0,
+      "actual_value": 0,
+      "expected_value": 0,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-23T16:20:01"
+    },
+    {
+      "check_id": "LIVE_PROJ_IN_002_acv",
+      "rule": "IN-002",
+      "stage": "PROJ",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "CRITICAL",
+      "message": "acv: 0 null rows",
+      "error_message": "acv: 0 null rows",
+      "affected_pct": 0.0,
+      "actual_value": 0,
+      "expected_value": 0,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-23T16:20:01"
+    },
+    {
+      "check_id": "LIVE_PROJ_IN_002_weight",
+      "rule": "IN-002",
+      "stage": "PROJ",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "CRITICAL",
+      "message": "weight: 0 null rows",
+      "error_message": "weight: 0 null rows",
+      "affected_pct": 0.0,
+      "actual_value": 0,
+      "expected_value": 0,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-23T16:20:01"
+    },
+    {
+      "check_id": "LIVE_PROJ_PRJ_001",
+      "rule": "PRJ-001",
+      "stage": "PROJ",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "CRITICAL",
+      "message": "All projection weights are valid\n- Null: 0\n- Non-numeric: 0\n- Zero or negative: 0",
+      "error_message": "All projection weights are valid\n- Null: 0\n- Non-numeric: 0\n- Zero or negative: 0",
+      "affected_pct": 0.0,
+      "actual_value": 0,
+      "expected_value": 0,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-23T16:20:01"
+    },
+    {
+      "check_id": "LIVE_POS_IN_001",
+      "rule": "IN-001",
+      "stage": "POS",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "CRITICAL",
+      "message": "8,587,421 rows",
+      "error_message": "8,587,421 rows",
+      "affected_pct": 0.0,
+      "actual_value": 8587421,
+      "expected_value": null,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-23T16:20:04"
+    },
+    {
+      "check_id": "LIVE_POS_IN_002_STORE",
+      "rule": "IN-002",
+      "stage": "POS",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "CRITICAL",
+      "message": "STORE: 0 null rows",
+      "error_message": "STORE: 0 null rows",
+      "affected_pct": 0.0,
+      "actual_value": 0,
+      "expected_value": 0,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-23T16:20:06"
+    },
+    {
+      "check_id": "LIVE_POS_IN_002_UPC",
+      "rule": "IN-002",
+      "stage": "POS",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "CRITICAL",
+      "message": "UPC: 0 null rows",
+      "error_message": "UPC: 0 null rows",
+      "affected_pct": 0.0,
+      "actual_value": 0,
+      "expected_value": 0,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-23T16:20:06"
+    },
+    {
+      "check_id": "LIVE_POS_IN_002_WEEK",
+      "rule": "IN-002",
+      "stage": "POS",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "CRITICAL",
+      "message": "WEEK: 0 null rows",
+      "error_message": "WEEK: 0 null rows",
+      "affected_pct": 0.0,
+      "actual_value": 0,
+      "expected_value": 0,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-23T16:20:06"
+    },
+    {
+      "check_id": "LIVE_POS_IN_005_UNITS",
+      "rule": "IN-005",
+      "stage": "POS",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "HIGH",
+      "message": "UNITS: 0 negative values",
+      "error_message": "UNITS: 0 negative values",
+      "affected_pct": 0.0,
+      "actual_value": 0,
+      "expected_value": 0,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-23T16:20:07"
+    },
+    {
+      "check_id": "LIVE_POS_IN_005_CURRENCY",
+      "rule": "IN-005",
+      "stage": "POS",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "HIGH",
+      "message": "CURRENCY: 0 negative values",
+      "error_message": "CURRENCY: 0 negative values",
+      "affected_pct": 0.0,
+      "actual_value": 0,
+      "expected_value": 0,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-23T16:20:07"
+    },
+    {
+      "check_id": "LIVE_SA_SA001",
+      "rule": "SA001",
+      "stage": "SA",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "INFO",
+      "message": "Delivery ids match the expected value(s)\n- Found (1): 3342\n- Expected: 3342",
+      "error_message": "Delivery ids match the expected value(s)\n- Found (1): 3342\n- Expected: 3342",
+      "affected_pct": 0.0,
+      "actual_value": 1,
+      "expected_value": "3342",
+      "sample_failing_rows": [
+        {
+          "DELIVERY_ID": 3342,
+          "row_count": 4117998
+        }
+      ],
+      "logged_at": "2026-10-23T16:20:08"
+    },
+    {
+      "check_id": "LIVE_SA_SA002",
+      "rule": "SA002",
+      "stage": "SA",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "INFO",
+      "message": "Task numbers match the expected value(s)\n- Found (1): 8916\n- Expected: 8916",
+      "error_message": "Task numbers match the expected value(s)\n- Found (1): 8916\n- Expected: 8916",
+      "affected_pct": 0.0,
+      "actual_value": 1,
+      "expected_value": "8916",
+      "sample_failing_rows": [
+        {
+          "TASK_NUMBER": 8916,
+          "row_count": 4117998
+        }
+      ],
+      "logged_at": "2026-10-23T16:20:09"
+    },
+    {
+      "check_id": "LIVE_SA_SA003",
+      "rule": "SA003",
+      "stage": "SA",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "CRITICAL",
+      "message": "All 813,988 rows with a category have these columns null\n- DELETE_TSTAMP: 0 non-null rows\n- STATUS_CD: 0 non-null rows\n- DROPPED_REASON: 0 non-null rows",
+      "error_message": "All 813,988 rows with a category have these columns null\n- DELETE_TSTAMP: 0 non-null rows\n- STATUS_CD: 0 non-null rows\n- DROPPED_REASON: 0 non-null rows",
+      "affected_pct": 0.0,
+      "actual_value": 0,
+      "expected_value": 0,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-23T16:20:10"
+    },
+    {
+      "check_id": "LIVE_SA_SA004",
+      "rule": "SA004",
+      "stage": "SA",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "INFO",
+      "message": "Iri weeks match the expected value(s)\n- Found (3): 2382, 2383, 2384\n- Expected: 2382, 2383, 2384",
+      "error_message": "Iri weeks match the expected value(s)\n- Found (3): 2382, 2383, 2384\n- Expected: 2382, 2383, 2384",
+      "affected_pct": 0.0,
+      "actual_value": 3,
+      "expected_value": "2382, 2383, 2384",
+      "sample_failing_rows": [
+        {
+          "IRI_WEEK": 2382,
+          "row_count": 1501830
+        },
+        {
+          "IRI_WEEK": 2383,
+          "row_count": 1435743
+        },
+        {
+          "IRI_WEEK": 2384,
+          "row_count": 1180425
+        }
+      ],
+      "logged_at": "2026-10-23T16:20:11"
+    },
+    {
+      "check_id": "LIVE_SA_SA005",
+      "rule": "SA005",
+      "stage": "SA",
+      "source": "LIVE",
+      "status": "FAIL",
+      "passed": false,
+      "severity": "INFO",
+      "message": "1 of 3 SA locations do not resolve to exactly one description (10 SA rows)\n- Resolved to one description: 2\n- Not found in shelf_var_master, or description blank: 1 (10 SA rows) \u2192 (null)\n- Matched more than one description: 0 (0 SA rows)\n- IDs compared after trimming leading zeros; read-only, nothing is updated",
+      "error_message": "1 of 3 SA locations do not resolve to exactly one description (10 SA rows)\n- Resolved to one description: 2\n- Not found in shelf_var_master, or description blank: 1 (10 SA rows) \u2192 (null)\n- Matched more than one description: 0 (0 SA rows)\n- IDs compared after trimming leading zeros; read-only, nothing is updated",
+      "affected_pct": 0.0002,
+      "actual_value": 1,
+      "expected_value": 0,
+      "sample_failing_rows": [
+        {
+          "location": null,
+          "description": null,
+          "sa_rows": 10,
+          "issue": "not found or blank description"
+        },
+        {
+          "location": 16010,
+          "description": "MAIN Warm",
+          "sa_rows": 3718697,
+          "issue": "ok"
+        },
+        {
+          "location": 16012,
+          "description": "All Other Warm Location",
+          "sa_rows": 399291,
+          "issue": "ok"
+        }
+      ],
+      "logged_at": "2026-10-23T16:20:12"
+    },
+    {
+      "check_id": "LIVE_SA_SA006_grain",
+      "rule": "SA006",
+      "stage": "SA",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "CRITICAL",
+      "message": "No duplicates at grain\n- Rows in duplicate groups: 0 of 4,117,998\n- Grain: STORE_NUMBER, AISLE, SIDE, SECTION, SHELF, UPC_SEQ, UPC_NUMBER",
+      "error_message": "No duplicates at grain\n- Rows in duplicate groups: 0 of 4,117,998\n- Grain: STORE_NUMBER, AISLE, SIDE, SECTION, SHELF, UPC_SEQ, UPC_NUMBER",
+      "affected_pct": 0.0,
+      "actual_value": 0,
+      "expected_value": 0,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-23T16:20:13"
+    },
+    {
+      "check_id": "LIVE_SA_SA006_row",
+      "rule": "SA006",
+      "stage": "SA",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "CRITICAL",
+      "message": "No duplicate rows across all columns\n- Rows in duplicate groups: 0 of 4,117,998\n- Columns compared: 81",
+      "error_message": "No duplicate rows across all columns\n- Rows in duplicate groups: 0 of 4,117,998\n- Columns compared: 81",
+      "affected_pct": 0.0,
+      "actual_value": 0,
+      "expected_value": 0,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-23T16:20:30"
+    },
+    {
+      "check_id": "LIVE_SA_SA007",
+      "rule": "SA007",
+      "stage": "SA",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "CRITICAL",
+      "message": "SA non-imputed stores match collected stores (1,951)\n- Delivery: 3342\n- Collected, missing from SA: 0\n- In SA, neither collected nor imputed: 0",
+      "error_message": "SA non-imputed stores match collected stores (1,951)\n- Delivery: 3342\n- Collected, missing from SA: 0\n- In SA, neither collected nor imputed: 0",
+      "affected_pct": 0.0,
+      "actual_value": 1951,
+      "expected_value": 1951,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-23T16:20:32"
+    },
+    {
+      "check_id": "LIVE_SA_SA008",
+      "rule": "SA008",
+      "stage": "SA",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "CRITICAL",
+      "message": "Sample and SA stores match (2,930)\n- Delivery: 3342\n- Sample: 979 imputed (Y), 1,951 collected (null), 0 other status (excluded)\n- In sample, missing from SA: 0\n- In SA, not in sample: 0\n- Both imputed and collected: 0",
+      "error_message": "Sample and SA stores match (2,930)\n- Delivery: 3342\n- Sample: 979 imputed (Y), 1,951 collected (null), 0 other status (excluded)\n- In sample, missing from SA: 0\n- In SA, not in sample: 0\n- Both imputed and collected: 0",
+      "affected_pct": 0.0,
+      "actual_value": 2930,
+      "expected_value": 2930,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-23T16:20:32"
+    },
+    {
+      "check_id": "LIVE_SA_SA009_SHELF_FEET",
+      "rule": "SA009",
+      "stage": "SA",
+      "source": "LIVE",
+      "status": "FAIL",
+      "passed": false,
+      "severity": "HIGH",
+      "message": "SHELF_FEET: 49 of 919 imputed stores up more than 50% vs prior wave\n- Basis: store-level sum, change on prior-wave base\n- Imputed stores not in prior wave (not assessed): 60\n- Imputed stores not in current SA: 0",
+      "error_message": "SHELF_FEET: 49 of 919 imputed stores up more than 50% vs prior wave\n- Basis: store-level sum, change on prior-wave base\n- Imputed stores not in prior wave (not assessed): 60\n- Imputed stores not in current SA: 0",
+      "affected_pct": 5.3319,
+      "actual_value": 49,
+      "expected_value": 0,
+      "sample_failing_rows": [
+        {
+          "store": "161499",
+          "prior_wave": 12.41,
+          "current_wave": 66.91,
+          "per_change": 439.16
+        },
+        {
+          "store": "37090",
+          "prior_wave": 120.18,
+          "current_wave": 298.39,
+          "per_change": 148.29
+        },
+        {
+          "store": "114567",
+          "prior_wave": 62.55,
+          "current_wave": 149.97,
+          "per_change": 139.76
+        },
+        {
+          "store": "82337",
+          "prior_wave": 55.85,
+          "current_wave": 129.46,
+          "per_change": 131.8
+        },
+        {
+          "store": "89843",
+          "prior_wave": 111.54,
+          "current_wave": 249.74,
+          "per_change": 123.9
+        },
+        {
+          "store": "37159",
+          "prior_wave": 145.41,
+          "current_wave": 323.79,
+          "per_change": 122.67
+        },
+        {
+          "store": "49464",
+          "prior_wave": 181.12,
+          "current_wave": 394.97,
+          "per_change": 118.07
+        },
+        {
+          "store": "212178",
+          "prior_wave": 134.26,
+          "current_wave": 292.75,
+          "per_change": 118.05
+        },
+        {
+          "store": "212010",
+          "prior_wave": 134.26,
+          "current_wave": 292.75,
+          "per_change": 118.05
+        },
+        {
+          "store": "212199",
+          "prior_wave": 134.26,
+          "current_wave": 292.75,
+          "per_change": 118.05
+        }
+      ],
+      "logged_at": "2026-10-23T16:20:37"
+    },
+    {
+      "check_id": "LIVE_SA_SA009_Facing",
+      "rule": "SA009",
+      "stage": "SA",
+      "source": "LIVE",
+      "status": "FAIL",
+      "passed": false,
+      "severity": "HIGH",
+      "message": "Facing: 120 of 919 imputed stores up more than 50% vs prior wave\n- Basis: store-level sum, change on prior-wave base\n- Imputed stores not in prior wave (not assessed): 60\n- Imputed stores not in current SA: 0",
+      "error_message": "Facing: 120 of 919 imputed stores up more than 50% vs prior wave\n- Basis: store-level sum, change on prior-wave base\n- Imputed stores not in prior wave (not assessed): 60\n- Imputed stores not in current SA: 0",
+      "affected_pct": 13.0577,
+      "actual_value": 120,
+      "expected_value": 0,
+      "sample_failing_rows": [
+        {
+          "store": "59293",
+          "prior_wave": 1026.0,
+          "current_wave": 3603.0,
+          "per_change": 251.17
+        },
+        {
+          "store": "114567",
+          "prior_wave": 887.0,
+          "current_wave": 2486.0,
+          "per_change": 180.27
+        },
+        {
+          "store": "37090",
+          "prior_wave": 1918.0,
+          "current_wave": 5265.0,
+          "per_change": 174.5
+        },
+        {
+          "store": "82337",
+          "prior_wave": 509.0,
+          "current_wave": 1352.0,
+          "per_change": 165.62
+        },
+        {
+          "store": "82148",
+          "prior_wave": 612.0,
+          "current_wave": 1613.0,
+          "per_change": 163.56
+        },
+        {
+          "store": "64887",
+          "prior_wave": 1929.0,
+          "current_wave": 5080.0,
+          "per_change": 163.35
+        },
+        {
+          "store": "72524",
+          "prior_wave": 1817.0,
+          "current_wave": 4775.0,
+          "per_change": 162.8
+        },
+        {
+          "store": "49464",
+          "prior_wave": 1961.0,
+          "current_wave": 5139.0,
+          "per_change": 162.06
+        },
+        {
+          "store": "94530",
+          "prior_wave": 974.0,
+          "current_wave": 2541.0,
+          "per_change": 160.88
+        },
+        {
+          "store": "161499",
+          "prior_wave": 226.0,
+          "current_wave": 587.0,
+          "per_change": 159.73
+        }
+      ],
+      "logged_at": "2026-10-23T16:20:37"
+    },
+    {
+      "check_id": "LIVE_SA_SA009_CAPACITY",
+      "rule": "SA009",
+      "stage": "SA",
+      "source": "LIVE",
+      "status": "FAIL",
+      "passed": false,
+      "severity": "HIGH",
+      "message": "CAPACITY: 64 of 919 imputed stores up more than 50% vs prior wave\n- Basis: store-level sum, change on prior-wave base\n- Imputed stores not in prior wave (not assessed): 60\n- Imputed stores not in current SA: 0",
+      "error_message": "CAPACITY: 64 of 919 imputed stores up more than 50% vs prior wave\n- Basis: store-level sum, change on prior-wave base\n- Imputed stores not in prior wave (not assessed): 60\n- Imputed stores not in current SA: 0",
+      "affected_pct": 6.9641,
+      "actual_value": 64,
+      "expected_value": 0,
+      "sample_failing_rows": [
+        {
+          "store": "161499",
+          "prior_wave": 127.0,
+          "current_wave": 707.0,
+          "per_change": 456.69
+        },
+        {
+          "store": "82337",
+          "prior_wave": 438.0,
+          "current_wave": 1818.0,
+          "per_change": 315.07
+        },
+        {
+          "store": "173937",
+          "prior_wave": 1047.0,
+          "current_wave": 3346.0,
+          "per_change": 219.58
+        },
+        {
+          "store": "89817",
+          "prior_wave": 1128.0,
+          "current_wave": 3298.0,
+          "per_change": 192.38
+        },
+        {
+          "store": "212010",
+          "prior_wave": 1267.0,
+          "current_wave": 3615.0,
+          "per_change": 185.32
+        },
+        {
+          "store": "212178",
+          "prior_wave": 1267.0,
+          "current_wave": 3615.0,
+          "per_change": 185.32
+        },
+        {
+          "store": "212199",
+          "prior_wave": 1267.0,
+          "current_wave": 3615.0,
+          "per_change": 185.32
+        },
+        {
+          "store": "37090",
+          "prior_wave": 1821.0,
+          "current_wave": 4715.0,
+          "per_change": 158.92
+        },
+        {
+          "store": "89843",
+          "prior_wave": 1670.0,
+          "current_wave": 4312.0,
+          "per_change": 158.2
+        },
+        {
+          "store": "49464",
+          "prior_wave": 2554.0,
+          "current_wave": 6514.0,
+          "per_change": 155.05
+        }
+      ],
+      "logged_at": "2026-10-23T16:20:37"
+    },
+    {
+      "check_id": "LIVE_SA_SA010",
+      "rule": "SA010",
+      "stage": "SA",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "INFO",
+      "message": "979 imputed stores in the sample\n- Delivery: 3342; imputed status = Y\n- Also in SA: 979 of 979",
+      "error_message": "979 imputed stores in the sample\n- Delivery: 3342; imputed status = Y\n- Also in SA: 979 of 979",
+      "affected_pct": 0.0,
+      "actual_value": 979,
+      "expected_value": null,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-23T16:20:37"
+    },
+    {
+      "check_id": "LIVE_SA_SA011",
+      "rule": "SA011",
+      "stage": "SA",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "INFO",
+      "message": "1,951 collected stores in the sample\n- Delivery: 3342; imputed status null\n- Also in SA: 1,951 of 1,951",
+      "error_message": "1,951 collected stores in the sample\n- Delivery: 3342; imputed status null\n- Also in SA: 1,951 of 1,951",
+      "affected_pct": 0.0,
+      "actual_value": 1951,
+      "expected_value": null,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-23T16:20:37"
+    },
+    {
+      "check_id": "LIVE_SA_SA012",
+      "rule": "SA012",
+      "stage": "SA",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "HIGH",
+      "message": "SHELF_FEET null on 0 of 813,988 rows with a category (0.0%)",
+      "error_message": "SHELF_FEET null on 0 of 813,988 rows with a category (0.0%)",
+      "affected_pct": 0.0,
+      "actual_value": 0,
+      "expected_value": 0,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-23T16:20:38"
+    },
+    {
+      "check_id": "LIVE_SA_SA013",
+      "rule": "SA013",
+      "stage": "SA",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "HIGH",
+      "message": "Facing null on 0 of 813,988 rows with a category (0.0%)",
+      "error_message": "Facing null on 0 of 813,988 rows with a category (0.0%)",
+      "affected_pct": 0.0,
+      "actual_value": 0,
+      "expected_value": 0,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-23T16:20:38"
+    },
+    {
+      "check_id": "LIVE_SA_SA014",
+      "rule": "SA014",
+      "stage": "SA",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "INFO",
+      "message": "2,930 distinct STORE_NUMBER\n- Null rows: 0 of 4,117,998",
+      "error_message": "2,930 distinct STORE_NUMBER\n- Null rows: 0 of 4,117,998",
+      "affected_pct": 0.0,
+      "actual_value": 2930,
+      "expected_value": null,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-23T16:20:39"
+    },
+    {
+      "check_id": "LIVE_SA_SA015",
+      "rule": "SA015",
+      "stage": "SA",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "INFO",
+      "message": "57,350 distinct UPC_NUMBER\n- Null rows: 0 of 4,117,998",
+      "error_message": "57,350 distinct UPC_NUMBER\n- Null rows: 0 of 4,117,998",
+      "affected_pct": 0.0,
+      "actual_value": 57350,
+      "expected_value": null,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-23T16:20:39"
+    },
+    {
+      "check_id": "LIVE_SA_SA016",
+      "rule": "SA016",
+      "stage": "SA",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "CRITICAL",
+      "message": "SHELF_FEET equals facings x upc_width / 12 on all 813,988 evaluated rows\n- Tolerance: 0, both sides rounded to 2 dp\n- Not evaluated (null input): 3,304,010 rows",
+      "error_message": "SHELF_FEET equals facings x upc_width / 12 on all 813,988 evaluated rows\n- Tolerance: 0, both sides rounded to 2 dp\n- Not evaluated (null input): 3,304,010 rows",
+      "affected_pct": 0.0,
+      "actual_value": 0,
+      "expected_value": 0,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-23T16:20:40"
+    },
+    {
+      "check_id": "LIVE_SA_SA017",
+      "rule": "SA017",
+      "stage": "SA",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "CRITICAL",
+      "message": "CAPACITY equals facings x units_deep x units_high on all 813,988 evaluated rows\n- Tolerance: 0\n- Not evaluated (null input): 3,304,010 rows",
+      "error_message": "CAPACITY equals facings x units_deep x units_high on all 813,988 evaluated rows\n- Tolerance: 0\n- Not evaluated (null input): 3,304,010 rows",
+      "affected_pct": 0.0,
+      "actual_value": 0,
+      "expected_value": 0,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-23T16:20:41"
+    },
+    {
+      "check_id": "LIVE_SA_SA018_STORE_NUMBER",
+      "rule": "SA018",
+      "stage": "SA",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "INFO",
+      "message": "STORE_NUMBER (grain) null on 0 of 813,988 rows with a category (0.0%)",
+      "error_message": "STORE_NUMBER (grain) null on 0 of 813,988 rows with a category (0.0%)",
+      "affected_pct": 0.0,
+      "actual_value": 0,
+      "expected_value": 0,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-23T16:20:42"
+    },
+    {
+      "check_id": "LIVE_SA_SA018_AISLE",
+      "rule": "SA018",
+      "stage": "SA",
+      "source": "LIVE",
+      "status": "FAIL",
+      "passed": false,
+      "severity": "INFO",
+      "message": "AISLE (grain) null on 3 of 813,988 rows with a category (0.0004%)",
+      "error_message": "AISLE (grain) null on 3 of 813,988 rows with a category (0.0004%)",
+      "affected_pct": 0.0004,
+      "actual_value": 3,
+      "expected_value": 0,
+      "sample_failing_rows": [
+        {
+          "STORE_NUMBER": 121302,
+          "UPC_NUMBER": 86000078030,
+          "category": "SS JUICE",
+          "AISLE": null
+        },
+        {
+          "STORE_NUMBER": 121302,
+          "UPC_NUMBER": 86000078032,
+          "category": "SS JUICE",
+          "AISLE": null
+        },
+        {
+          "STORE_NUMBER": 121302,
+          "UPC_NUMBER": 85047200403,
+          "category": "SS JUICE",
+          "AISLE": null
+        }
+      ],
+      "logged_at": "2026-10-23T16:20:42"
+    },
+    {
+      "check_id": "LIVE_SA_SA018_SIDE",
+      "rule": "SA018",
+      "stage": "SA",
+      "source": "LIVE",
+      "status": "FAIL",
+      "passed": false,
+      "severity": "INFO",
+      "message": "SIDE (grain) null on 3 of 813,988 rows with a category (0.0004%)",
+      "error_message": "SIDE (grain) null on 3 of 813,988 rows with a category (0.0004%)",
+      "affected_pct": 0.0004,
+      "actual_value": 3,
+      "expected_value": 0,
+      "sample_failing_rows": [
+        {
+          "STORE_NUMBER": 121302,
+          "UPC_NUMBER": 86000078030,
+          "category": "SS JUICE",
+          "SIDE": null
+        },
+        {
+          "STORE_NUMBER": 121302,
+          "UPC_NUMBER": 86000078032,
+          "category": "SS JUICE",
+          "SIDE": null
+        },
+        {
+          "STORE_NUMBER": 121302,
+          "UPC_NUMBER": 85047200403,
+          "category": "SS JUICE",
+          "SIDE": null
+        }
+      ],
+      "logged_at": "2026-10-23T16:20:43"
+    },
+    {
+      "check_id": "LIVE_SA_SA018_SECTION",
+      "rule": "SA018",
+      "stage": "SA",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "INFO",
+      "message": "SECTION (grain) null on 0 of 813,988 rows with a category (0.0%)",
+      "error_message": "SECTION (grain) null on 0 of 813,988 rows with a category (0.0%)",
+      "affected_pct": 0.0,
+      "actual_value": 0,
+      "expected_value": 0,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-23T16:20:43"
+    },
+    {
+      "check_id": "LIVE_SA_SA018_SHELF",
+      "rule": "SA018",
+      "stage": "SA",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "INFO",
+      "message": "SHELF (grain) null on 0 of 813,988 rows with a category (0.0%)",
+      "error_message": "SHELF (grain) null on 0 of 813,988 rows with a category (0.0%)",
+      "affected_pct": 0.0,
+      "actual_value": 0,
+      "expected_value": 0,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-23T16:20:43"
+    },
+    {
+      "check_id": "LIVE_SA_SA018_UPC_SEQ",
+      "rule": "SA018",
+      "stage": "SA",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "INFO",
+      "message": "UPC_SEQ (grain) null on 0 of 813,988 rows with a category (0.0%)",
+      "error_message": "UPC_SEQ (grain) null on 0 of 813,988 rows with a category (0.0%)",
+      "affected_pct": 0.0,
+      "actual_value": 0,
+      "expected_value": 0,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-23T16:20:43"
+    },
+    {
+      "check_id": "LIVE_SA_SA018_UPC_NUMBER",
+      "rule": "SA018",
+      "stage": "SA",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "INFO",
+      "message": "UPC_NUMBER (grain) null on 0 of 813,988 rows with a category (0.0%)",
+      "error_message": "UPC_NUMBER (grain) null on 0 of 813,988 rows with a category (0.0%)",
+      "affected_pct": 0.0,
+      "actual_value": 0,
+      "expected_value": 0,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-23T16:20:43"
+    },
+    {
+      "check_id": "LIVE_MDM_MDM001",
+      "rule": "MDM001",
+      "stage": "MDM",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "CRITICAL",
+      "message": "UPC is unique and complete\n- Distinct UPCs: 13,922\n- Rows of duplicated UPCs: 0 of 13,922\n- Null UPC rows: 0",
+      "error_message": "UPC is unique and complete\n- Distinct UPCs: 13,922\n- Rows of duplicated UPCs: 0 of 13,922\n- Null UPC rows: 0",
+      "affected_pct": 0.0,
+      "actual_value": 0,
+      "expected_value": 0,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-23T16:20:43"
+    },
+    {
+      "check_id": "LIVE_MDM_MDM002",
+      "rule": "MDM002",
+      "stage": "MDM",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "CRITICAL",
+      "message": "sys|vendor|item builds upc_number on all 13,922 rows\n- Build: sys (2) + vendor (5) + item (5), as bigint",
+      "error_message": "sys|vendor|item builds upc_number on all 13,922 rows\n- Build: sys (2) + vendor (5) + item (5), as bigint",
+      "affected_pct": 0.0,
+      "actual_value": 0,
+      "expected_value": 0,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-23T16:20:43"
+    },
+    {
+      "check_id": "LIVE_MDM_MDM003",
+      "rule": "MDM003",
+      "stage": "MDM",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "CRITICAL",
+      "message": "No duplicate rows across all columns\n- Rows in duplicate groups: 0 of 13,922\n- Columns compared: 114",
+      "error_message": "No duplicate rows across all columns\n- Rows in duplicate groups: 0 of 13,922\n- Columns compared: 114",
+      "affected_pct": 0.0,
+      "actual_value": 0,
+      "expected_value": 0,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-23T16:20:47"
+    },
+    {
+      "check_id": "LIVE_MDM_MDM004_CAMPBELLS_BEVERAGE_",
+      "rule": "MDM004",
+      "stage": "MDM",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "INFO",
+      "message": "CAMPBELLS_BEVERAGE_: 1 distinct non-null values\n- Null rows: 13,547 of 13,922\n- Most frequent: X (375)",
+      "error_message": "CAMPBELLS_BEVERAGE_: 1 distinct non-null values\n- Null rows: 13,547 of 13,922\n- Most frequent: X (375)",
+      "affected_pct": 0.0,
+      "actual_value": 1,
+      "expected_value": null,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-23T16:20:47",
+      "profile": {
+        "column": "CAMPBELLS_BEVERAGE_",
+        "distinct_count": 1,
+        "null_rows": 13547,
+        "truncated": false,
+        "values": [
+          {
+            "value": "X",
+            "row_count": 375
+          }
+        ]
+      }
+    },
+    {
+      "check_id": "LIVE_MDM_MDM004_PRIVATE_LABLE_KIDS",
+      "rule": "MDM004",
+      "stage": "MDM",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "INFO",
+      "message": "PRIVATE_LABLE_KIDS: 1 distinct non-null values\n- Null rows: 13,501 of 13,922\n- Most frequent: X (421)",
+      "error_message": "PRIVATE_LABLE_KIDS: 1 distinct non-null values\n- Null rows: 13,501 of 13,922\n- Most frequent: X (421)",
+      "affected_pct": 0.0,
+      "actual_value": 1,
+      "expected_value": null,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-23T16:20:48",
+      "profile": {
+        "column": "PRIVATE_LABLE_KIDS",
+        "distinct_count": 1,
+        "null_rows": 13501,
+        "truncated": false,
+        "values": [
+          {
+            "value": "X",
+            "row_count": 421
+          }
+        ]
+      }
+    },
+    {
+      "check_id": "LIVE_MDM_MDM004_JUICY_JUICE_MULTI_SERVE",
+      "rule": "MDM004",
+      "stage": "MDM",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "INFO",
+      "message": "JUICY_JUICE_MULTI_SERVE: 1 distinct non-null values\n- Null rows: 13,865 of 13,922\n- Most frequent: X (57)",
+      "error_message": "JUICY_JUICE_MULTI_SERVE: 1 distinct non-null values\n- Null rows: 13,865 of 13,922\n- Most frequent: X (57)",
+      "affected_pct": 0.0,
+      "actual_value": 1,
+      "expected_value": null,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-23T16:20:49",
+      "profile": {
+        "column": "JUICY_JUICE_MULTI_SERVE",
+        "distinct_count": 1,
+        "null_rows": 13865,
+        "truncated": false,
+        "values": [
+          {
+            "value": "X",
+            "row_count": 57
+          }
+        ]
+      }
+    },
+    {
+      "check_id": "LIVE_MDM_MDM005",
+      "rule": "MDM005",
+      "stage": "MDM",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "INFO",
+      "message": "For additional checks run the Streamlit MDM validation tool: https://mdm-validation-app.streamlit.app/",
+      "error_message": "For additional checks run the Streamlit MDM validation tool: https://mdm-validation-app.streamlit.app/",
+      "affected_pct": 0.0,
+      "actual_value": null,
+      "expected_value": null,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-23T16:20:49"
+    },
+    {
+      "check_id": "LIVE_PROJ_PRJ001",
+      "rule": "PRJ001",
+      "stage": "PROJ",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "INFO",
+      "message": "849 distinct geographies\n- Values: ADUSA Ahold Corp-RMA - Food, ADUSA Corp-RMA - Food, ADUSA Delhaize Corp-RMA - Food, ADUSA Food Lion Corp-RMA - Food, ADUSA Food Lion DC10-RMA - Food, ADUSA Food Lion DC20 and DC5-RMA - Food, ADUSA Food Lion DC30-RMA - Food, ADUSA Food Lion DC4-RMA - Food, ADUSA Food Lion DC7-RMA - Food, ADUSA Giant Food Div-RMA - Food, ADUSA Giant Food Rgn 10-RMA - Food, ADUSA Giant Food Rgn 9-RMA - Food, ADUSA Giant Martin's Div-RMA - Food, ADUSA Giant Martin's Rgn 13-RMA - Food, ADUSA Giant Martin's Rgn 14-RMA - Food \u2026",
+      "error_message": "849 distinct geographies\n- Values: ADUSA Ahold Corp-RMA - Food, ADUSA Corp-RMA - Food, ADUSA Delhaize Corp-RMA - Food, ADUSA Food Lion Corp-RMA - Food, ADUSA Food Lion DC10-RMA - Food, ADUSA Food Lion DC20 and DC5-RMA - Food, ADUSA Food Lion DC30-RMA - Food, ADUSA Food Lion DC4-RMA - Food, ADUSA Food Lion DC7-RMA - Food, ADUSA Giant Food Div-RMA - Food, ADUSA Giant Food Rgn 10-RMA - Food, ADUSA Giant Food Rgn 9-RMA - Food, ADUSA Giant Martin's Div-RMA - Food, ADUSA Giant Martin's Rgn 13-RMA - Food, ADUSA Giant Martin's Rgn 14-RMA - Food \u2026",
+      "affected_pct": 0.0,
+      "actual_value": 849,
+      "expected_value": null,
+      "sample_failing_rows": [
+        {
+          "cdm_geo": "ADUSA Ahold Corp-RMA - Food",
+          "row_count": 85
+        },
+        {
+          "cdm_geo": "ADUSA Corp-RMA - Food",
+          "row_count": 220
+        },
+        {
+          "cdm_geo": "ADUSA Delhaize Corp-RMA - Food",
+          "row_count": 135
+        },
+        {
+          "cdm_geo": "ADUSA Food Lion Corp-RMA - Food",
+          "row_count": 108
+        },
+        {
+          "cdm_geo": "ADUSA Food Lion DC10-RMA - Food",
+          "row_count": 26
+        },
+        {
+          "cdm_geo": "ADUSA Food Lion DC20 and DC5-RMA - Food",
+          "row_count": 31
+        },
+        {
+          "cdm_geo": "ADUSA Food Lion DC30-RMA - Food",
+          "row_count": 15
+        },
+        {
+          "cdm_geo": "ADUSA Food Lion DC4-RMA - Food",
+          "row_count": 24
+        },
+        {
+          "cdm_geo": "ADUSA Food Lion DC7-RMA - Food",
+          "row_count": 12
+        },
+        {
+          "cdm_geo": "ADUSA Giant Food Div-RMA - Food",
+          "row_count": 16
+        },
+        {
+          "cdm_geo": "ADUSA Giant Food Rgn 10-RMA - Food",
+          "row_count": 7
+        },
+        {
+          "cdm_geo": "ADUSA Giant Food Rgn 9-RMA - Food",
+          "row_count": 9
+        },
+        {
+          "cdm_geo": "ADUSA Giant Martin's Div-RMA - Food",
+          "row_count": 24
+        },
+        {
+          "cdm_geo": "ADUSA Giant Martin's Rgn 13-RMA - Food",
+          "row_count": 12
+        },
+        {
+          "cdm_geo": "ADUSA Giant Martin's Rgn 14-RMA - Food",
+          "row_count": 12
+        },
+        {
+          "cdm_geo": "ADUSA Hannaford Corp DC1-RMA - Food",
+          "row_count": 27
+        },
+        {
+          "cdm_geo": "ADUSA Hannaford MA-RMA - Food",
+          "row_count": 6
+        },
+        {
+          "cdm_geo": "ADUSA Hannaford ME/NH-RMA - Food",
+          "row_count": 11
+        },
+        {
+          "cdm_geo": "ADUSA Hannaford NY/VT-RMA - Food",
+          "row_count": 10
+        },
+        {
+          "cdm_geo": "ADUSA Stop & Shop Central Rgn-RMA - Food",
+          "row_count": 17
+        },
+        {
+          "cdm_geo": "ADUSA Stop & Shop Div-RMA - Food",
+          "row_count": 45
+        },
+        {
+          "cdm_geo": "ADUSA Stop & Shop North Rgn-RMA - Food",
+          "row_count": 17
+        },
+        {
+          "cdm_geo": "ADUSA Stop & Shop South Rgn-RMA - Food",
+          "row_count": 11
+        },
+        {
+          "cdm_geo": "Albany, NY - Food",
+          "row_count": 18
+        },
+        {
+          "cdm_geo": "Albany, NY - Hannaford - Food",
+          "row_count": 6
+        },
+        {
+          "cdm_geo": "Albany, NY - Price Chopper - Food",
+          "row_count": 7
+        },
+        {
+          "cdm_geo": "AlbertsonsCo Acme D1, D3, D5-RMA - Food",
+          "row_count": 9
+        },
+        {
+          "cdm_geo": "AlbertsonsCo Acme D2, D6, D8-RMA - Food",
+          "row_count": 8
+        },
+        {
+          "cdm_geo": "AlbertsonsCo Acme-RMA - Food",
+          "row_count": 21
+        },
+        {
+          "cdm_geo": "AlbertsonsCo Bay Area-RMA - Food",
+          "row_count": 17
+        },
+        {
+          "cdm_geo": "AlbertsonsCo Corp w/ SLC-RMA - Food",
+          "row_count": 338
+        },
+        {
+          "cdm_geo": "AlbertsonsCo Corp-RMA - Food",
+          "row_count": 338
+        },
+        {
+          "cdm_geo": "AlbertsonsCo Dallas-RMA - Food",
+          "row_count": 14
+        },
+        {
+          "cdm_geo": "AlbertsonsCo DC-RMA - Food",
+          "row_count": 8
+        },
+        {
+          "cdm_geo": "AlbertsonsCo Denver All Other-RMA - Food",
+          "row_count": 14
+        },
+        {
+          "cdm_geo": "AlbertsonsCo Denver Div-RMA - Food",
+          "row_count": 19
+        },
+        {
+          "cdm_geo": "AlbertsonsCo East Washington-RMA - Food",
+          "row_count": 13
+        },
+        {
+          "cdm_geo": "AlbertsonsCo Eastern-RMA - Food",
+          "row_count": 13
+        },
+        {
+          "cdm_geo": "AlbertsonsCo East-RMA - Food",
+          "row_count": 133
+        },
+        {
+          "cdm_geo": "AlbertsonsCo Haggen Div-RMA - Food",
+          "row_count": 7
+        },
+        {
+          "cdm_geo": "AlbertsonsCo Houston-RMA - Food",
+          "row_count": 6
+        },
+        {
+          "cdm_geo": "AlbertsonsCo Idaho-RMA - Food",
+          "row_count": 7
+        },
+        {
+          "cdm_geo": "AlbertsonsCo IM Div w/ SLC-RMA - Food",
+          "row_count": 17
+        },
+        {
+          "cdm_geo": "AlbertsonsCo IM Div w/out SLC-RMA - Food",
+          "row_count": 17
+        },
+        {
+          "cdm_geo": "AlbertsonsCo Inland Empire-RMA - Food",
+          "row_count": 7
+        },
+        {
+          "cdm_geo": "AlbertsonsCo Jewel Chicago-RMA - Food",
+          "row_count": 19
+        },
+        {
+          "cdm_geo": "AlbertsonsCo Jewel Div-RMA - Food",
+          "row_count": 22
+        },
+        {
+          "cdm_geo": "AlbertsonsCo Kings-RMA - Food",
+          "row_count": 5
+        },
+        {
+          "cdm_geo": "AlbertsonsCo Las Vegas-RMA - Food",
+          "row_count": 12
+        },
+        {
+          "cdm_geo": "AlbertsonsCo Los Angeles-RMA - Food",
+          "row_count": 21
+        },
+        {
+          "cdm_geo": "AlbertsonsCo Mid-Atlantic Div-RMA - Food",
+          "row_count": 39
+        },
+        {
+          "cdm_geo": "AlbertsonsCo Montana-RMA - Food",
+          "row_count": 10
+        },
+        {
+          "cdm_geo": "AlbertsonsCo Mountain West w/ Salt Lake City-RMA - Food",
+          "row_count": 36
+        },
+        {
+          "cdm_geo": "AlbertsonsCo Mountain West-RMA - Food",
+          "row_count": 36
+        },
+        {
+          "cdm_geo": "AlbertsonsCo NorCal All Other-RMA - Food",
+          "row_count": 11
+        },
+        {
+          "cdm_geo": "AlbertsonsCo NorCal Div-RMA - Food",
+          "row_count": 28
+        },
+        {
+          "cdm_geo": "AlbertsonsCo Orange County, CA-RMA - Food",
+          "row_count": 9
+        },
+        {
+          "cdm_geo": "AlbertsonsCo Phoenix-RMA - Food",
+          "row_count": 16
+        },
+        {
+          "cdm_geo": "AlbertsonsCo Portland All Other-RMA - Food",
+          "row_count": 8
+        },
+        {
+          "cdm_geo": "AlbertsonsCo Portland Div-RMA - Food",
+          "row_count": 17
+        },
+        {
+          "cdm_geo": "AlbertsonsCo Portland-RMA - Food",
+          "row_count": 9
+        },
+        {
+          "cdm_geo": "AlbertsonsCo San Diego-RMA - Food",
+          "row_count": 15
+        },
+        {
+          "cdm_geo": "AlbertsonsCo Seattle Div-RMA - Food",
+          "row_count": 30
+        },
+        {
+          "cdm_geo": "AlbertsonsCo Shaws Div w/ SM-RMA - Food",
+          "row_count": 28
+        },
+        {
+          "cdm_geo": "AlbertsonsCo Shaws Div-RMA - Food",
+          "row_count": 22
+        },
+        {
+          "cdm_geo": "AlbertsonsCo Shaws MA/RI-RMA - Food",
+          "row_count": 12
+        },
+        {
+          "cdm_geo": "AlbertsonsCo Shaws New England-RMA - Food",
+          "row_count": 10
+        },
+        {
+          "cdm_geo": "AlbertsonsCo SoCal Div-RMA - Food",
+          "row_count": 52
+        },
+        {
+          "cdm_geo": "AlbertsonsCo SoCal Pavilions-RMA - Food",
+          "row_count": 6
+        },
+        {
+          "cdm_geo": "AlbertsonsCo SoCal Vons-RMA - Food",
+          "row_count": 29
+        },
+        {
+          "cdm_geo": "AlbertsonsCo Southern All Other-RMA - Food",
+          "row_count": 6
+        },
+        {
+          "cdm_geo": "AlbertsonsCo Southern Div-RMA - Food",
+          "row_count": 30
+        },
+        {
+          "cdm_geo": "AlbertsonsCo Southwest Div-RMA - Food",
+          "row_count": 35
+        },
+        {
+          "cdm_geo": "AlbertsonsCo Star Market-RMA - Food",
+          "row_count": 6
+        },
+        {
+          "cdm_geo": "AlbertsonsCo United All Other-RMA - Food",
+          "row_count": 9
+        },
+        {
+          "cdm_geo": "AlbertsonsCo United Div-RMA - Food",
+          "row_count": 14
+        },
+        {
+          "cdm_geo": "AlbertsonsCo West w/ AK/HI-RMA - Food",
+          "row_count": 205
+        },
+        {
+          "cdm_geo": "AlbertsonsCo West w/ Salt Lake City-RMA - Food",
+          "row_count": 205
+        },
+        {
+          "cdm_geo": "AlbertsonsCo West w/ SLC and AK/HI-RMA - Food",
+          "row_count": 205
+        },
+        {
+          "cdm_geo": "AlbertsonsCo West Washington-RMA - Food",
+          "row_count": 17
+        },
+        {
+          "cdm_geo": "AlbertsonsCo West-RMA - Food",
+          "row_count": 205
+        },
+        {
+          "cdm_geo": "Alex Lee Corp-RMA - Food",
+          "row_count": 20
+        },
+        {
+          "cdm_geo": "Alex Lee Lowes-RMA - Food",
+          "row_count": 11
+        },
+        {
+          "cdm_geo": "Alex Lee W. Lee Flowers-RMA - Food",
+          "row_count": 9
+        },
+        {
+          "cdm_geo": "America's Food Basket Brooklyn-RMA - Food",
+          "row_count": 7
+        },
+        {
+          "cdm_geo": "America's Food Basket NY-RMA - Food",
+          "row_count": 10
+        },
+        {
+          "cdm_geo": "America's Food Basket Total-RMA - Food",
+          "row_count": 10
+        },
+        {
+          "cdm_geo": "Arizona - Food",
+          "row_count": 50
+        },
+        {
+          "cdm_geo": "Arkansas - Food",
+          "row_count": 20
+        },
+        {
+          "cdm_geo": "Atlanta, GA - Kroger - Food",
+          "row_count": 15
+        },
+        {
+          "cdm_geo": "Baltimore, MD/Washington D.C. - Food",
+          "row_count": 63
+        },
+        {
+          "cdm_geo": "Baltimore, MD/Washington D.C. - Food Lion - Food",
+          "row_count": 8
+        },
+        {
+          "cdm_geo": "Baltimore, MD/Washington D.C. - Giant Food/Landover - Food",
+          "row_count": 14
+        },
+        {
+          "cdm_geo": "Baltimore, MD/Washington D.C. - Safeway - Food",
+          "row_count": 13
+        },
+        {
+          "cdm_geo": "Baltimore, MD/Washington D.C. - Shoppers Food Warehouse - Food",
+          "row_count": 6
+        },
+        {
+          "cdm_geo": "Bashas' Corp-RMA - Food",
+          "row_count": 14
+        },
+        {
+          "cdm_geo": "Bashas' Food City-RMA - Food",
+          "row_count": 8
+        },
+        {
+          "cdm_geo": "Bashas'-RMA - Food",
+          "row_count": 6
+        },
+        {
+          "cdm_geo": "Big Y-RMA - Food",
+          "row_count": 10
+        },
+        {
+          "cdm_geo": "Birmingham/Montgomery, AL - Kroger - Food",
+          "row_count": 4
+        },
+        {
+          "cdm_geo": "Birmingham/Montgomery, AL - Winn Dixie - Food",
+          "row_count": 2
+        },
+        {
+          "cdm_geo": "Boise, ID - Albertsons - Food",
+          "row_count": 6
+        },
+        {
+          "cdm_geo": "Boise, ID - Food",
+          "row_count": 10
+        },
+        {
+          "cdm_geo": "Boston, MA - Food",
+          "row_count": 50
+        },
+        {
+          "cdm_geo": "Boston, MA - Hannaford - Food",
+          "row_count": 6
+        },
+        {
+          "cdm_geo": "Boston, MA - Shaws - Food",
+          "row_count": 8
+        },
+        {
+          "cdm_geo": "Boston, MA - Star Market - Food",
+          "row_count": 6
+        },
+        {
+          "cdm_geo": "Boston, MA - Stop & Shop - Food",
+          "row_count": 11
+        },
+        {
+          "cdm_geo": "Brookshire Grocery Corp-RMA - Food",
+          "row_count": 22
+        },
+        {
+          "cdm_geo": "Brookshire's Food Stores-RMA - Food",
+          "row_count": 13
+        },
+        {
+          "cdm_geo": "Buffalo/Rochester, NY - Food",
+          "row_count": 29
+        },
+        {
+          "cdm_geo": "Buffalo/Rochester, NY - Wegmans - Food",
+          "row_count": 8
+        },
+        {
+          "cdm_geo": "California - Food",
+          "row_count": 241
+        },
+        {
+          "cdm_geo": "California - Standard - Food",
+          "row_count": 241
+        },
+        {
+          "cdm_geo": "Charlotte, NC - Food",
+          "row_count": 27
+        },
+        {
+          "cdm_geo": "Charlotte, NC - Food Lion - Food",
+          "row_count": 14
+        },
+        {
+          "cdm_geo": "Charlotte, NC - Harris Teeter - Food",
+          "row_count": 9
+        },
+        {
+          "cdm_geo": "Chicago, IL - Food",
+          "row_count": 53
+        },
+        {
+          "cdm_geo": "Chicago, IL - Food 4 Less - Food",
+          "row_count": 5
+        },
+        {
+          "cdm_geo": "Chicago, IL - Jewel - Food",
+          "row_count": 17
+        },
+        {
+          "cdm_geo": "Chicago, IL - Strack & Van Til - Food",
+          "row_count": 7
+        },
+        {
+          "cdm_geo": "Cincinnati/Dayton, OH - Kroger - Food",
+          "row_count": 12
+        },
+        {
+          "cdm_geo": "Cleveland, OH - Food",
+          "row_count": 17
+        },
+        {
+          "cdm_geo": "Cleveland, OH - Giant Eagle - Food",
+          "row_count": 7
+        },
+        {
+          "cdm_geo": "Columbus, OH - Giant Eagle - Food",
+          "row_count": 6
+        },
+        {
+          "cdm_geo": "Columbus, OH - Kroger - Food",
+          "row_count": 9
+        },
+        {
+          "cdm_geo": "Connecticut - Food",
+          "row_count": 36
+        },
+        {
+          "cdm_geo": "Dallas/Ft. Worth, TX - Albertsons - Food",
+          "row_count": 7
+        },
+        {
+          "cdm_geo": "Dallas/Ft. Worth, TX - Food",
+          "row_count": 34
+        },
+        {
+          "cdm_geo": "Dallas/Ft. Worth, TX - Kroger - Food",
+          "row_count": 12
+        },
+        {
+          "cdm_geo": "Dallas/Ft. Worth, TX - Tom Thumb - Food",
+          "row_count": 8
+        },
+        {
+          "cdm_geo": "Demoulas-RMA - Food",
+          "row_count": 15
+        },
+        {
+          "cdm_geo": "Denver, CO - King Soopers - Food",
+          "row_count": 13
+        },
+        {
+          "cdm_geo": "Denver, CO - Safeway - Food",
+          "row_count": 15
+        },
+        {
+          "cdm_geo": "Des Moines, IA - Hy Vee - Food",
+          "row_count": 7
+        },
+        {
+          "cdm_geo": "Detroit, MI - Food",
+          "row_count": 28
+        },
+        {
+          "cdm_geo": "Detroit, MI - Kroger - Food",
+          "row_count": 12
+        },
+        {
+          "cdm_geo": "Dierbergs Markets-RMA - Food",
+          "row_count": 6
+        },
+        {
+          "cdm_geo": "East North Central - US Census Bureau Division - Food",
+          "row_count": 376
+        },
+        {
+          "cdm_geo": "East South Central - US Census Bureau Division - Food",
+          "row_count": 148
+        },
+        {
+          "cdm_geo": "Four B Corp-RMA - Food",
+          "row_count": 10
+        },
+        {
+          "cdm_geo": "Four B Hen House-RMA - Food",
+          "row_count": 5
+        },
+        {
+          "cdm_geo": "Four B Price Chopper-RMA - Food",
+          "row_count": 5
+        },
+        {
+          "cdm_geo": "Giant Eagle Cleveland, OH-RMA - Food",
+          "row_count": 11
+        },
+        {
+          "cdm_geo": "Giant Eagle Columbus, OH-RMA - Food",
+          "row_count": 6
+        },
+        {
+          "cdm_geo": "Giant Eagle Corp-RMA - Food",
+          "row_count": 31
+        },
+        {
+          "cdm_geo": "Giant Eagle Pittsburgh, PA-RMA - Food",
+          "row_count": 14
+        },
+        {
+          "cdm_geo": "Grand Rapids, MI - Family Fare/Spartan - Food",
+          "row_count": 7
+        },
+        {
+          "cdm_geo": "Grand Rapids, MI - Food",
+          "row_count": 26
+        },
+        {
+          "cdm_geo": "Great Lakes - Standard - Food",
+          "row_count": 376
+        },
+        {
+          "cdm_geo": "HAC Homeland-RMA - Food",
+          "row_count": 13
+        },
+        {
+          "cdm_geo": "HAC United-RMA - Food",
+          "row_count": 4
+        },
+        {
+          "cdm_geo": "HAC, Inc-RMA - Food",
+          "row_count": 17
+        },
+        {
+          "cdm_geo": "Harps Corp-RMA - Food",
+          "row_count": 8
+        },
+        {
+          "cdm_geo": "Harps Harps-RMA - Food",
+          "row_count": 8
+        },
+        {
+          "cdm_geo": "Harrisburg/Scranton, PA - Food",
+          "row_count": 40
+        },
+        {
+          "cdm_geo": "Harrisburg/Scranton, PA - Giant/Carlisle - Food",
+          "row_count": 11
+        },
+        {
+          "cdm_geo": "Harrisburg/Scranton, PA - Weis Markets - Food",
+          "row_count": 12
+        },
+        {
+          "cdm_geo": "Hartford, CT/Springfield, MA - Big Y - Food",
+          "row_count": 8
+        },
+        {
+          "cdm_geo": "Hartford, CT/Springfield, MA - Food",
+          "row_count": 36
+        },
+        {
+          "cdm_geo": "Hartford, CT/Springfield, MA - Stop & Shop - Food",
+          "row_count": 10
+        },
+        {
+          "cdm_geo": "Idaho - Food",
+          "row_count": 24
+        },
+        {
+          "cdm_geo": "Illinois - Food",
+          "row_count": 80
+        },
+        {
+          "cdm_geo": "Indiana - Food",
+          "row_count": 58
+        },
+        {
+          "cdm_geo": "Indianapolis, IN - Kroger - Food",
+          "row_count": 9
+        },
+        {
+          "cdm_geo": "Jacksonville, FL - Winn Dixie - Food",
+          "row_count": 6
+        },
+        {
+          "cdm_geo": "Kansas - Food",
+          "row_count": 30
+        },
+        {
+          "cdm_geo": "Kansas City, KS - Food",
+          "row_count": 27
+        },
+        {
+          "cdm_geo": "Kansas City, KS - Hy Vee - Food",
+          "row_count": 6
+        },
+        {
+          "cdm_geo": "Kansas City, KS - Price Chopper/Balls - Food",
+          "row_count": 5
+        },
+        {
+          "cdm_geo": "Knoxville, TN - Food",
+          "row_count": 18
+        },
+        {
+          "cdm_geo": "Knoxville, TN - Food City - Food",
+          "row_count": 8
+        },
+        {
+          "cdm_geo": "Knoxville, TN - Kroger - Food",
+          "row_count": 6
+        },
+        {
+          "cdm_geo": "KR Atlanta - All Other-RMA - Food",
+          "row_count": 8
+        },
+        {
+          "cdm_geo": "KR Atlanta-RMA - Food",
+          "row_count": 24
+        },
+        {
+          "cdm_geo": "KR Bakers-RMA - Food",
+          "row_count": 5
+        },
+        {
+          "cdm_geo": "KR Banner Total-RMA - Food",
+          "row_count": 189
+        },
+        {
+          "cdm_geo": "KR Central - All Other-RMA - Food",
+          "row_count": 9
+        },
+        {
+          "cdm_geo": "KR Central - Indianapolis Market-RMA - Food",
+          "row_count": 11
+        },
+        {
+          "cdm_geo": "KR Central-RMA - Food",
+          "row_count": 24
+        },
+        {
+          "cdm_geo": "KR Cincinnati-RMA - Food",
+          "row_count": 13
+        },
+        {
+          "cdm_geo": "KR City Market-RMA - Food",
+          "row_count": 7
+        },
+        {
+          "cdm_geo": "KR Columbus - All Other-RMA - Food",
+          "row_count": 9
+        },
+        {
+          "cdm_geo": "KR Columbus - Columbus Market-RMA - Food",
+          "row_count": 9
+        },
+        {
+          "cdm_geo": "KR Columbus-RMA - Food",
+          "row_count": 18
+        },
+        {
+          "cdm_geo": "KR Corp w/ Harris Teeter, Roundy's, Ruler, w/out Food 4 Less Corp-RMA - Food",
+          "row_count": 379
+        },
+        {
+          "cdm_geo": "KR Corp w/ Harris Teeter, Roundy's, Ruler-RMA - Food",
+          "row_count": 405
+        },
+        {
+          "cdm_geo": "KR Corp w/ Harris Teeter, Ruler, w/out Food 4 Less Corp-RMA - Food",
+          "row_count": 351
+        },
+        {
+          "cdm_geo": "KR Corp w/ Harris Teeter, Ruler, w/out Mariano's, Food 4 Less Midwest-RMA - Food",
+          "row_count": 393
+        },
+        {
+          "cdm_geo": "KR Corp w/ Harris Teeter, Ruler-RMA - Food",
+          "row_count": 377
+        },
+        {
+          "cdm_geo": "KR Corp w/ Roundy's w/out King Soopers/City Market-RMA - Food",
+          "row_count": 349
+        },
+        {
+          "cdm_geo": "KR Corp w/ Roundy's, w/out Food 4 Less Corp-RMA - Food",
+          "row_count": 343
+        },
+        {
+          "cdm_geo": "KR Corp w/ Roundy's-RMA - Food",
+          "row_count": 369
+        },
+        {
+          "cdm_geo": "KR Corp w/out Harris Teeter, Mariano's, Food 4 Less MW-RMA - Food",
+          "row_count": 357
+        },
+        {
+          "cdm_geo": "KR Corp w/out Harris Teeter, Roundy's, Food 4 Less-RMA - Food",
+          "row_count": 315
+        },
+        {
+          "cdm_geo": "KR Corp w/out Harris Teeter, Roundy's, Mariano's, Food 4 Less, Fred Meyer, Ralphs, QFC-RMA - Food",
+          "row_count": 261
+        },
+        {
+          "cdm_geo": "KR Corp-RMA - Food",
+          "row_count": 341
+        },
+        {
+          "cdm_geo": "KR Dallas-RMA - Food",
+          "row_count": 12
+        },
+        {
+          "cdm_geo": "KR Delta - All Other-RMA - Food",
+          "row_count": 6
+        },
+        {
+          "cdm_geo": "KR Delta - Little Rock Market-RMA - Food",
+          "row_count": 7
+        }
+      ],
+      "logged_at": "2026-10-23T16:20:49"
+    },
+    {
+      "check_id": "LIVE_PROJ_PRJ002",
+      "rule": "PRJ002",
+      "stage": "PROJ",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "INFO",
+      "message": "2,850 distinct store_number\n- Null rows: 0 of 31,354",
+      "error_message": "2,850 distinct store_number\n- Null rows: 0 of 31,354",
+      "affected_pct": 0.0,
+      "actual_value": 2850,
+      "expected_value": null,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-23T16:20:50"
+    },
+    {
+      "check_id": "LIVE_PROJ_PRJ003",
+      "rule": "PRJ003",
+      "stage": "PROJ",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "INFO",
+      "message": "3 distinct outlets\n- Values: FOOD, MASS, WALM",
+      "error_message": "3 distinct outlets\n- Values: FOOD, MASS, WALM",
+      "affected_pct": 0.0,
+      "actual_value": 3,
+      "expected_value": null,
+      "sample_failing_rows": [
+        {
+          "outlet": "FOOD",
+          "row_count": 23344
+        },
+        {
+          "outlet": "MASS",
+          "row_count": 722
+        },
+        {
+          "outlet": "WALM",
+          "row_count": 7288
+        }
+      ],
+      "logged_at": "2026-10-23T16:20:50"
+    },
+    {
+      "check_id": "LIVE_PROJ_PRJ004",
+      "rule": "PRJ004",
+      "stage": "PROJ",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "INFO",
+      "message": "6 distinct geo levels\n- Values: Country, KeyAccount, Market, Region, RMA, State",
+      "error_message": "6 distinct geo levels\n- Values: Country, KeyAccount, Market, Region, RMA, State",
+      "affected_pct": 0.0,
+      "actual_value": 6,
+      "expected_value": null,
+      "sample_failing_rows": [
+        {
+          "geo_level": "Country",
+          "row_count": 2278
+        },
+        {
+          "geo_level": "KeyAccount",
+          "row_count": 1008
+        },
+        {
+          "geo_level": "Market",
+          "row_count": 1246
+        },
+        {
+          "geo_level": "Region",
+          "row_count": 6790
+        },
+        {
+          "geo_level": "RMA",
+          "row_count": 18362
+        },
+        {
+          "geo_level": "State",
+          "row_count": 1670
+        }
+      ],
+      "logged_at": "2026-10-23T16:20:51"
+    },
+    {
+      "check_id": "LIVE_PROJ_PRJ005",
+      "rule": "PRJ005",
+      "stage": "PROJ",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "INFO",
+      "message": "1 distinct IRI weeks\n- Values: 2382",
+      "error_message": "1 distinct IRI weeks\n- Values: 2382",
+      "affected_pct": 0.0,
+      "actual_value": 1,
+      "expected_value": null,
+      "sample_failing_rows": [
+        {
+          "iri_week": 2382,
+          "row_count": 31354
+        }
+      ],
+      "logged_at": "2026-10-23T16:20:52"
+    },
+    {
+      "check_id": "LIVE_PROJ_PRJ006",
+      "rule": "PRJ006",
+      "stage": "PROJ",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "CRITICAL",
+      "message": "No duplicate rows across all columns\n- Rows in duplicate groups: 0 of 31,354\n- Columns compared: 13",
+      "error_message": "No duplicate rows across all columns\n- Rows in duplicate groups: 0 of 31,354\n- Columns compared: 13",
+      "affected_pct": 0.0,
+      "actual_value": 0,
+      "expected_value": 0,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-23T16:20:55"
+    },
+    {
+      "check_id": "LIVE_PROJ_PRJ007",
+      "rule": "PRJ007",
+      "stage": "PROJ",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "INFO",
+      "message": "2 distinct versions\n- Values: 38.0, 38.03",
+      "error_message": "2 distinct versions\n- Values: 38.0, 38.03",
+      "affected_pct": 0.0,
+      "actual_value": 2,
+      "expected_value": null,
+      "sample_failing_rows": [
+        {
+          "version": "38.0",
+          "row_count": 28084
+        },
+        {
+          "version": "38.03",
+          "row_count": 3270
+        }
+      ],
+      "logged_at": "2026-10-23T16:20:56"
+    },
+    {
+      "check_id": "LIVE_POS_POS001",
+      "rule": "POS001",
+      "stage": "POS",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "INFO",
+      "message": "2,930 distinct stores, 5,515 distinct UPCs\n- Rows: 8,587,421",
+      "error_message": "2,930 distinct stores, 5,515 distinct UPCs\n- Rows: 8,587,421",
+      "affected_pct": 0.0,
+      "actual_value": 2930,
+      "expected_value": null,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-23T16:20:57"
+    },
+    {
+      "check_id": "LIVE_POS_POS002",
+      "rule": "POS002",
+      "stage": "POS",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "INFO",
+      "message": "5,515 distinct UPCs\n- Non-null UPC rows: 8,587,421\n- Null UPC rows: 0",
+      "error_message": "5,515 distinct UPCs\n- Non-null UPC rows: 8,587,421\n- Null UPC rows: 0",
+      "affected_pct": 0.0,
+      "actual_value": 8587421,
+      "expected_value": null,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-23T16:20:57"
+    },
+    {
+      "check_id": "LIVE_POS_POS003",
+      "rule": "POS003",
+      "stage": "POS",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "INFO",
+      "message": "741 distinct IRI weeks\n- Values: 0.0800, 0.1000, 0.1300, 0.1700, 0.2000, 0.2500, 0.3000, 0.3300, 0.3800, 0.4000, 0.5000, 0.5800, 0.6000, 0.6300, 0.6700 \u2026",
+      "error_message": "741 distinct IRI weeks\n- Values: 0.0800, 0.1000, 0.1300, 0.1700, 0.2000, 0.2500, 0.3000, 0.3300, 0.3800, 0.4000, 0.5000, 0.5800, 0.6000, 0.6300, 0.6700 \u2026",
+      "affected_pct": 0.0,
+      "actual_value": 741,
+      "expected_value": null,
+      "sample_failing_rows": [
+        {
+          "UNITS": 0.08,
+          "row_count": 5
+        },
+        {
+          "UNITS": 0.1,
+          "row_count": 8
+        },
+        {
+          "UNITS": 0.13,
+          "row_count": 1
+        },
+        {
+          "UNITS": 0.17,
+          "row_count": 1350
+        },
+        {
+          "UNITS": 0.2,
+          "row_count": 5
+        },
+        {
+          "UNITS": 0.25,
+          "row_count": 184
+        },
+        {
+          "UNITS": 0.3,
+          "row_count": 2
+        },
+        {
+          "UNITS": 0.33,
+          "row_count": 776
+        },
+        {
+          "UNITS": 0.38,
+          "row_count": 1
+        },
+        {
+          "UNITS": 0.4,
+          "row_count": 1
+        },
+        {
+          "UNITS": 0.5,
+          "row_count": 636
+        },
+        {
+          "UNITS": 0.58,
+          "row_count": 12
+        },
+        {
+          "UNITS": 0.6,
+          "row_count": 1
+        },
+        {
+          "UNITS": 0.63,
+          "row_count": 1
+        },
+        {
+          "UNITS": 0.67,
+          "row_count": 427
+        },
+        {
+          "UNITS": 0.75,
+          "row_count": 95
+        },
+        {
+          "UNITS": 0.83,
+          "row_count": 237
+        },
+        {
+          "UNITS": 0.88,
+          "row_count": 1
+        },
+        {
+          "UNITS": 1.0,
+          "row_count": 1952365
+        },
+        {
+          "UNITS": 1.17,
+          "row_count": 115
+        },
+        {
+          "UNITS": 1.25,
+          "row_count": 75
+        },
+        {
+          "UNITS": 1.33,
+          "row_count": 143
+        },
+        {
+          "UNITS": 1.5,
+          "row_count": 146
+        },
+        {
+          "UNITS": 1.67,
+          "row_count": 68
+        },
+        {
+          "UNITS": 1.7,
+          "row_count": 1
+        },
+        {
+          "UNITS": 1.75,
+          "row_count": 44
+        },
+        {
+          "UNITS": 1.83,
+          "row_count": 39
+        },
+        {
+          "UNITS": 2.0,
+          "row_count": 1460454
+        },
+        {
+          "UNITS": 2.17,
+          "row_count": 21
+        },
+        {
+          "UNITS": 2.25,
+          "row_count": 43
+        },
+        {
+          "UNITS": 2.33,
+          "row_count": 28
+        },
+        {
+          "UNITS": 2.5,
+          "row_count": 38
+        },
+        {
+          "UNITS": 2.67,
+          "row_count": 22
+        },
+        {
+          "UNITS": 2.75,
+          "row_count": 20
+        },
+        {
+          "UNITS": 2.83,
+          "row_count": 9
+        },
+        {
+          "UNITS": 3.0,
+          "row_count": 1057011
+        },
+        {
+          "UNITS": 3.17,
+          "row_count": 11
+        },
+        {
+          "UNITS": 3.25,
+          "row_count": 8
+        },
+        {
+          "UNITS": 3.33,
+          "row_count": 14
+        },
+        {
+          "UNITS": 3.5,
+          "row_count": 12
+        },
+        {
+          "UNITS": 3.67,
+          "row_count": 11
+        },
+        {
+          "UNITS": 3.75,
+          "row_count": 17
+        },
+        {
+          "UNITS": 3.83,
+          "row_count": 5
+        },
+        {
+          "UNITS": 4.0,
+          "row_count": 796643
+        },
+        {
+          "UNITS": 4.08,
+          "row_count": 1
+        },
+        {
+          "UNITS": 4.17,
+          "row_count": 7
+        },
+        {
+          "UNITS": 4.25,
+          "row_count": 3
+        },
+        {
+          "UNITS": 4.33,
+          "row_count": 1
+        },
+        {
+          "UNITS": 4.5,
+          "row_count": 4
+        },
+        {
+          "UNITS": 4.67,
+          "row_count": 2
+        },
+        {
+          "UNITS": 4.75,
+          "row_count": 3
+        },
+        {
+          "UNITS": 4.83,
+          "row_count": 1
+        },
+        {
+          "UNITS": 5.0,
+          "row_count": 599190
+        },
+        {
+          "UNITS": 5.17,
+          "row_count": 1
+        },
+        {
+          "UNITS": 5.25,
+          "row_count": 2
+        },
+        {
+          "UNITS": 5.33,
+          "row_count": 1
+        },
+        {
+          "UNITS": 5.67,
+          "row_count": 2
+        },
+        {
+          "UNITS": 6.0,
+          "row_count": 468916
+        },
+        {
+          "UNITS": 6.08,
+          "row_count": 2
+        },
+        {
+          "UNITS": 6.5,
+          "row_count": 1
+        },
+        {
+          "UNITS": 6.67,
+          "row_count": 1
+        },
+        {
+          "UNITS": 7.0,
+          "row_count": 364512
+        },
+        {
+          "UNITS": 7.17,
+          "row_count": 1
+        },
+        {
+          "UNITS": 8.0,
+          "row_count": 294859
+        },
+        {
+          "UNITS": 8.67,
+          "row_count": 1
+        },
+        {
+          "UNITS": 9.0,
+          "row_count": 233056
+        },
+        {
+          "UNITS": 10.0,
+          "row_count": 191063
+        },
+        {
+          "UNITS": 10.2,
+          "row_count": 1
+        },
+        {
+          "UNITS": 10.4,
+          "row_count": 1
+        },
+        {
+          "UNITS": 10.5,
+          "row_count": 1
+        },
+        {
+          "UNITS": 10.67,
+          "row_count": 1
+        },
+        {
+          "UNITS": 11.0,
+          "row_count": 156362
+        },
+        {
+          "UNITS": 11.08,
+          "row_count": 1
+        },
+        {
+          "UNITS": 12.0,
+          "row_count": 131947
+        },
+        {
+          "UNITS": 13.0,
+          "row_count": 107617
+        },
+        {
+          "UNITS": 14.0,
+          "row_count": 90186
+        },
+        {
+          "UNITS": 15.0,
+          "row_count": 76958
+        },
+        {
+          "UNITS": 15.75,
+          "row_count": 1
+        },
+        {
+          "UNITS": 16.0,
+          "row_count": 65701
+        },
+        {
+          "UNITS": 16.5,
+          "row_count": 1
+        },
+        {
+          "UNITS": 17.0,
+          "row_count": 55198
+        },
+        {
+          "UNITS": 18.0,
+          "row_count": 47869
+        },
+        {
+          "UNITS": 18.67,
+          "row_count": 1
+        },
+        {
+          "UNITS": 19.0,
+          "row_count": 40867
+        },
+        {
+          "UNITS": 20.0,
+          "row_count": 35561
+        },
+        {
+          "UNITS": 21.0,
+          "row_count": 31181
+        },
+        {
+          "UNITS": 21.08,
+          "row_count": 1
+        },
+        {
+          "UNITS": 22.0,
+          "row_count": 27235
+        },
+        {
+          "UNITS": 23.0,
+          "row_count": 24282
+        },
+        {
+          "UNITS": 24.0,
+          "row_count": 22540
+        },
+        {
+          "UNITS": 24.67,
+          "row_count": 1
+        },
+        {
+          "UNITS": 25.0,
+          "row_count": 19096
+        },
+        {
+          "UNITS": 26.0,
+          "row_count": 17109
+        },
+        {
+          "UNITS": 27.0,
+          "row_count": 15018
+        },
+        {
+          "UNITS": 28.0,
+          "row_count": 13816
+        },
+        {
+          "UNITS": 28.83,
+          "row_count": 1
+        },
+        {
+          "UNITS": 29.0,
+          "row_count": 12396
+        },
+        {
+          "UNITS": 30.0,
+          "row_count": 11248
+        },
+        {
+          "UNITS": 31.0,
+          "row_count": 10128
+        },
+        {
+          "UNITS": 32.0,
+          "row_count": 9378
+        },
+        {
+          "UNITS": 33.0,
+          "row_count": 8423
+        },
+        {
+          "UNITS": 34.0,
+          "row_count": 7760
+        },
+        {
+          "UNITS": 35.0,
+          "row_count": 7156
+        },
+        {
+          "UNITS": 36.0,
+          "row_count": 6502
+        },
+        {
+          "UNITS": 37.0,
+          "row_count": 6036
+        },
+        {
+          "UNITS": 38.0,
+          "row_count": 5527
+        },
+        {
+          "UNITS": 39.0,
+          "row_count": 5147
+        },
+        {
+          "UNITS": 40.0,
+          "row_count": 4741
+        },
+        {
+          "UNITS": 41.0,
+          "row_count": 4401
+        },
+        {
+          "UNITS": 42.0,
+          "row_count": 4068
+        },
+        {
+          "UNITS": 43.0,
+          "row_count": 3692
+        },
+        {
+          "UNITS": 44.0,
+          "row_count": 3369
+        },
+        {
+          "UNITS": 45.0,
+          "row_count": 3190
+        },
+        {
+          "UNITS": 46.0,
+          "row_count": 3031
+        },
+        {
+          "UNITS": 47.0,
+          "row_count": 2920
+        },
+        {
+          "UNITS": 48.0,
+          "row_count": 2748
+        },
+        {
+          "UNITS": 49.0,
+          "row_count": 2446
+        },
+        {
+          "UNITS": 50.0,
+          "row_count": 2418
+        },
+        {
+          "UNITS": 51.0,
+          "row_count": 2075
+        },
+        {
+          "UNITS": 52.0,
+          "row_count": 2085
+        },
+        {
+          "UNITS": 53.0,
+          "row_count": 1915
+        },
+        {
+          "UNITS": 54.0,
+          "row_count": 1823
+        },
+        {
+          "UNITS": 55.0,
+          "row_count": 1657
+        },
+        {
+          "UNITS": 56.0,
+          "row_count": 1624
+        },
+        {
+          "UNITS": 57.0,
+          "row_count": 1449
+        },
+        {
+          "UNITS": 58.0,
+          "row_count": 1471
+        },
+        {
+          "UNITS": 59.0,
+          "row_count": 1361
+        },
+        {
+          "UNITS": 60.0,
+          "row_count": 1324
+        },
+        {
+          "UNITS": 61.0,
+          "row_count": 1235
+        },
+        {
+          "UNITS": 62.0,
+          "row_count": 1153
+        },
+        {
+          "UNITS": 63.0,
+          "row_count": 1120
+        },
+        {
+          "UNITS": 64.0,
+          "row_count": 1090
+        },
+        {
+          "UNITS": 65.0,
+          "row_count": 978
+        },
+        {
+          "UNITS": 66.0,
+          "row_count": 925
+        },
+        {
+          "UNITS": 67.0,
+          "row_count": 886
+        },
+        {
+          "UNITS": 68.0,
+          "row_count": 874
+        },
+        {
+          "UNITS": 69.0,
+          "row_count": 845
+        },
+        {
+          "UNITS": 70.0,
+          "row_count": 794
+        },
+        {
+          "UNITS": 71.0,
+          "row_count": 792
+        },
+        {
+          "UNITS": 72.0,
+          "row_count": 767
+        },
+        {
+          "UNITS": 73.0,
+          "row_count": 755
+        },
+        {
+          "UNITS": 74.0,
+          "row_count": 723
+        },
+        {
+          "UNITS": 75.0,
+          "row_count": 653
+        },
+        {
+          "UNITS": 76.0,
+          "row_count": 642
+        },
+        {
+          "UNITS": 77.0,
+          "row_count": 584
+        },
+        {
+          "UNITS": 78.0,
+          "row_count": 624
+        },
+        {
+          "UNITS": 79.0,
+          "row_count": 555
+        },
+        {
+          "UNITS": 80.0,
+          "row_count": 557
+        },
+        {
+          "UNITS": 81.0,
+          "row_count": 570
+        },
+        {
+          "UNITS": 82.0,
+          "row_count": 550
+        },
+        {
+          "UNITS": 83.0,
+          "row_count": 522
+        },
+        {
+          "UNITS": 84.0,
+          "row_count": 539
+        },
+        {
+          "UNITS": 85.0,
+          "row_count": 446
+        },
+        {
+          "UNITS": 86.0,
+          "row_count": 437
+        },
+        {
+          "UNITS": 87.0,
+          "row_count": 427
+        },
+        {
+          "UNITS": 88.0,
+          "row_count": 408
+        },
+        {
+          "UNITS": 89.0,
+          "row_count": 443
+        },
+        {
+          "UNITS": 90.0,
+          "row_count": 399
+        },
+        {
+          "UNITS": 91.0,
+          "row_count": 390
+        },
+        {
+          "UNITS": 92.0,
+          "row_count": 409
+        },
+        {
+          "UNITS": 93.0,
+          "row_count": 416
+        },
+        {
+          "UNITS": 94.0,
+          "row_count": 357
+        },
+        {
+          "UNITS": 95.0,
+          "row_count": 372
+        },
+        {
+          "UNITS": 96.0,
+          "row_count": 372
+        },
+        {
+          "UNITS": 97.0,
+          "row_count": 339
+        },
+        {
+          "UNITS": 98.0,
+          "row_count": 364
+        },
+        {
+          "UNITS": 99.0,
+          "row_count": 310
+        },
+        {
+          "UNITS": 100.0,
+          "row_count": 309
+        },
+        {
+          "UNITS": 101.0,
+          "row_count": 282
+        },
+        {
+          "UNITS": 102.0,
+          "row_count": 298
+        },
+        {
+          "UNITS": 103.0,
+          "row_count": 294
+        },
+        {
+          "UNITS": 104.0,
+          "row_count": 276
+        },
+        {
+          "UNITS": 105.0,
+          "row_count": 267
+        },
+        {
+          "UNITS": 106.0,
+          "row_count": 293
+        },
+        {
+          "UNITS": 107.0,
+          "row_count": 288
+        },
+        {
+          "UNITS": 108.0,
+          "row_count": 256
+        },
+        {
+          "UNITS": 109.0,
+          "row_count": 242
+        },
+        {
+          "UNITS": 110.0,
+          "row_count": 228
+        },
+        {
+          "UNITS": 111.0,
+          "row_count": 243
+        },
+        {
+          "UNITS": 112.0,
+          "row_count": 230
+        },
+        {
+          "UNITS": 113.0,
+          "row_count": 231
+        },
+        {
+          "UNITS": 114.0,
+          "row_count": 213
+        },
+        {
+          "UNITS": 115.0,
+          "row_count": 234
+        },
+        {
+          "UNITS": 116.0,
+          "row_count": 203
+        },
+        {
+          "UNITS": 117.0,
+          "row_count": 216
+        },
+        {
+          "UNITS": 118.0,
+          "row_count": 209
+        },
+        {
+          "UNITS": 119.0,
+          "row_count": 186
+        },
+        {
+          "UNITS": 120.0,
+          "row_count": 209
+        },
+        {
+          "UNITS": 121.0,
+          "row_count": 212
+        },
+        {
+          "UNITS": 122.0,
+          "row_count": 183
+        },
+        {
+          "UNITS": 123.0,
+          "row_count": 170
+        },
+        {
+          "UNITS": 124.0,
+          "row_count": 198
+        },
+        {
+          "UNITS": 125.0,
+          "row_count": 183
+        },
+        {
+          "UNITS": 126.0,
+          "row_count": 177
+        },
+        {
+          "UNITS": 127.0,
+          "row_count": 192
+        },
+        {
+          "UNITS": 128.0,
+          "row_count": 172
+        },
+        {
+          "UNITS": 129.0,
+          "row_count": 166
+        },
+        {
+          "UNITS": 130.0,
+          "row_count": 177
+        },
+        {
+          "UNITS": 131.0,
+          "row_count": 141
+        },
+        {
+          "UNITS": 132.0,
+          "row_count": 149
+        }
+      ],
+      "logged_at": "2026-10-23T16:20:59"
+    },
+    {
+      "check_id": "LIVE_POS_POS004",
+      "rule": "POS004",
+      "stage": "POS",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "CRITICAL",
+      "message": "CURRENCY null on 0 of 8,587,421 rows (0.0%)",
+      "error_message": "CURRENCY null on 0 of 8,587,421 rows (0.0%)",
+      "affected_pct": 0.0,
+      "actual_value": 0,
+      "expected_value": 0,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-23T16:20:59"
+    },
+    {
+      "check_id": "LIVE_POS_POS005",
+      "rule": "POS005",
+      "stage": "POS",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "CRITICAL",
+      "message": "CURRENCY null on 0 of 8,587,421 rows (0.0%)",
+      "error_message": "CURRENCY null on 0 of 8,587,421 rows (0.0%)",
+      "affected_pct": 0.0,
+      "actual_value": 0,
+      "expected_value": 0,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-23T16:21:00"
+    },
+    {
+      "check_id": "LIVE_POS_POS006",
+      "rule": "POS006",
+      "stage": "POS",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "CRITICAL",
+      "message": "No duplicate rows across all columns\n- Rows in duplicate groups: 0 of 8,587,421\n- Columns compared: 5",
+      "error_message": "No duplicate rows across all columns\n- Rows in duplicate groups: 0 of 8,587,421\n- Columns compared: 5",
+      "affected_pct": 0.0,
+      "actual_value": 0,
+      "expected_value": 0,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-23T16:21:04"
+    }
+  ],
+  "rule_descriptions": {
+    "SA001": "Delivery IDs in SA match the expected delivery ID",
+    "SA002": "Task numbers in SA match the expected task number",
+    "SA003": "Delete_tstamp, Status_Cd and dropped_reason are null where category is not null",
+    "SA004": "IRI weeks in SA match the expected week(s)",
+    "SA005": "Every SA location resolves to one description in shelf_var_master (read-only lookup)",
+    "SA006": "No duplicates at declared grain or full-row level",
+    "SA007": "SA non-imputed store count equals collected store count (sample, imputed status null)",
+    "SA008": "Audit store sample (imputed Y + null) for the delivery matches SA stores",
+    "SA009": "Imputed stores: shelf feet, facings, capacity increase vs prior wave within threshold",
+    "SA010": "Count of imputed stores (imputed status = Y) in the audit store sample for the delivery",
+    "SA011": "Count of collected stores (imputed status null) in the audit store sample for the delivery",
+    "SA012": "Shelf feet not null where category is not null",
+    "SA013": "Facings not null where category is not null",
+    "SA014": "Distinct store_number count",
+    "SA015": "Distinct upc_number count",
+    "SA016": "Shelf feet = facings x upc_width / 12, both sides rounded to round_dp decimals",
+    "SA018": "Grain columns are not null where category is not null",
+    "SA017": "Capacity = facings x units_deep x units_high",
+    "MDM001": "UPC is unique in the product master (distinct UPC count listed)",
+    "MDM002": "sys(2) vendor(5) item(5) builds upc_number as bigint",
+    "MDM003": "No duplicate rows across all columns of the product master",
+    "MDM004": "Distinct non-null values and row counts for each selected Product column (listing for review, null rows counted separately)",
+    "MDM005": "Reminder: run the Streamlit MDM validation tool for additional MDM checks",
+    "PRJ001": "Distinct cdm_geo / geography",
+    "PRJ002": "Distinct store_number count",
+    "PRJ003": "Distinct outlet",
+    "PRJ004": "Distinct geo_level",
+    "PRJ005": "Distinct iri_week",
+    "PRJ006": "No duplicate rows across all columns of the projections table",
+    "PRJ007": "Distinct version in the projections table",
+    "POS001": "Distinct store_number and upc_number counts",
+    "POS002": "UPC count (non-null rows and distinct)",
+    "POS003": "IRI weeks sales were pulled for",
+    "POS004": "Dollars not null",
+    "POS005": "Units not null",
+    "POS006": "No duplicate rows across all columns of the POS table",
+    "IN-000": "Server reachable; SQL Server version recorded",
+    "IN-001": "Every mapped source table has at least one row",
+    "IN-002": "Store, UPC and Grain columns mapped on a source have no null rows (tested per source, per column)",
+    "IN-003": "No duplicates at declared grain (superseded by SA006)",
+    "IN-004": "Distinct store and UPC counts profiled (superseded by SA014/SA015/PRJ002/POS001)",
+    "IN-005": "Measures mapped on SA or POS have no negative values",
+    "IN-007": "Measure columns are non-null (superseded by SA012/SA013/POS004/POS005)",
+    "SA-005": "SA store count reconciles to expected collection sample (superseded by SA007)",
+    "IMP-001": "Share of imputed SA stores within threshold (superseded by SA008)",
+    "IMP-002": "Every imputed store in the sample exists in SA (superseded by SA008)",
+    "IMP-003": "Imputed store x UPC measures not overstated vs non-imputed average (superseded by SA009)",
+    "PRJ-001": "Projection weight column has no nulls, non-numeric or zero/negative values"
+  },
+  "expected_rules": {
+    "SA001": {
+      "stage": "SA",
+      "severity": "INFO"
+    },
+    "SA002": {
+      "stage": "SA",
+      "severity": "INFO"
+    },
+    "SA003": {
+      "stage": "SA",
+      "severity": "CRITICAL"
+    },
+    "SA004": {
+      "stage": "SA",
+      "severity": "INFO"
+    },
+    "SA005": {
+      "stage": "SA",
+      "severity": "INFO"
+    },
+    "SA006": {
+      "stage": "SA",
+      "severity": "CRITICAL"
+    },
+    "SA007": {
+      "stage": "SA",
+      "severity": "CRITICAL"
+    },
+    "SA008": {
+      "stage": "SA",
+      "severity": "CRITICAL"
+    },
+    "SA009": {
+      "stage": "SA",
+      "severity": "HIGH"
+    },
+    "SA010": {
+      "stage": "SA",
+      "severity": "INFO"
+    },
+    "SA011": {
+      "stage": "SA",
+      "severity": "INFO"
+    },
+    "SA012": {
+      "stage": "SA",
+      "severity": "HIGH"
+    },
+    "SA013": {
+      "stage": "SA",
+      "severity": "HIGH"
+    },
+    "SA014": {
+      "stage": "SA",
+      "severity": "INFO"
+    },
+    "SA015": {
+      "stage": "SA",
+      "severity": "INFO"
+    },
+    "SA016": {
+      "stage": "SA",
+      "severity": "CRITICAL"
+    },
+    "SA018": {
+      "stage": "SA",
+      "severity": "INFO"
+    },
+    "SA017": {
+      "stage": "SA",
+      "severity": "CRITICAL"
+    },
+    "MDM001": {
+      "stage": "MDM",
+      "severity": "CRITICAL"
+    },
+    "MDM002": {
+      "stage": "MDM",
+      "severity": "CRITICAL"
+    },
+    "MDM003": {
+      "stage": "MDM",
+      "severity": "CRITICAL"
+    },
+    "MDM004": {
+      "stage": "MDM",
+      "severity": "INFO"
+    },
+    "MDM005": {
+      "stage": "MDM",
+      "severity": "INFO"
+    },
+    "PRJ001": {
+      "stage": "PROJ",
+      "severity": "INFO"
+    },
+    "PRJ002": {
+      "stage": "PROJ",
+      "severity": "INFO"
+    },
+    "PRJ003": {
+      "stage": "PROJ",
+      "severity": "INFO"
+    },
+    "PRJ004": {
+      "stage": "PROJ",
+      "severity": "INFO"
+    },
+    "PRJ005": {
+      "stage": "PROJ",
+      "severity": "INFO"
+    },
+    "PRJ006": {
+      "stage": "PROJ",
+      "severity": "CRITICAL"
+    },
+    "PRJ007": {
+      "stage": "PROJ",
+      "severity": "INFO"
+    },
+    "POS001": {
+      "stage": "POS",
+      "severity": "INFO"
+    },
+    "POS002": {
+      "stage": "POS",
+      "severity": "INFO"
+    },
+    "POS003": {
+      "stage": "POS",
+      "severity": "INFO"
+    },
+    "POS004": {
+      "stage": "POS",
+      "severity": "CRITICAL"
+    },
+    "POS005": {
+      "stage": "POS",
+      "severity": "CRITICAL"
+    },
+    "POS006": {
+      "stage": "POS",
+      "severity": "CRITICAL"
+    }
+  },
+  "disabled_rules": [
+    "IN-003",
+    "IN-004",
+    "IN-007",
+    "SA-005",
+    "IMP-001",
+    "IMP-002",
+    "IMP-003"
+  ],
+  "skipped_rules": [],
+  "config": {
+    "report_name": "Campbells",
+    "expected_sa_stores": "",
+    "expected_delivery_id": "3342",
+    "expected_task": "8916",
+    "expected_weeks": "2382, 2383, 2384",
+    "server": "10.106.10.49",
+    "database": "Imputations_sa",
+    "sources": {
+      "SA": {
+        "server": "10.106.10.49",
+        "database": "Imputations_sa",
+        "table": "Audit_Rollup_Final_3342",
+        "store_col": "STORE_NUMBER",
+        "upc_col": "UPC_NUMBER",
+        "grain": [
+          "STORE_NUMBER",
+          "AISLE",
+          "SIDE",
+          "SECTION",
+          "SHELF",
+          "UPC_SEQ",
+          "UPC_NUMBER"
+        ],
+        "measures": [
+          "Facing",
+          "CAPACITY",
+          "SHELF_FEET"
+        ],
+        "delivery_col": "DELIVERY_ID",
+        "task_col": "TASK_NUMBER",
+        "week_col": "IRI_WEEK",
+        "location_col": "LOCATION",
+        "category_col": "CATEGORY",
+        "delete_tstamp_col": "DELETE_TSTAMP",
+        "status_cd_col": "STATUS_CD",
+        "dropped_reason_col": "DROPPED_REASON",
+        "shelf_feet_col": "SHELF_FEET",
+        "facings_col": "Facing",
+        "capacity_col": "CAPACITY",
+        "upc_width_col": "UPC_WIDTH",
+        "units_deep_col": "UNITS_DEEP",
+        "units_high_col": "UNITS_HIGH",
+        "aisle_col": "AISLE",
+        "side_col": "SIDE",
+        "section_col": "SECTION",
+        "shelf_col": "SHELF"
+      },
+      "IMP": {
+        "server": "10.106.10.49",
+        "database": "Imputations_sa",
+        "table": "Audit_Delivery_Store_Sample",
+        "store_col": "store_number",
+        "delivery_col": "delivery_id",
+        "status_col": "imputed_status",
+        "imputed_value": "Y"
+      },
+      "PRIOR": {
+        "server": "10.106.10.49",
+        "database": "Imputations_sa",
+        "table": "Audit_Rollup_Final_3361",
+        "store_col": "STORE_NUMBER",
+        "shelf_feet_col": "SHELF_FEET",
+        "facings_col": "Facing",
+        "capacity_col": "CAPACITY"
+      },
+      "SHELFVAR": {
+        "server": "10.106.10.49",
+        "database": "Imputations_sa",
+        "table": "shelf_var_master",
+        "id_col": "shelf_var_id",
+        "desc_col": "description"
+      },
+      "MDM": {
+        "server": "10.106.11.180",
+        "database": "Product_Attributes",
+        "table": "Campbells_SSjuice_2026_MDM",
+        "upc_col": "upc_number",
+        "grain": [
+          "upc_number"
+        ],
+        "sys_col": "sys",
+        "vendor_col": "vendor",
+        "item_col": "item",
+        "product_col": [
+          "CAMPBELLS_BEVERAGE_",
+          "PRIVATE_LABLE_KIDS",
+          "JUICY_JUICE_MULTI_SERVE"
+        ]
+      },
+      "PROJ": {
+        "server": "10.106.10.49",
+        "database": "Audit_projections",
+        "table": "Campbells_11574201272_projections_V3803_2025",
+        "store_col": "store_number",
+        "weight_col": "weight",
+        "grain": [
+          "outlet",
+          "geo_level",
+          "cdm_geo",
+          "store_number",
+          "acv",
+          "weight"
+        ],
+        "geo_col": "cdm_geo",
+        "outlet_col": "outlet",
+        "geo_level_col": "geo_level",
+        "week_col": "iri_week",
+        "version_col": "version"
+      },
+      "POS": {
+        "server": "10.106.10.49",
+        "database": "pointofsales_landing",
+        "table": "Campbells_11574201272_2370_2382_2025_raw_sales",
+        "store_col": "STORE",
+        "upc_col": "UPC",
+        "grain": [
+          "STORE",
+          "WEEK",
+          "UPC"
+        ],
+        "measures": [
+          "UNITS",
+          "CURRENCY"
+        ],
+        "week_col": "UNITS",
+        "dollars_col": "CURRENCY",
+        "units_col": "CURRENCY"
+      }
+    },
+    "products": {
+      "SA": {
+        "owner": "",
+        "slo": ""
+      },
+      "MDM": {
+        "owner": "",
+        "slo": ""
+      },
+      "PROJ": {
+        "owner": "",
+        "slo": ""
+      },
+      "POS": {
+        "owner": "",
+        "slo": ""
+      },
+      "PREP": {
+        "owner": "",
+        "slo": ""
+      },
+      "STAGING": {
+        "owner": "",
+        "slo": ""
+      },
+      "PREDELIVERY": {
+        "owner": "",
+        "slo": ""
+      },
+      "DELIVERY": {
+        "owner": "",
+        "slo": ""
+      }
+    },
+    "rules_off": [],
+    "custom_checks": []
+  }
+}

@@ -1,0 +1,5237 @@
+{
+  "report_name": "Molson",
+  "run_id": "20261014T193902",
+  "source": "LIVE",
+  "timestamp": "2026-10-14T19:39:02",
+  "summary": {
+    "total_checks": 142,
+    "passed": 128,
+    "failed": 14,
+    "critical_failures": 7,
+    "high_failures": 0,
+    "manual_required": 2,
+    "blocks_delivery": true,
+    "final_status": "FAIL",
+    "stage_runtime_s": {
+      "SA": 7.2,
+      "MDM": 6.3,
+      "PROJ": 3.9,
+      "POS": 14.6,
+      "SPEC": 99.6
+    },
+    "total_runtime_s": 142.3
+  },
+  "live_profile": {
+    "SA": {
+      "table": "Audit_Rollup_Final_3147",
+      "rows": 3064374,
+      "stores": 5861,
+      "upcs": 74309,
+      "collected_stores": 4252,
+      "imputed_stores": 1705
+    },
+    "MDM": {
+      "table": "MOLSON_BEER_MDM",
+      "rows": 55769,
+      "upcs": 55769
+    },
+    "PROJ": {
+      "table": "MLSN_COORS_2026_2442_Projections_Translation_allver",
+      "rows": 74660,
+      "stores": 4032
+    },
+    "POS": {
+      "table": "ISG_11717795433_Molson_2025_beer_thc_sales",
+      "rows": 19335480,
+      "stores": 2863,
+      "upcs": 9155
+    }
+  },
+  "schema": {
+    "SA": {
+      "table": "Audit_Rollup_Final_3147",
+      "columns": {
+        "DELIVERY_ID": "int",
+        "TASK_NUMBER": "smallint",
+        "IRI_WEEK": "smallint",
+        "STORE_NUMBER": "bigint",
+        "EMP_ID": "varchar",
+        "DEVICE_ID": "varchar",
+        "OPEN_TSTAMP": "datetime",
+        "MOD_TAG": "varchar",
+        "COLLECT_METHOD": "varchar",
+        "CORRECTED_FLAG": "varchar",
+        "AISLE_KEY": "numeric",
+        "AISLETYPE": "int",
+        "AISLE": "int",
+        "UNNUMAISLE": "int",
+        "STOREWALL": "int",
+        "DISPLAYLOCATION": "int",
+        "AISLE_SIDE_KEY": "numeric",
+        "SIDE": "int",
+        "SECTION_KEY": "numeric",
+        "SECTION": "int",
+        "POSWIDTH": "int",
+        "CUSTOMPOSWIDTH": "int",
+        "DEPARTMENT": "int",
+        "METHOD": "int",
+        "SECTIONTYPE": "int",
+        "COOLERTYPE": "int",
+        "SHELFSECTIONWIDTH": "int",
+        "CUSTOMSHELFSECTIONWIDTH": "int",
+        "COFFINSECTIONWIDTH": "int",
+        "CUSTOMCOFFINSECTIONWIDTH": "int",
+        "UPRIGHTSECTIONWIDTH": "int",
+        "CUSTOMUPRIGHTSECTIONWIDTH": "int",
+        "LOCATION": "int",
+        "SECTIONDEPTH": "int",
+        "CUSTOMSECTIONDEPTH": "int",
+        "SHELF_KEY": "numeric",
+        "SHELF": "int",
+        "SHELFTYPE": "int",
+        "SHELFHEIGHT": "int",
+        "CUSTOMSHELFHEIGHT": "int",
+        "UPC_NUMBER": "bigint",
+        "UPC_SEQ": "int",
+        "UPC_DESCRIPTION": "varchar",
+        "CATEGORY": "varchar",
+        "SUBCATEGORY": "varchar",
+        "UPC_HEIGHT": "numeric",
+        "UPC_WIDTH": "numeric",
+        "UPC_DEPTH": "numeric",
+        "COLL_SEQ": "int",
+        "INIT_ADD_TSTAMP": "datetime",
+        "LAST_UPD_TSTAMP": "datetime",
+        "LAST_UPD_USER_ID": "varchar",
+        "QA_TSTAMP": "datetime",
+        "WAREHOUSE_TSTAMP": "datetime",
+        "DELIVERED_TSTAMP": "datetime",
+        "STATUS_CD": "varchar",
+        "DELETE_TSTAMP": "datetime",
+        "DROPPED_REASON": "varchar",
+        "OOS": "int",
+        "TOTAL_SHELVES": "int",
+        "KEYCAT_ID": "int",
+        "KEYCAT_NAME": "varchar",
+        "Dimension_Type_Flag": "varchar",
+        "QA_ID": "bigint",
+        "SHELF_FEET": "numeric",
+        "UNITS_DEEP": "int",
+        "UNITS_HIGH": "int",
+        "CAPACITY": "numeric",
+        "section_width": "int",
+        "section_depth": "int",
+        "shelf_height": "int",
+        "BusinessRules_Log": "varchar",
+        "Facing": "int",
+        "Row_id": "bigint",
+        "section_share": "numeric",
+        "Product_Coord_bottom_Left_X": "numeric",
+        "Product_Coord_bottom_left_Y": "numeric",
+        "Product_Coord_Width": "numeric",
+        "Product_Coord_Height": "numeric",
+        "Image_identifier": "varchar",
+        "shelf_position": "int"
+      }
+    },
+    "IMP": {
+      "table": "Audit_Delivery_Store_Sample",
+      "columns": {
+        "delivery_id": "int",
+        "store_number": "int",
+        "outlet_type": "varchar",
+        "imputed_status": "varchar",
+        "created_date": "datetime",
+        "delivery_action": "varchar"
+      }
+    },
+    "MDM": {
+      "table": "MOLSON_BEER_MDM",
+      "columns": {
+        "Grocery": "nvarchar",
+        "Drug": "nvarchar",
+        "Mass": "nvarchar",
+        "C&G": "nvarchar",
+        "Walmart": "nvarchar",
+        "Club": "nvarchar",
+        "Custom Flagging": "nvarchar",
+        "Custom Flagging1": "nvarchar",
+        "ISG_Delivery_Category_Flagging": "nvarchar",
+        "ISG Delivery Sub Category Flagging": "nvarchar",
+        "Private Label Flag": "float",
+        "Alcohol Flag": "float",
+        "Category Flag": "nvarchar",
+        "SGVI": "float",
+        "sys": "float",
+        "gen": "float",
+        "vendor": "float",
+        "item": "float",
+        "upc_number": "float",
+        "item_dim_key": "float",
+        "hierarchy_id": "float",
+        "client_id": "float",
+        "ABV": "nvarchar",
+        "ABV_RANGE": "nvarchar",
+        "ALC/NON_ALC": "nvarchar",
+        "BRAND": "nvarchar",
+        "BREWER": "nvarchar",
+        "CATEGORY": "nvarchar",
+        "CONTAINER": "nvarchar",
+        "CONTAINER_MATERIAL": "nvarchar",
+        "CONTAINER_TYPE": "nvarchar",
+        "CUSTOM_BREWER": "nvarchar",
+        "DESCRIPTION": "nvarchar",
+        "DOMESTIC_VS_IMPORTED": "nvarchar",
+        "FLAVOR_GROUP": "nvarchar",
+        "FLAVOR_SUBGROUP": "nvarchar",
+        "FRANCHISE": "nvarchar",
+        "MACRO_STYLE": "nvarchar",
+        "MEGA_CATEGORY": "nvarchar",
+        "MEGA_SUBSEGMENT": "nvarchar",
+        "MEZZO_STYLE": "nvarchar",
+        "MICRO_STYLE": "nvarchar",
+        "MSH_SUBSEGMENT": "nvarchar",
+        "OUNCES": "nvarchar",
+        "PACKAGE": "nvarchar",
+        "PACKAGE_COUNT": "nvarchar",
+        "Custom Package Count Range Value": "nvarchar",
+        "PACKAGE_SIZE": "nvarchar",
+        "PACKAGE_TYPE": "nvarchar",
+        "PARENT_COMPANY": "nvarchar",
+        "REGION": "nvarchar",
+        "REGULAR_LIGHT_SUPERLIGHT": "nvarchar",
+        "SEGMENT": "nvarchar",
+        "SUBCATEGORY": "nvarchar",
+        "SUBSEGMENT": "nvarchar",
+        "SUPER_CATEGORY": "nvarchar",
+        "TASTE_PROFILE": "nvarchar",
+        "VOLUME_EQUIVALENCY_VALUE": "float",
+        "12 count BUDGET/NEAR PREMIUM in TOTAL BEER": "nvarchar",
+        "LARGE count BUDGET/NEAR PREMIUM in TOTAL BEER": "nvarchar",
+        "MID count BUDGET/NEAR PREMIUM in TOTAL BEER": "nvarchar",
+        "SINGLE count BUDGET/NEAR PREMIUM in TOTAL BEER": "nvarchar",
+        "SMALL count BUDGET/NEAR PREMIUM in TOTAL BEER": "nvarchar",
+        "12 count CRAFT in TOTAL BEER": "nvarchar",
+        "LARGE count CRAFT in TOTAL BEER": "nvarchar",
+        "MID count CRAFT in TOTAL BEER": "nvarchar",
+        "SINGLE count CRAFT in TOTAL BEER": "nvarchar",
+        "SMALL count CRAFT in TOTAL BEER": "nvarchar",
+        "12 count IMPORT in TOTAL BEER": "nvarchar",
+        "LARGE count IMPORT in TOTAL BEER": "nvarchar",
+        "MID count IMPORT in TOTAL BEER": "nvarchar",
+        "SINGLE count IMPORT in TOTAL BEER": "nvarchar",
+        "SMALL count IMPORT in TOTAL BEER": "nvarchar",
+        "12 count MALT LIQUOR in TOTAL BEER": "nvarchar",
+        "LARGE count MALT LIQUOR in TOTAL BEER": "nvarchar",
+        "MID count MALT LIQUOR in TOTAL BEER": "nvarchar",
+        "SINGLE count MALT LIQUOR in TOTAL BEER": "nvarchar",
+        "SMALL count MALT LIQUOR in TOTAL BEER": "nvarchar",
+        "12 count PREMIUM LIGHT in TOTAL BEER": "nvarchar",
+        "LARGE count PREMIUM LIGHT in TOTAL BEER": "nvarchar",
+        "MID count PREMIUM LIGHT in TOTAL BEER": "nvarchar",
+        "SINGLE count PREMIUM LIGHT in TOTAL BEER": "nvarchar",
+        "SMALL count PREMIUM LIGHT in TOTAL BEER": "nvarchar",
+        "12 count PREMIUM REGULAR in TOTAL BEER": "nvarchar",
+        "LARGE count PREMIUM REGULAR in TOTAL BEER": "nvarchar",
+        "MID count PREMIUM REGULAR in TOTAL BEER": "nvarchar",
+        "SINGLE count PREMIUM REGULAR in TOTAL BEER": "nvarchar",
+        "SMALL count PREMIUM REGULAR in TOTAL BEER": "nvarchar",
+        "12 count SUPER PREMIUM in TOTAL BEER": "nvarchar",
+        "LARGE count SUPER PREMIUM in TOTAL BEER": "nvarchar",
+        "MID count SUPER PREMIUM in TOTAL BEER": "nvarchar",
+        "SINGLE count SUPER PREMIUM in TOTAL BEER": "nvarchar",
+        "SMALL count SUPER PREMIUM in TOTAL BEER": "nvarchar",
+        "12 count CIDER in FLAVORED TAB": "nvarchar",
+        "LARGE count CIDER in FLAVORED TAB": "nvarchar",
+        "MID count CIDER in FLAVORED TAB": "nvarchar",
+        "SINGLE count CIDER in FLAVORED TAB": "nvarchar",
+        "SMALL count CIDER in FLAVORED TAB": "nvarchar",
+        "12 count RTD FULL FLAVOR in FLAVORED TAB": "nvarchar",
+        "LARGE count RTD FULL FLAVOR in FLAVORED TAB": "nvarchar",
+        "MID count RTD FULL FLAVOR in FLAVORED TAB": "nvarchar",
+        "SINGLE count RTD FULL FLAVOR in FLAVORED TAB": "nvarchar",
+        "SMALL count RTD FULL FLAVOR in FLAVORED TAB": "nvarchar",
+        "12 count RTD SELTZER in FLAVORED TAB": "nvarchar",
+        "LARGE count RTD SELTZER in FLAVORED TAB": "nvarchar",
+        "MID count RTD SELTZER in FLAVORED TAB": "nvarchar",
+        "SINGLE count RTD SELTZER in FLAVORED TAB": "nvarchar",
+        "SMALL count RTD SELTZER in FLAVORED TAB": "nvarchar",
+        "12 count RTD SPIRITS/WINE in FLAVORED TAB": "nvarchar",
+        "LARGE count RTD SPIRITS/WINE in FLAVORED TAB": "nvarchar",
+        "MID count RTD SPIRITS/WINE in FLAVORED TAB": "nvarchar",
+        "SINGLE count RTD SPIRITS/WINE in FLAVORED TAB": "nvarchar",
+        "SMALL count RTD SPIRITS/WINE in FLAVORED TAB": "nvarchar",
+        "12 count in TOTAL BEER": "nvarchar",
+        "LARGE count in TOTAL BEER": "nvarchar",
+        "MID count in TOTAL BEER": "nvarchar",
+        "SINGLE count in TOTAL BEER": "nvarchar",
+        "SMALL count in TOTAL BEER": "nvarchar",
+        "12 count in FLAVORED TAB": "nvarchar",
+        "LARGE count in FLAVORED TAB": "nvarchar",
+        "MID count in FLAVORED TAB": "nvarchar",
+        "SINGLE count in FLAVORED TAB": "nvarchar",
+        "SMALL count in FLAVORED TAB": "nvarchar"
+      }
+    },
+    "PROJ": {
+      "table": "MLSN_COORS_2026_2442_Projections_Translation_allver",
+      "columns": {
+        "version": "decimal",
+        "Iri_week": "int",
+        "vg_key": "int",
+        "venu_dim_key": "int",
+        "outlet": "nvarchar",
+        "cdm_geo": "nvarchar",
+        "rma_name": "nvarchar",
+        "store_number": "int",
+        "acv": "float",
+        "weight": "float",
+        "projected_acv": "decimal",
+        "geo_level": "nvarchar",
+        "releasable": "varchar"
+      }
+    },
+    "POS": {
+      "table": "ISG_11717795433_Molson_2025_beer_thc_sales",
+      "columns": {
+        "STORE": "bigint",
+        "WEEK": "varchar",
+        "UPC": "varchar",
+        "UNITS": "decimal",
+        "CURRENCY": "decimal"
+      }
+    }
+  },
+  "checks": [
+    {
+      "check_id": "LIVE_SA_IN_000_10_106_10_49",
+      "rule": "IN-000",
+      "stage": "SA",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "INFO",
+      "message": "10.106.10.49: SQL Server 2016 (build 13.0.6465.1), Standard Edition (64-bit)",
+      "error_message": "10.106.10.49: SQL Server 2016 (build 13.0.6465.1), Standard Edition (64-bit)",
+      "affected_pct": 0.0,
+      "actual_value": null,
+      "expected_value": null,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-14T19:36:41"
+    },
+    {
+      "check_id": "LIVE_SA_IN_001",
+      "rule": "IN-001",
+      "stage": "SA",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "CRITICAL",
+      "message": "3,064,374 rows",
+      "error_message": "3,064,374 rows",
+      "affected_pct": 0.0,
+      "actual_value": 3064374,
+      "expected_value": null,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-14T19:36:43"
+    },
+    {
+      "check_id": "LIVE_SA_IN_002_STORE_NUMBER",
+      "rule": "IN-002",
+      "stage": "SA",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "CRITICAL",
+      "message": "STORE_NUMBER: 0 null rows",
+      "error_message": "STORE_NUMBER: 0 null rows",
+      "affected_pct": 0.0,
+      "actual_value": 0,
+      "expected_value": 0,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-14T19:36:46"
+    },
+    {
+      "check_id": "LIVE_SA_IN_002_UPC_NUMBER",
+      "rule": "IN-002",
+      "stage": "SA",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "CRITICAL",
+      "message": "UPC_NUMBER: 0 null rows",
+      "error_message": "UPC_NUMBER: 0 null rows",
+      "affected_pct": 0.0,
+      "actual_value": 0,
+      "expected_value": 0,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-14T19:36:46"
+    },
+    {
+      "check_id": "LIVE_SA_IN_002_AISLE",
+      "rule": "IN-002",
+      "stage": "SA",
+      "source": "LIVE",
+      "status": "FAIL",
+      "passed": false,
+      "severity": "CRITICAL",
+      "message": "AISLE: 24 null rows",
+      "error_message": "AISLE: 24 null rows",
+      "affected_pct": 0.0008,
+      "actual_value": 24,
+      "expected_value": 0,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-14T19:36:46"
+    },
+    {
+      "check_id": "LIVE_SA_IN_002_SIDE",
+      "rule": "IN-002",
+      "stage": "SA",
+      "source": "LIVE",
+      "status": "FAIL",
+      "passed": false,
+      "severity": "CRITICAL",
+      "message": "SIDE: 51,563 null rows",
+      "error_message": "SIDE: 51,563 null rows",
+      "affected_pct": 1.6827,
+      "actual_value": 51563,
+      "expected_value": 0,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-14T19:36:46"
+    },
+    {
+      "check_id": "LIVE_SA_IN_002_SECTION",
+      "rule": "IN-002",
+      "stage": "SA",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "CRITICAL",
+      "message": "SECTION: 0 null rows",
+      "error_message": "SECTION: 0 null rows",
+      "affected_pct": 0.0,
+      "actual_value": 0,
+      "expected_value": 0,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-14T19:36:46"
+    },
+    {
+      "check_id": "LIVE_SA_IN_002_SHELF",
+      "rule": "IN-002",
+      "stage": "SA",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "CRITICAL",
+      "message": "SHELF: 0 null rows",
+      "error_message": "SHELF: 0 null rows",
+      "affected_pct": 0.0,
+      "actual_value": 0,
+      "expected_value": 0,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-14T19:36:46"
+    },
+    {
+      "check_id": "LIVE_SA_IN_002_LOCATION",
+      "rule": "IN-002",
+      "stage": "SA",
+      "source": "LIVE",
+      "status": "FAIL",
+      "passed": false,
+      "severity": "CRITICAL",
+      "message": "LOCATION: 9,280 null rows",
+      "error_message": "LOCATION: 9,280 null rows",
+      "affected_pct": 0.3028,
+      "actual_value": 9280,
+      "expected_value": 0,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-14T19:36:46"
+    },
+    {
+      "check_id": "LIVE_SA_IN_002_UPC_SEQ",
+      "rule": "IN-002",
+      "stage": "SA",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "CRITICAL",
+      "message": "UPC_SEQ: 0 null rows",
+      "error_message": "UPC_SEQ: 0 null rows",
+      "affected_pct": 0.0,
+      "actual_value": 0,
+      "expected_value": 0,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-14T19:36:46"
+    },
+    {
+      "check_id": "LIVE_SA_IN_002_SHELF_FEET",
+      "rule": "IN-002",
+      "stage": "SA",
+      "source": "LIVE",
+      "status": "FAIL",
+      "passed": false,
+      "severity": "CRITICAL",
+      "message": "SHELF_FEET: 1,766,004 null rows",
+      "error_message": "SHELF_FEET: 1,766,004 null rows",
+      "affected_pct": 57.6302,
+      "actual_value": 1766004,
+      "expected_value": 0,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-14T19:36:46"
+    },
+    {
+      "check_id": "LIVE_SA_IN_002_Facing",
+      "rule": "IN-002",
+      "stage": "SA",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "CRITICAL",
+      "message": "Facing: 0 null rows",
+      "error_message": "Facing: 0 null rows",
+      "affected_pct": 0.0,
+      "actual_value": 0,
+      "expected_value": 0,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-14T19:36:46"
+    },
+    {
+      "check_id": "LIVE_SA_IN_005_SHELF_FEET",
+      "rule": "IN-005",
+      "stage": "SA",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "HIGH",
+      "message": "SHELF_FEET: 0 negative values",
+      "error_message": "SHELF_FEET: 0 negative values",
+      "affected_pct": 0.0,
+      "actual_value": 0,
+      "expected_value": 0,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-14T19:36:47"
+    },
+    {
+      "check_id": "LIVE_SA_IN_005_Facing",
+      "rule": "IN-005",
+      "stage": "SA",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "HIGH",
+      "message": "Facing: 0 negative values",
+      "error_message": "Facing: 0 negative values",
+      "affected_pct": 0.0,
+      "actual_value": 0,
+      "expected_value": 0,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-14T19:36:47"
+    },
+    {
+      "check_id": "LIVE_SA_IN_005_CAPACITY",
+      "rule": "IN-005",
+      "stage": "SA",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "HIGH",
+      "message": "CAPACITY: 0 negative values",
+      "error_message": "CAPACITY: 0 negative values",
+      "affected_pct": 0.0,
+      "actual_value": 0,
+      "expected_value": 0,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-14T19:36:47"
+    },
+    {
+      "check_id": "LIVE_MDM_IN_000_10_106_11_180",
+      "rule": "IN-000",
+      "stage": "MDM",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "INFO",
+      "message": "10.106.11.180: SQL Server 2016 (build 13.0.6465.1), Standard Edition (64-bit)",
+      "error_message": "10.106.11.180: SQL Server 2016 (build 13.0.6465.1), Standard Edition (64-bit)",
+      "affected_pct": 0.0,
+      "actual_value": null,
+      "expected_value": null,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-14T19:36:51"
+    },
+    {
+      "check_id": "LIVE_MDM_IN_001",
+      "rule": "IN-001",
+      "stage": "MDM",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "CRITICAL",
+      "message": "55,769 rows",
+      "error_message": "55,769 rows",
+      "affected_pct": 0.0,
+      "actual_value": 55769,
+      "expected_value": null,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-14T19:36:51"
+    },
+    {
+      "check_id": "LIVE_MDM_IN_002_upc_number",
+      "rule": "IN-002",
+      "stage": "MDM",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "CRITICAL",
+      "message": "upc_number: 0 null rows",
+      "error_message": "upc_number: 0 null rows",
+      "affected_pct": 0.0,
+      "actual_value": 0,
+      "expected_value": 0,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-14T19:36:53"
+    },
+    {
+      "check_id": "LIVE_PROJ_IN_001",
+      "rule": "IN-001",
+      "stage": "PROJ",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "CRITICAL",
+      "message": "74,660 rows",
+      "error_message": "74,660 rows",
+      "affected_pct": 0.0,
+      "actual_value": 74660,
+      "expected_value": null,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-14T19:36:56"
+    },
+    {
+      "check_id": "LIVE_PROJ_IN_002_store_number",
+      "rule": "IN-002",
+      "stage": "PROJ",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "CRITICAL",
+      "message": "store_number: 0 null rows",
+      "error_message": "store_number: 0 null rows",
+      "affected_pct": 0.0,
+      "actual_value": 0,
+      "expected_value": 0,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-14T19:36:57"
+    },
+    {
+      "check_id": "LIVE_PROJ_IN_002_acv",
+      "rule": "IN-002",
+      "stage": "PROJ",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "CRITICAL",
+      "message": "acv: 0 null rows",
+      "error_message": "acv: 0 null rows",
+      "affected_pct": 0.0,
+      "actual_value": 0,
+      "expected_value": 0,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-14T19:36:57"
+    },
+    {
+      "check_id": "LIVE_PROJ_IN_002_weight",
+      "rule": "IN-002",
+      "stage": "PROJ",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "CRITICAL",
+      "message": "weight: 0 null rows",
+      "error_message": "weight: 0 null rows",
+      "affected_pct": 0.0,
+      "actual_value": 0,
+      "expected_value": 0,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-14T19:36:57"
+    },
+    {
+      "check_id": "LIVE_PROJ_IN_002_cdm_geo",
+      "rule": "IN-002",
+      "stage": "PROJ",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "CRITICAL",
+      "message": "cdm_geo: 0 null rows",
+      "error_message": "cdm_geo: 0 null rows",
+      "affected_pct": 0.0,
+      "actual_value": 0,
+      "expected_value": 0,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-14T19:36:57"
+    },
+    {
+      "check_id": "LIVE_PROJ_IN_002_outlet",
+      "rule": "IN-002",
+      "stage": "PROJ",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "CRITICAL",
+      "message": "outlet: 0 null rows",
+      "error_message": "outlet: 0 null rows",
+      "affected_pct": 0.0,
+      "actual_value": 0,
+      "expected_value": 0,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-14T19:36:57"
+    },
+    {
+      "check_id": "LIVE_PROJ_IN_002_geo_level",
+      "rule": "IN-002",
+      "stage": "PROJ",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "CRITICAL",
+      "message": "geo_level: 0 null rows",
+      "error_message": "geo_level: 0 null rows",
+      "affected_pct": 0.0,
+      "actual_value": 0,
+      "expected_value": 0,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-14T19:36:57"
+    },
+    {
+      "check_id": "LIVE_PROJ_PRJ_001",
+      "rule": "PRJ-001",
+      "stage": "PROJ",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "CRITICAL",
+      "message": "0 null, 0 non-numeric, and 0 zero/negative weights",
+      "error_message": "0 null, 0 non-numeric, and 0 zero/negative weights",
+      "affected_pct": 0.0,
+      "actual_value": 0,
+      "expected_value": 0,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-14T19:36:57"
+    },
+    {
+      "check_id": "LIVE_POS_IN_001",
+      "rule": "IN-001",
+      "stage": "POS",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "CRITICAL",
+      "message": "19,335,480 rows",
+      "error_message": "19,335,480 rows",
+      "affected_pct": 0.0,
+      "actual_value": 19335480,
+      "expected_value": null,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-14T19:37:03"
+    },
+    {
+      "check_id": "LIVE_POS_IN_002_STORE",
+      "rule": "IN-002",
+      "stage": "POS",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "CRITICAL",
+      "message": "STORE: 0 null rows",
+      "error_message": "STORE: 0 null rows",
+      "affected_pct": 0.0,
+      "actual_value": 0,
+      "expected_value": 0,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-14T19:37:10"
+    },
+    {
+      "check_id": "LIVE_POS_IN_002_UPC",
+      "rule": "IN-002",
+      "stage": "POS",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "CRITICAL",
+      "message": "UPC: 0 null rows",
+      "error_message": "UPC: 0 null rows",
+      "affected_pct": 0.0,
+      "actual_value": 0,
+      "expected_value": 0,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-14T19:37:10"
+    },
+    {
+      "check_id": "LIVE_POS_IN_005_UNITS",
+      "rule": "IN-005",
+      "stage": "POS",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "HIGH",
+      "message": "UNITS: 0 negative values",
+      "error_message": "UNITS: 0 negative values",
+      "affected_pct": 0.0,
+      "actual_value": 0,
+      "expected_value": 0,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-14T19:37:11"
+    },
+    {
+      "check_id": "LIVE_POS_IN_005_CURRENCY",
+      "rule": "IN-005",
+      "stage": "POS",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "HIGH",
+      "message": "CURRENCY: 0 negative values",
+      "error_message": "CURRENCY: 0 negative values",
+      "affected_pct": 0.0,
+      "actual_value": 0,
+      "expected_value": 0,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-14T19:37:11"
+    },
+    {
+      "check_id": "LIVE_SA_SA001",
+      "rule": "SA001",
+      "stage": "SA",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "INFO",
+      "message": "1 distinct delivery IDs (3147) vs expected 3147",
+      "error_message": "1 distinct delivery IDs (3147) vs expected 3147",
+      "affected_pct": 0.0,
+      "actual_value": 1,
+      "expected_value": "3147",
+      "sample_failing_rows": [
+        {
+          "DELIVERY_ID": 3147,
+          "row_count": 3064374
+        }
+      ],
+      "logged_at": "2026-10-14T19:37:13"
+    },
+    {
+      "check_id": "LIVE_SA_SA002",
+      "rule": "SA002",
+      "stage": "SA",
+      "source": "LIVE",
+      "status": "FAIL",
+      "passed": false,
+      "severity": "INFO",
+      "message": "6 distinct task numbers (8935, 8936, 8938, 8939, 8948, 8949) vs expected 8939; unexpected: 8935, 8936, 8938, 8948, 8949",
+      "error_message": "6 distinct task numbers (8935, 8936, 8938, 8939, 8948, 8949) vs expected 8939; unexpected: 8935, 8936, 8938, 8948, 8949",
+      "affected_pct": 99.0552,
+      "actual_value": 6,
+      "expected_value": "8939",
+      "sample_failing_rows": [
+        {
+          "TASK_NUMBER": 8935,
+          "row_count": 1257861
+        },
+        {
+          "TASK_NUMBER": 8936,
+          "row_count": 60813
+        },
+        {
+          "TASK_NUMBER": 8938,
+          "row_count": 106665
+        },
+        {
+          "TASK_NUMBER": 8939,
+          "row_count": 28952
+        },
+        {
+          "TASK_NUMBER": 8948,
+          "row_count": 561801
+        },
+        {
+          "TASK_NUMBER": 8949,
+          "row_count": 1048282
+        }
+      ],
+      "logged_at": "2026-10-14T19:37:14"
+    },
+    {
+      "check_id": "LIVE_SA_SA003",
+      "rule": "SA003",
+      "stage": "SA",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "CRITICAL",
+      "message": "0 of 1,298,370 rows with a category have a non-null value (DELETE_TSTAMP: 0; STATUS_CD: 0; DROPPED_REASON: 0)",
+      "error_message": "0 of 1,298,370 rows with a category have a non-null value (DELETE_TSTAMP: 0; STATUS_CD: 0; DROPPED_REASON: 0)",
+      "affected_pct": 0.0,
+      "actual_value": 0,
+      "expected_value": 0,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-14T19:37:14"
+    },
+    {
+      "check_id": "LIVE_SA_SA004",
+      "rule": "SA004",
+      "stage": "SA",
+      "source": "LIVE",
+      "status": "FAIL",
+      "passed": false,
+      "severity": "INFO",
+      "message": "6 distinct IRI weeks (2388, 2389, 2390, 2391, 2392, 2393) vs expected 2390; unexpected: 2388, 2389, 2391, 2392, 2393",
+      "error_message": "6 distinct IRI weeks (2388, 2389, 2390, 2391, 2392, 2393) vs expected 2390; unexpected: 2388, 2389, 2391, 2392, 2393",
+      "affected_pct": 79.7136,
+      "actual_value": 6,
+      "expected_value": "2390",
+      "sample_failing_rows": [
+        {
+          "IRI_WEEK": 2388,
+          "row_count": 431740
+        },
+        {
+          "IRI_WEEK": 2389,
+          "row_count": 400901
+        },
+        {
+          "IRI_WEEK": 2390,
+          "row_count": 621650
+        },
+        {
+          "IRI_WEEK": 2391,
+          "row_count": 852738
+        },
+        {
+          "IRI_WEEK": 2392,
+          "row_count": 757004
+        },
+        {
+          "IRI_WEEK": 2393,
+          "row_count": 341
+        }
+      ],
+      "logged_at": "2026-10-14T19:37:15"
+    },
+    {
+      "check_id": "LIVE_SA_SA005",
+      "rule": "SA005",
+      "stage": "SA",
+      "source": "LIVE",
+      "status": "MANUAL_REQUIRED",
+      "passed": false,
+      "severity": "INFO",
+      "message": "SA005 not run: switched off for this run",
+      "error_message": "SA005 not run: switched off for this run",
+      "affected_pct": 0.0,
+      "actual_value": null,
+      "expected_value": null,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-14T19:37:15"
+    },
+    {
+      "check_id": "LIVE_SA_SA006_grain",
+      "rule": "SA006",
+      "stage": "SA",
+      "source": "LIVE",
+      "status": "FAIL",
+      "passed": false,
+      "severity": "CRITICAL",
+      "message": "Grain [STORE_NUMBER, UPC_NUMBER, AISLE, SIDE, SECTION, SHELF, LOCATION, UPC_SEQ, SHELF_FEET, Facing]: 3 duplicate keys (6 rows of 3,064,374)",
+      "error_message": "Grain [STORE_NUMBER, UPC_NUMBER, AISLE, SIDE, SECTION, SHELF, LOCATION, UPC_SEQ, SHELF_FEET, Facing]: 3 duplicate keys (6 rows of 3,064,374)",
+      "affected_pct": 0.0002,
+      "actual_value": 3,
+      "expected_value": 0,
+      "sample_failing_rows": [
+        {
+          "STORE_NUMBER": 50678,
+          "UPC_NUMBER": 3410057344,
+          "AISLE": 7,
+          "SIDE": 7100,
+          "SECTION": 5,
+          "SHELF": 2,
+          "LOCATION": 16012,
+          "UPC_SEQ": 1,
+          "SHELF_FEET": 0.66,
+          "Facing": 1,
+          "dup_count": 2
+        },
+        {
+          "STORE_NUMBER": 33977,
+          "UPC_NUMBER": 7031001718,
+          "AISLE": 15,
+          "SIDE": 7100,
+          "SECTION": 1,
+          "SHELF": 2,
+          "LOCATION": 16097,
+          "UPC_SEQ": 1,
+          "SHELF_FEET": 0.88,
+          "Facing": 2,
+          "dup_count": 2
+        },
+        {
+          "STORE_NUMBER": 33909,
+          "UPC_NUMBER": 7031001718,
+          "AISLE": 15,
+          "SIDE": 7100,
+          "SECTION": 1,
+          "SHELF": 2,
+          "LOCATION": 16097,
+          "UPC_SEQ": 1,
+          "SHELF_FEET": 0.88,
+          "Facing": 2,
+          "dup_count": 2
+        }
+      ],
+      "logged_at": "2026-10-14T19:37:17"
+    },
+    {
+      "check_id": "LIVE_SA_SA006_row",
+      "rule": "SA006",
+      "stage": "SA",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "CRITICAL",
+      "message": "Full row (81 columns): 0 duplicated rows (0 rows of 3,064,374)",
+      "error_message": "Full row (81 columns): 0 duplicated rows (0 rows of 3,064,374)",
+      "affected_pct": 0.0,
+      "actual_value": 0,
+      "expected_value": 0,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-14T19:37:29"
+    },
+    {
+      "check_id": "LIVE_SA_SA007",
+      "rule": "SA007",
+      "stage": "SA",
+      "source": "LIVE",
+      "status": "FAIL",
+      "passed": false,
+      "severity": "CRITICAL",
+      "message": "SA non-imputed stores 4,161 vs collected stores 4,252 (delivery 3147); 91 collected stores missing from SA; 0 SA stores neither collected nor imputed",
+      "error_message": "SA non-imputed stores 4,161 vs collected stores 4,252 (delivery 3147); 91 collected stores missing from SA; 0 SA stores neither collected nor imputed",
+      "affected_pct": 2.1402,
+      "actual_value": 4161,
+      "expected_value": 4252,
+      "sample_failing_rows": [
+        {
+          "store": "100910",
+          "issue": "collected, not in SA"
+        },
+        {
+          "store": "101713",
+          "issue": "collected, not in SA"
+        },
+        {
+          "store": "113208",
+          "issue": "collected, not in SA"
+        },
+        {
+          "store": "115777",
+          "issue": "collected, not in SA"
+        },
+        {
+          "store": "117879",
+          "issue": "collected, not in SA"
+        },
+        {
+          "store": "121702",
+          "issue": "collected, not in SA"
+        },
+        {
+          "store": "121887",
+          "issue": "collected, not in SA"
+        },
+        {
+          "store": "123776",
+          "issue": "collected, not in SA"
+        },
+        {
+          "store": "124125",
+          "issue": "collected, not in SA"
+        },
+        {
+          "store": "125250",
+          "issue": "collected, not in SA"
+        }
+      ],
+      "logged_at": "2026-10-14T19:37:30"
+    },
+    {
+      "check_id": "LIVE_SA_SA008",
+      "rule": "SA008",
+      "stage": "SA",
+      "source": "LIVE",
+      "status": "FAIL",
+      "passed": false,
+      "severity": "CRITICAL",
+      "message": "Sample for delivery 3147: 1,705 imputed (Y), 4,252 collected (null), 0 other status (excluded); 96 sample stores missing from SA; 0 SA stores not in the sample; 0 stores both imputed and collected",
+      "error_message": "Sample for delivery 3147: 1,705 imputed (Y), 4,252 collected (null), 0 other status (excluded); 96 sample stores missing from SA; 0 SA stores not in the sample; 0 stores both imputed and collected",
+      "affected_pct": 1.6115,
+      "actual_value": 5957,
+      "expected_value": 5861,
+      "sample_failing_rows": [
+        {
+          "store": "100910",
+          "issue": "in sample, not in SA"
+        },
+        {
+          "store": "101713",
+          "issue": "in sample, not in SA"
+        },
+        {
+          "store": "113208",
+          "issue": "in sample, not in SA"
+        },
+        {
+          "store": "115777",
+          "issue": "in sample, not in SA"
+        },
+        {
+          "store": "117879",
+          "issue": "in sample, not in SA"
+        },
+        {
+          "store": "121702",
+          "issue": "in sample, not in SA"
+        },
+        {
+          "store": "121887",
+          "issue": "in sample, not in SA"
+        },
+        {
+          "store": "123776",
+          "issue": "in sample, not in SA"
+        },
+        {
+          "store": "124125",
+          "issue": "in sample, not in SA"
+        },
+        {
+          "store": "125250",
+          "issue": "in sample, not in SA"
+        }
+      ],
+      "logged_at": "2026-10-14T19:37:30"
+    },
+    {
+      "check_id": "LIVE_SA_SA009",
+      "rule": "SA009",
+      "stage": "SA",
+      "source": "LIVE",
+      "status": "MANUAL_REQUIRED",
+      "passed": false,
+      "severity": "HIGH",
+      "message": "SA009 not run: switched off for this run",
+      "error_message": "SA009 not run: switched off for this run",
+      "affected_pct": 0.0,
+      "actual_value": null,
+      "expected_value": null,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-14T19:37:30"
+    },
+    {
+      "check_id": "LIVE_SA_SA010",
+      "rule": "SA010",
+      "stage": "SA",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "INFO",
+      "message": "1,705 imputed stores (imputed status = Y) in the sample for delivery 3147; 1,700 of them in SA",
+      "error_message": "1,705 imputed stores (imputed status = Y) in the sample for delivery 3147; 1,700 of them in SA",
+      "affected_pct": 0.0,
+      "actual_value": 1705,
+      "expected_value": null,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-14T19:37:30"
+    },
+    {
+      "check_id": "LIVE_SA_SA011",
+      "rule": "SA011",
+      "stage": "SA",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "INFO",
+      "message": "4,252 collected stores (imputed status null) in the sample for delivery 3147; 4,161 of them in SA",
+      "error_message": "4,252 collected stores (imputed status null) in the sample for delivery 3147; 4,161 of them in SA",
+      "affected_pct": 0.0,
+      "actual_value": 4252,
+      "expected_value": null,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-14T19:37:30"
+    },
+    {
+      "check_id": "LIVE_SA_SA012",
+      "rule": "SA012",
+      "stage": "SA",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "HIGH",
+      "message": "SHELF_FEET null on 0 of 1,298,370 rows with a category (0.0%)",
+      "error_message": "SHELF_FEET null on 0 of 1,298,370 rows with a category (0.0%)",
+      "affected_pct": 0.0,
+      "actual_value": 0,
+      "expected_value": 0,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-14T19:37:31"
+    },
+    {
+      "check_id": "LIVE_SA_SA013",
+      "rule": "SA013",
+      "stage": "SA",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "HIGH",
+      "message": "Facing null on 0 of 1,298,370 rows with a category (0.0%)",
+      "error_message": "Facing null on 0 of 1,298,370 rows with a category (0.0%)",
+      "affected_pct": 0.0,
+      "actual_value": 0,
+      "expected_value": 0,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-14T19:37:31"
+    },
+    {
+      "check_id": "LIVE_SA_SA014",
+      "rule": "SA014",
+      "stage": "SA",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "INFO",
+      "message": "5,861 distinct STORE_NUMBER; 0 null rows of 3,064,374",
+      "error_message": "5,861 distinct STORE_NUMBER; 0 null rows of 3,064,374",
+      "affected_pct": 0.0,
+      "actual_value": 5861,
+      "expected_value": null,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-14T19:37:31"
+    },
+    {
+      "check_id": "LIVE_SA_SA015",
+      "rule": "SA015",
+      "stage": "SA",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "INFO",
+      "message": "74,309 distinct UPC_NUMBER; 0 null rows of 3,064,374",
+      "error_message": "74,309 distinct UPC_NUMBER; 0 null rows of 3,064,374",
+      "affected_pct": 0.0,
+      "actual_value": 74309,
+      "expected_value": null,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-14T19:37:32"
+    },
+    {
+      "check_id": "LIVE_SA_SA016",
+      "rule": "SA016",
+      "stage": "SA",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "CRITICAL",
+      "message": "SHELF_FEET vs facings x upc_width / 12: 0 of 1,298,370 evaluated rows differ (tolerance 0, both sides rounded to 2 dp); 1,766,004 rows with a null input not evaluated",
+      "error_message": "SHELF_FEET vs facings x upc_width / 12: 0 of 1,298,370 evaluated rows differ (tolerance 0, both sides rounded to 2 dp); 1,766,004 rows with a null input not evaluated",
+      "affected_pct": 0.0,
+      "actual_value": 0,
+      "expected_value": 0,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-14T19:37:33"
+    },
+    {
+      "check_id": "LIVE_SA_SA017",
+      "rule": "SA017",
+      "stage": "SA",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "CRITICAL",
+      "message": "CAPACITY vs facings x units_deep x units_high: 0 of 1,298,370 evaluated rows differ (tolerance 0); 1,766,004 rows with a null input not evaluated",
+      "error_message": "CAPACITY vs facings x units_deep x units_high: 0 of 1,298,370 evaluated rows differ (tolerance 0); 1,766,004 rows with a null input not evaluated",
+      "affected_pct": 0.0,
+      "actual_value": 0,
+      "expected_value": 0,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-14T19:37:34"
+    },
+    {
+      "check_id": "LIVE_SA_SA018_STORE_NUMBER",
+      "rule": "SA018",
+      "stage": "SA",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "INFO",
+      "message": "STORE_NUMBER (grain) null on 0 of 1,298,370 rows with a category (0.0%)",
+      "error_message": "STORE_NUMBER (grain) null on 0 of 1,298,370 rows with a category (0.0%)",
+      "affected_pct": 0.0,
+      "actual_value": 0,
+      "expected_value": 0,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-14T19:37:34"
+    },
+    {
+      "check_id": "LIVE_SA_SA018_UPC_NUMBER",
+      "rule": "SA018",
+      "stage": "SA",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "INFO",
+      "message": "UPC_NUMBER (grain) null on 0 of 1,298,370 rows with a category (0.0%)",
+      "error_message": "UPC_NUMBER (grain) null on 0 of 1,298,370 rows with a category (0.0%)",
+      "affected_pct": 0.0,
+      "actual_value": 0,
+      "expected_value": 0,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-14T19:37:34"
+    },
+    {
+      "check_id": "LIVE_SA_SA018_AISLE",
+      "rule": "SA018",
+      "stage": "SA",
+      "source": "LIVE",
+      "status": "FAIL",
+      "passed": false,
+      "severity": "INFO",
+      "message": "AISLE (grain) null on 24 of 1,298,370 rows with a category (0.0018%)",
+      "error_message": "AISLE (grain) null on 24 of 1,298,370 rows with a category (0.0018%)",
+      "affected_pct": 0.0018,
+      "actual_value": 24,
+      "expected_value": 0,
+      "sample_failing_rows": [
+        {
+          "STORE_NUMBER": 233208,
+          "UPC_NUMBER": 1820020077,
+          "category": "BEER",
+          "AISLE": null
+        },
+        {
+          "STORE_NUMBER": 233208,
+          "UPC_NUMBER": 8066095615,
+          "category": "BEER",
+          "AISLE": null
+        },
+        {
+          "STORE_NUMBER": 219937,
+          "UPC_NUMBER": 8769282102,
+          "category": "BEER",
+          "AISLE": null
+        },
+        {
+          "STORE_NUMBER": 219937,
+          "UPC_NUMBER": 85908800309,
+          "category": "BEER",
+          "AISLE": null
+        },
+        {
+          "STORE_NUMBER": 219937,
+          "UPC_NUMBER": 85908800366,
+          "category": "BEER",
+          "AISLE": null
+        },
+        {
+          "STORE_NUMBER": 219937,
+          "UPC_NUMBER": 1820000978,
+          "category": "BEER",
+          "AISLE": null
+        },
+        {
+          "STORE_NUMBER": 219937,
+          "UPC_NUMBER": 1820000957,
+          "category": "BEER",
+          "AISLE": null
+        },
+        {
+          "STORE_NUMBER": 219937,
+          "UPC_NUMBER": 1820000833,
+          "category": "BEER",
+          "AISLE": null
+        },
+        {
+          "STORE_NUMBER": 219937,
+          "UPC_NUMBER": 1820014991,
+          "category": "BEER",
+          "AISLE": null
+        },
+        {
+          "STORE_NUMBER": 219937,
+          "UPC_NUMBER": 1820018993,
+          "category": "BEER",
+          "AISLE": null
+        }
+      ],
+      "logged_at": "2026-10-14T19:37:35"
+    },
+    {
+      "check_id": "LIVE_SA_SA018_SIDE",
+      "rule": "SA018",
+      "stage": "SA",
+      "source": "LIVE",
+      "status": "FAIL",
+      "passed": false,
+      "severity": "INFO",
+      "message": "SIDE (grain) null on 1,978 of 1,298,370 rows with a category (0.1523%)",
+      "error_message": "SIDE (grain) null on 1,978 of 1,298,370 rows with a category (0.1523%)",
+      "affected_pct": 0.1523,
+      "actual_value": 1978,
+      "expected_value": 0,
+      "sample_failing_rows": [
+        {
+          "STORE_NUMBER": 233208,
+          "UPC_NUMBER": 1820020077,
+          "category": "BEER",
+          "SIDE": null
+        },
+        {
+          "STORE_NUMBER": 233208,
+          "UPC_NUMBER": 8066095615,
+          "category": "BEER",
+          "SIDE": null
+        },
+        {
+          "STORE_NUMBER": 194544,
+          "UPC_NUMBER": 8066095721,
+          "category": "BEER",
+          "SIDE": null
+        },
+        {
+          "STORE_NUMBER": 194544,
+          "UPC_NUMBER": 3354495060,
+          "category": "BEER",
+          "SIDE": null
+        },
+        {
+          "STORE_NUMBER": 194544,
+          "UPC_NUMBER": 3354400158,
+          "category": "BEER",
+          "SIDE": null
+        },
+        {
+          "STORE_NUMBER": 194544,
+          "UPC_NUMBER": 3354400080,
+          "category": "BEER",
+          "SIDE": null
+        },
+        {
+          "STORE_NUMBER": 194544,
+          "UPC_NUMBER": 8066095643,
+          "category": "BEER",
+          "SIDE": null
+        },
+        {
+          "STORE_NUMBER": 194544,
+          "UPC_NUMBER": 1820025000,
+          "category": "BEER",
+          "SIDE": null
+        },
+        {
+          "STORE_NUMBER": 194544,
+          "UPC_NUMBER": 3410000355,
+          "category": "BEER",
+          "SIDE": null
+        },
+        {
+          "STORE_NUMBER": 194544,
+          "UPC_NUMBER": 1820025509,
+          "category": "BEER",
+          "SIDE": null
+        }
+      ],
+      "logged_at": "2026-10-14T19:37:35"
+    },
+    {
+      "check_id": "LIVE_SA_SA018_SECTION",
+      "rule": "SA018",
+      "stage": "SA",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "INFO",
+      "message": "SECTION (grain) null on 0 of 1,298,370 rows with a category (0.0%)",
+      "error_message": "SECTION (grain) null on 0 of 1,298,370 rows with a category (0.0%)",
+      "affected_pct": 0.0,
+      "actual_value": 0,
+      "expected_value": 0,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-14T19:37:35"
+    },
+    {
+      "check_id": "LIVE_SA_SA018_SHELF",
+      "rule": "SA018",
+      "stage": "SA",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "INFO",
+      "message": "SHELF (grain) null on 0 of 1,298,370 rows with a category (0.0%)",
+      "error_message": "SHELF (grain) null on 0 of 1,298,370 rows with a category (0.0%)",
+      "affected_pct": 0.0,
+      "actual_value": 0,
+      "expected_value": 0,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-14T19:37:35"
+    },
+    {
+      "check_id": "LIVE_SA_SA018_LOCATION",
+      "rule": "SA018",
+      "stage": "SA",
+      "source": "LIVE",
+      "status": "FAIL",
+      "passed": false,
+      "severity": "INFO",
+      "message": "LOCATION (grain) null on 125 of 1,298,370 rows with a category (0.0096%)",
+      "error_message": "LOCATION (grain) null on 125 of 1,298,370 rows with a category (0.0096%)",
+      "affected_pct": 0.0096,
+      "actual_value": 125,
+      "expected_value": 0,
+      "sample_failing_rows": [
+        {
+          "STORE_NUMBER": 241471,
+          "UPC_NUMBER": 1820025000,
+          "category": "BEER",
+          "LOCATION": null
+        },
+        {
+          "STORE_NUMBER": 241471,
+          "UPC_NUMBER": 1820025010,
+          "category": "BEER",
+          "LOCATION": null
+        },
+        {
+          "STORE_NUMBER": 241471,
+          "UPC_NUMBER": 3410000355,
+          "category": "BEER",
+          "LOCATION": null
+        },
+        {
+          "STORE_NUMBER": 241471,
+          "UPC_NUMBER": 7199030065,
+          "category": "BEER",
+          "LOCATION": null
+        },
+        {
+          "STORE_NUMBER": 241471,
+          "UPC_NUMBER": 1820000018,
+          "category": "BEER",
+          "LOCATION": null
+        },
+        {
+          "STORE_NUMBER": 241471,
+          "UPC_NUMBER": 1820000115,
+          "category": "BEER",
+          "LOCATION": null
+        },
+        {
+          "STORE_NUMBER": 241471,
+          "UPC_NUMBER": 7199032000,
+          "category": "BEER",
+          "LOCATION": null
+        },
+        {
+          "STORE_NUMBER": 241471,
+          "UPC_NUMBER": 63598501012,
+          "category": "BEER",
+          "LOCATION": null
+        },
+        {
+          "STORE_NUMBER": 241471,
+          "UPC_NUMBER": 63598524595,
+          "category": "BEER",
+          "LOCATION": null
+        },
+        {
+          "STORE_NUMBER": 241471,
+          "UPC_NUMBER": 63598525875,
+          "category": "BEER",
+          "LOCATION": null
+        }
+      ],
+      "logged_at": "2026-10-14T19:37:35"
+    },
+    {
+      "check_id": "LIVE_SA_SA018_UPC_SEQ",
+      "rule": "SA018",
+      "stage": "SA",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "INFO",
+      "message": "UPC_SEQ (grain) null on 0 of 1,298,370 rows with a category (0.0%)",
+      "error_message": "UPC_SEQ (grain) null on 0 of 1,298,370 rows with a category (0.0%)",
+      "affected_pct": 0.0,
+      "actual_value": 0,
+      "expected_value": 0,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-14T19:37:35"
+    },
+    {
+      "check_id": "LIVE_SA_SA018_SHELF_FEET",
+      "rule": "SA018",
+      "stage": "SA",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "INFO",
+      "message": "SHELF_FEET (grain) null on 0 of 1,298,370 rows with a category (0.0%)",
+      "error_message": "SHELF_FEET (grain) null on 0 of 1,298,370 rows with a category (0.0%)",
+      "affected_pct": 0.0,
+      "actual_value": 0,
+      "expected_value": 0,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-14T19:37:35"
+    },
+    {
+      "check_id": "LIVE_SA_SA018_Facing",
+      "rule": "SA018",
+      "stage": "SA",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "INFO",
+      "message": "Facing (grain) null on 0 of 1,298,370 rows with a category (0.0%)",
+      "error_message": "Facing (grain) null on 0 of 1,298,370 rows with a category (0.0%)",
+      "affected_pct": 0.0,
+      "actual_value": 0,
+      "expected_value": 0,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-14T19:37:35"
+    },
+    {
+      "check_id": "LIVE_MDM_MDM001",
+      "rule": "MDM001",
+      "stage": "MDM",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "CRITICAL",
+      "message": "55,769 distinct UPCs; 0 duplicated UPCs (0 rows of 55,769); 0 null UPC rows",
+      "error_message": "55,769 distinct UPCs; 0 duplicated UPCs (0 rows of 55,769); 0 null UPC rows",
+      "affected_pct": 0.0,
+      "actual_value": 0,
+      "expected_value": 0,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-14T19:37:36"
+    },
+    {
+      "check_id": "LIVE_MDM_MDM002",
+      "rule": "MDM002",
+      "stage": "MDM",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "CRITICAL",
+      "message": "0 of 55,769 rows where sys|vendor|item (2-5-5, bigint) does not equal upc_number",
+      "error_message": "0 of 55,769 rows where sys|vendor|item (2-5-5, bigint) does not equal upc_number",
+      "affected_pct": 0.0,
+      "actual_value": 0,
+      "expected_value": 0,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-14T19:37:36"
+    },
+    {
+      "check_id": "LIVE_MDM_MDM003",
+      "rule": "MDM003",
+      "stage": "MDM",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "CRITICAL",
+      "message": "Full row (123 columns): 0 duplicated rows (0 rows of 55,769)",
+      "error_message": "Full row (123 columns): 0 duplicated rows (0 rows of 55,769)",
+      "affected_pct": 0.0,
+      "actual_value": 0,
+      "expected_value": 0,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-14T19:37:41"
+    },
+    {
+      "check_id": "LIVE_MDM_MDM004_ISG_Delivery_Category_Flagging",
+      "rule": "MDM004",
+      "stage": "MDM",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "INFO",
+      "message": "ISG_Delivery_Category_Flagging: 2 distinct non-null values; 0 null rows of 55,769; most frequent: TOTAL BEER (41,776), FLAVORED TAB (13,993)",
+      "error_message": "ISG_Delivery_Category_Flagging: 2 distinct non-null values; 0 null rows of 55,769; most frequent: TOTAL BEER (41,776), FLAVORED TAB (13,993)",
+      "affected_pct": 0.0,
+      "actual_value": 2,
+      "expected_value": null,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-14T19:37:41",
+      "profile": {
+        "column": "ISG_Delivery_Category_Flagging",
+        "distinct_count": 2,
+        "null_rows": 0,
+        "truncated": false,
+        "values": [
+          {
+            "value": "TOTAL BEER",
+            "row_count": 41776
+          },
+          {
+            "value": "FLAVORED TAB",
+            "row_count": 13993
+          }
+        ]
+      }
+    },
+    {
+      "check_id": "LIVE_MDM_MDM004_12_count_BUDGET_NEAR_PREMIUM_in_TOTAL_BEER",
+      "rule": "MDM004",
+      "stage": "MDM",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "INFO",
+      "message": "12 count BUDGET/NEAR PREMIUM in TOTAL BEER: 1 distinct non-null values; 55,612 null rows of 55,769; most frequent: x (157)",
+      "error_message": "12 count BUDGET/NEAR PREMIUM in TOTAL BEER: 1 distinct non-null values; 55,612 null rows of 55,769; most frequent: x (157)",
+      "affected_pct": 0.0,
+      "actual_value": 1,
+      "expected_value": null,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-14T19:37:42",
+      "profile": {
+        "column": "12 count BUDGET/NEAR PREMIUM in TOTAL BEER",
+        "distinct_count": 1,
+        "null_rows": 55612,
+        "truncated": false,
+        "values": [
+          {
+            "value": "x",
+            "row_count": 157
+          }
+        ]
+      }
+    },
+    {
+      "check_id": "LIVE_MDM_MDM004_LARGE_count_BUDGET_NEAR_PREMIUM_in_TOTAL_BEER",
+      "rule": "MDM004",
+      "stage": "MDM",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "INFO",
+      "message": "LARGE count BUDGET/NEAR PREMIUM in TOTAL BEER: 1 distinct non-null values; 55,567 null rows of 55,769; most frequent: x (202)",
+      "error_message": "LARGE count BUDGET/NEAR PREMIUM in TOTAL BEER: 1 distinct non-null values; 55,567 null rows of 55,769; most frequent: x (202)",
+      "affected_pct": 0.0,
+      "actual_value": 1,
+      "expected_value": null,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-14T19:37:42",
+      "profile": {
+        "column": "LARGE count BUDGET/NEAR PREMIUM in TOTAL BEER",
+        "distinct_count": 1,
+        "null_rows": 55567,
+        "truncated": false,
+        "values": [
+          {
+            "value": "x",
+            "row_count": 202
+          }
+        ]
+      }
+    },
+    {
+      "check_id": "LIVE_MDM_MDM004_MID_count_BUDGET_NEAR_PREMIUM_in_TOTAL_BEER",
+      "rule": "MDM004",
+      "stage": "MDM",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "INFO",
+      "message": "MID count BUDGET/NEAR PREMIUM in TOTAL BEER: 1 distinct non-null values; 55,682 null rows of 55,769; most frequent: x (87)",
+      "error_message": "MID count BUDGET/NEAR PREMIUM in TOTAL BEER: 1 distinct non-null values; 55,682 null rows of 55,769; most frequent: x (87)",
+      "affected_pct": 0.0,
+      "actual_value": 1,
+      "expected_value": null,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-14T19:37:43",
+      "profile": {
+        "column": "MID count BUDGET/NEAR PREMIUM in TOTAL BEER",
+        "distinct_count": 1,
+        "null_rows": 55682,
+        "truncated": false,
+        "values": [
+          {
+            "value": "x",
+            "row_count": 87
+          }
+        ]
+      }
+    },
+    {
+      "check_id": "LIVE_MDM_MDM004_SINGLE_count_BUDGET_NEAR_PREMIUM_in_TOTAL_BEER",
+      "rule": "MDM004",
+      "stage": "MDM",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "INFO",
+      "message": "SINGLE count BUDGET/NEAR PREMIUM in TOTAL BEER: 1 distinct non-null values; 55,565 null rows of 55,769; most frequent: x (204)",
+      "error_message": "SINGLE count BUDGET/NEAR PREMIUM in TOTAL BEER: 1 distinct non-null values; 55,565 null rows of 55,769; most frequent: x (204)",
+      "affected_pct": 0.0,
+      "actual_value": 1,
+      "expected_value": null,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-14T19:37:43",
+      "profile": {
+        "column": "SINGLE count BUDGET/NEAR PREMIUM in TOTAL BEER",
+        "distinct_count": 1,
+        "null_rows": 55565,
+        "truncated": false,
+        "values": [
+          {
+            "value": "x",
+            "row_count": 204
+          }
+        ]
+      }
+    },
+    {
+      "check_id": "LIVE_MDM_MDM004_SMALL_count_BUDGET_NEAR_PREMIUM_in_TOTAL_BEER",
+      "rule": "MDM004",
+      "stage": "MDM",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "INFO",
+      "message": "SMALL count BUDGET/NEAR PREMIUM in TOTAL BEER: 1 distinct non-null values; 55,531 null rows of 55,769; most frequent: x (238)",
+      "error_message": "SMALL count BUDGET/NEAR PREMIUM in TOTAL BEER: 1 distinct non-null values; 55,531 null rows of 55,769; most frequent: x (238)",
+      "affected_pct": 0.0,
+      "actual_value": 1,
+      "expected_value": null,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-14T19:37:44",
+      "profile": {
+        "column": "SMALL count BUDGET/NEAR PREMIUM in TOTAL BEER",
+        "distinct_count": 1,
+        "null_rows": 55531,
+        "truncated": false,
+        "values": [
+          {
+            "value": "x",
+            "row_count": 238
+          }
+        ]
+      }
+    },
+    {
+      "check_id": "LIVE_MDM_MDM004_12_count_CRAFT_in_TOTAL_BEER",
+      "rule": "MDM004",
+      "stage": "MDM",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "INFO",
+      "message": "12 count CRAFT in TOTAL BEER: 1 distinct non-null values; 52,395 null rows of 55,769; most frequent: x (3,374)",
+      "error_message": "12 count CRAFT in TOTAL BEER: 1 distinct non-null values; 52,395 null rows of 55,769; most frequent: x (3,374)",
+      "affected_pct": 0.0,
+      "actual_value": 1,
+      "expected_value": null,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-14T19:37:45",
+      "profile": {
+        "column": "12 count CRAFT in TOTAL BEER",
+        "distinct_count": 1,
+        "null_rows": 52395,
+        "truncated": false,
+        "values": [
+          {
+            "value": "x",
+            "row_count": 3374
+          }
+        ]
+      }
+    },
+    {
+      "check_id": "LIVE_MDM_MDM004_LARGE_count_CRAFT_in_TOTAL_BEER",
+      "rule": "MDM004",
+      "stage": "MDM",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "INFO",
+      "message": "LARGE count CRAFT in TOTAL BEER: 1 distinct non-null values; 55,203 null rows of 55,769; most frequent: x (566)",
+      "error_message": "LARGE count CRAFT in TOTAL BEER: 1 distinct non-null values; 55,203 null rows of 55,769; most frequent: x (566)",
+      "affected_pct": 0.0,
+      "actual_value": 1,
+      "expected_value": null,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-14T19:37:45",
+      "profile": {
+        "column": "LARGE count CRAFT in TOTAL BEER",
+        "distinct_count": 1,
+        "null_rows": 55203,
+        "truncated": false,
+        "values": [
+          {
+            "value": "x",
+            "row_count": 566
+          }
+        ]
+      }
+    },
+    {
+      "check_id": "LIVE_MDM_MDM004_MID_count_CRAFT_in_TOTAL_BEER",
+      "rule": "MDM004",
+      "stage": "MDM",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "INFO",
+      "message": "MID count CRAFT in TOTAL BEER: 1 distinct non-null values; 55,368 null rows of 55,769; most frequent: x (401)",
+      "error_message": "MID count CRAFT in TOTAL BEER: 1 distinct non-null values; 55,368 null rows of 55,769; most frequent: x (401)",
+      "affected_pct": 0.0,
+      "actual_value": 1,
+      "expected_value": null,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-14T19:37:46",
+      "profile": {
+        "column": "MID count CRAFT in TOTAL BEER",
+        "distinct_count": 1,
+        "null_rows": 55368,
+        "truncated": false,
+        "values": [
+          {
+            "value": "x",
+            "row_count": 401
+          }
+        ]
+      }
+    },
+    {
+      "check_id": "LIVE_MDM_MDM004_SINGLE_count_CRAFT_in_TOTAL_BEER",
+      "rule": "MDM004",
+      "stage": "MDM",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "INFO",
+      "message": "SINGLE count CRAFT in TOTAL BEER: 1 distinct non-null values; 48,235 null rows of 55,769; most frequent: x (7,534)",
+      "error_message": "SINGLE count CRAFT in TOTAL BEER: 1 distinct non-null values; 48,235 null rows of 55,769; most frequent: x (7,534)",
+      "affected_pct": 0.0,
+      "actual_value": 1,
+      "expected_value": null,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-14T19:37:46",
+      "profile": {
+        "column": "SINGLE count CRAFT in TOTAL BEER",
+        "distinct_count": 1,
+        "null_rows": 48235,
+        "truncated": false,
+        "values": [
+          {
+            "value": "x",
+            "row_count": 7534
+          }
+        ]
+      }
+    },
+    {
+      "check_id": "LIVE_MDM_MDM004_SMALL_count_CRAFT_in_TOTAL_BEER",
+      "rule": "MDM004",
+      "stage": "MDM",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "INFO",
+      "message": "SMALL count CRAFT in TOTAL BEER: 1 distinct non-null values; 32,632 null rows of 55,769; most frequent: x (23,137)",
+      "error_message": "SMALL count CRAFT in TOTAL BEER: 1 distinct non-null values; 32,632 null rows of 55,769; most frequent: x (23,137)",
+      "affected_pct": 0.0,
+      "actual_value": 1,
+      "expected_value": null,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-14T19:37:47",
+      "profile": {
+        "column": "SMALL count CRAFT in TOTAL BEER",
+        "distinct_count": 1,
+        "null_rows": 32632,
+        "truncated": false,
+        "values": [
+          {
+            "value": "x",
+            "row_count": 23137
+          }
+        ]
+      }
+    },
+    {
+      "check_id": "LIVE_MDM_MDM004_12_count_IMPORT_in_TOTAL_BEER",
+      "rule": "MDM004",
+      "stage": "MDM",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "INFO",
+      "message": "12 count IMPORT in TOTAL BEER: 1 distinct non-null values; 55,333 null rows of 55,769; most frequent: x (436)",
+      "error_message": "12 count IMPORT in TOTAL BEER: 1 distinct non-null values; 55,333 null rows of 55,769; most frequent: x (436)",
+      "affected_pct": 0.0,
+      "actual_value": 1,
+      "expected_value": null,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-14T19:37:47",
+      "profile": {
+        "column": "12 count IMPORT in TOTAL BEER",
+        "distinct_count": 1,
+        "null_rows": 55333,
+        "truncated": false,
+        "values": [
+          {
+            "value": "x",
+            "row_count": 436
+          }
+        ]
+      }
+    },
+    {
+      "check_id": "LIVE_MDM_MDM004_LARGE_count_IMPORT_in_TOTAL_BEER",
+      "rule": "MDM004",
+      "stage": "MDM",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "INFO",
+      "message": "LARGE count IMPORT in TOTAL BEER: 1 distinct non-null values; 55,455 null rows of 55,769; most frequent: x (314)",
+      "error_message": "LARGE count IMPORT in TOTAL BEER: 1 distinct non-null values; 55,455 null rows of 55,769; most frequent: x (314)",
+      "affected_pct": 0.0,
+      "actual_value": 1,
+      "expected_value": null,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-14T19:37:48",
+      "profile": {
+        "column": "LARGE count IMPORT in TOTAL BEER",
+        "distinct_count": 1,
+        "null_rows": 55455,
+        "truncated": false,
+        "values": [
+          {
+            "value": "x",
+            "row_count": 314
+          }
+        ]
+      }
+    },
+    {
+      "check_id": "LIVE_MDM_MDM004_MID_count_IMPORT_in_TOTAL_BEER",
+      "rule": "MDM004",
+      "stage": "MDM",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "INFO",
+      "message": "MID count IMPORT in TOTAL BEER: 1 distinct non-null values; 55,681 null rows of 55,769; most frequent: x (88)",
+      "error_message": "MID count IMPORT in TOTAL BEER: 1 distinct non-null values; 55,681 null rows of 55,769; most frequent: x (88)",
+      "affected_pct": 0.0,
+      "actual_value": 1,
+      "expected_value": null,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-14T19:37:49",
+      "profile": {
+        "column": "MID count IMPORT in TOTAL BEER",
+        "distinct_count": 1,
+        "null_rows": 55681,
+        "truncated": false,
+        "values": [
+          {
+            "value": "x",
+            "row_count": 88
+          }
+        ]
+      }
+    },
+    {
+      "check_id": "LIVE_MDM_MDM004_SINGLE_count_IMPORT_in_TOTAL_BEER",
+      "rule": "MDM004",
+      "stage": "MDM",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "INFO",
+      "message": "SINGLE count IMPORT in TOTAL BEER: 1 distinct non-null values; 53,905 null rows of 55,769; most frequent: x (1,864)",
+      "error_message": "SINGLE count IMPORT in TOTAL BEER: 1 distinct non-null values; 53,905 null rows of 55,769; most frequent: x (1,864)",
+      "affected_pct": 0.0,
+      "actual_value": 1,
+      "expected_value": null,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-14T19:37:49",
+      "profile": {
+        "column": "SINGLE count IMPORT in TOTAL BEER",
+        "distinct_count": 1,
+        "null_rows": 53905,
+        "truncated": false,
+        "values": [
+          {
+            "value": "x",
+            "row_count": 1864
+          }
+        ]
+      }
+    },
+    {
+      "check_id": "LIVE_MDM_MDM004_SMALL_count_IMPORT_in_TOTAL_BEER",
+      "rule": "MDM004",
+      "stage": "MDM",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "INFO",
+      "message": "SMALL count IMPORT in TOTAL BEER: 1 distinct non-null values; 54,144 null rows of 55,769; most frequent: x (1,625)",
+      "error_message": "SMALL count IMPORT in TOTAL BEER: 1 distinct non-null values; 54,144 null rows of 55,769; most frequent: x (1,625)",
+      "affected_pct": 0.0,
+      "actual_value": 1,
+      "expected_value": null,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-14T19:37:50",
+      "profile": {
+        "column": "SMALL count IMPORT in TOTAL BEER",
+        "distinct_count": 1,
+        "null_rows": 54144,
+        "truncated": false,
+        "values": [
+          {
+            "value": "x",
+            "row_count": 1625
+          }
+        ]
+      }
+    },
+    {
+      "check_id": "LIVE_MDM_MDM004_12_count_MALT_LIQUOR_in_TOTAL_BEER",
+      "rule": "MDM004",
+      "stage": "MDM",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "INFO",
+      "message": "12 count MALT LIQUOR in TOTAL BEER: 1 distinct non-null values; 55,753 null rows of 55,769; most frequent: x (16)",
+      "error_message": "12 count MALT LIQUOR in TOTAL BEER: 1 distinct non-null values; 55,753 null rows of 55,769; most frequent: x (16)",
+      "affected_pct": 0.0,
+      "actual_value": 1,
+      "expected_value": null,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-14T19:37:50",
+      "profile": {
+        "column": "12 count MALT LIQUOR in TOTAL BEER",
+        "distinct_count": 1,
+        "null_rows": 55753,
+        "truncated": false,
+        "values": [
+          {
+            "value": "x",
+            "row_count": 16
+          }
+        ]
+      }
+    },
+    {
+      "check_id": "LIVE_MDM_MDM004_LARGE_count_MALT_LIQUOR_in_TOTAL_BEER",
+      "rule": "MDM004",
+      "stage": "MDM",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "INFO",
+      "message": "LARGE count MALT LIQUOR in TOTAL BEER: 1 distinct non-null values; 55,765 null rows of 55,769; most frequent: x (4)",
+      "error_message": "LARGE count MALT LIQUOR in TOTAL BEER: 1 distinct non-null values; 55,765 null rows of 55,769; most frequent: x (4)",
+      "affected_pct": 0.0,
+      "actual_value": 1,
+      "expected_value": null,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-14T19:37:51",
+      "profile": {
+        "column": "LARGE count MALT LIQUOR in TOTAL BEER",
+        "distinct_count": 1,
+        "null_rows": 55765,
+        "truncated": false,
+        "values": [
+          {
+            "value": "x",
+            "row_count": 4
+          }
+        ]
+      }
+    },
+    {
+      "check_id": "LIVE_MDM_MDM004_MID_count_MALT_LIQUOR_in_TOTAL_BEER",
+      "rule": "MDM004",
+      "stage": "MDM",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "INFO",
+      "message": "MID count MALT LIQUOR in TOTAL BEER: 1 distinct non-null values; 55,760 null rows of 55,769; most frequent: x (9)",
+      "error_message": "MID count MALT LIQUOR in TOTAL BEER: 1 distinct non-null values; 55,760 null rows of 55,769; most frequent: x (9)",
+      "affected_pct": 0.0,
+      "actual_value": 1,
+      "expected_value": null,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-14T19:37:52",
+      "profile": {
+        "column": "MID count MALT LIQUOR in TOTAL BEER",
+        "distinct_count": 1,
+        "null_rows": 55760,
+        "truncated": false,
+        "values": [
+          {
+            "value": "x",
+            "row_count": 9
+          }
+        ]
+      }
+    },
+    {
+      "check_id": "LIVE_MDM_MDM004_SINGLE_count_MALT_LIQUOR_in_TOTAL_BEER",
+      "rule": "MDM004",
+      "stage": "MDM",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "INFO",
+      "message": "SINGLE count MALT LIQUOR in TOTAL BEER: 1 distinct non-null values; 55,606 null rows of 55,769; most frequent: x (163)",
+      "error_message": "SINGLE count MALT LIQUOR in TOTAL BEER: 1 distinct non-null values; 55,606 null rows of 55,769; most frequent: x (163)",
+      "affected_pct": 0.0,
+      "actual_value": 1,
+      "expected_value": null,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-14T19:37:52",
+      "profile": {
+        "column": "SINGLE count MALT LIQUOR in TOTAL BEER",
+        "distinct_count": 1,
+        "null_rows": 55606,
+        "truncated": false,
+        "values": [
+          {
+            "value": "x",
+            "row_count": 163
+          }
+        ]
+      }
+    },
+    {
+      "check_id": "LIVE_MDM_MDM004_SMALL_count_MALT_LIQUOR_in_TOTAL_BEER",
+      "rule": "MDM004",
+      "stage": "MDM",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "INFO",
+      "message": "SMALL count MALT LIQUOR in TOTAL BEER: 1 distinct non-null values; 55,712 null rows of 55,769; most frequent: x (57)",
+      "error_message": "SMALL count MALT LIQUOR in TOTAL BEER: 1 distinct non-null values; 55,712 null rows of 55,769; most frequent: x (57)",
+      "affected_pct": 0.0,
+      "actual_value": 1,
+      "expected_value": null,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-14T19:37:53",
+      "profile": {
+        "column": "SMALL count MALT LIQUOR in TOTAL BEER",
+        "distinct_count": 1,
+        "null_rows": 55712,
+        "truncated": false,
+        "values": [
+          {
+            "value": "x",
+            "row_count": 57
+          }
+        ]
+      }
+    },
+    {
+      "check_id": "LIVE_MDM_MDM004_12_count_PREMIUM_LIGHT_in_TOTAL_BEER",
+      "rule": "MDM004",
+      "stage": "MDM",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "INFO",
+      "message": "12 count PREMIUM LIGHT in TOTAL BEER: 1 distinct non-null values; 55,707 null rows of 55,769; most frequent: x (62)",
+      "error_message": "12 count PREMIUM LIGHT in TOTAL BEER: 1 distinct non-null values; 55,707 null rows of 55,769; most frequent: x (62)",
+      "affected_pct": 0.0,
+      "actual_value": 1,
+      "expected_value": null,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-14T19:37:53",
+      "profile": {
+        "column": "12 count PREMIUM LIGHT in TOTAL BEER",
+        "distinct_count": 1,
+        "null_rows": 55707,
+        "truncated": false,
+        "values": [
+          {
+            "value": "x",
+            "row_count": 62
+          }
+        ]
+      }
+    },
+    {
+      "check_id": "LIVE_MDM_MDM004_LARGE_count_PREMIUM_LIGHT_in_TOTAL_BEER",
+      "rule": "MDM004",
+      "stage": "MDM",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "INFO",
+      "message": "LARGE count PREMIUM LIGHT in TOTAL BEER: 1 distinct non-null values; 55,629 null rows of 55,769; most frequent: x (140)",
+      "error_message": "LARGE count PREMIUM LIGHT in TOTAL BEER: 1 distinct non-null values; 55,629 null rows of 55,769; most frequent: x (140)",
+      "affected_pct": 0.0,
+      "actual_value": 1,
+      "expected_value": null,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-14T19:37:54",
+      "profile": {
+        "column": "LARGE count PREMIUM LIGHT in TOTAL BEER",
+        "distinct_count": 1,
+        "null_rows": 55629,
+        "truncated": false,
+        "values": [
+          {
+            "value": "x",
+            "row_count": 140
+          }
+        ]
+      }
+    },
+    {
+      "check_id": "LIVE_MDM_MDM004_MID_count_PREMIUM_LIGHT_in_TOTAL_BEER",
+      "rule": "MDM004",
+      "stage": "MDM",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "INFO",
+      "message": "MID count PREMIUM LIGHT in TOTAL BEER: 1 distinct non-null values; 55,694 null rows of 55,769; most frequent: x (75)",
+      "error_message": "MID count PREMIUM LIGHT in TOTAL BEER: 1 distinct non-null values; 55,694 null rows of 55,769; most frequent: x (75)",
+      "affected_pct": 0.0,
+      "actual_value": 1,
+      "expected_value": null,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-14T19:37:54",
+      "profile": {
+        "column": "MID count PREMIUM LIGHT in TOTAL BEER",
+        "distinct_count": 1,
+        "null_rows": 55694,
+        "truncated": false,
+        "values": [
+          {
+            "value": "x",
+            "row_count": 75
+          }
+        ]
+      }
+    },
+    {
+      "check_id": "LIVE_MDM_MDM004_SINGLE_count_PREMIUM_LIGHT_in_TOTAL_BEER",
+      "rule": "MDM004",
+      "stage": "MDM",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "INFO",
+      "message": "SINGLE count PREMIUM LIGHT in TOTAL BEER: 1 distinct non-null values; 55,648 null rows of 55,769; most frequent: x (121)",
+      "error_message": "SINGLE count PREMIUM LIGHT in TOTAL BEER: 1 distinct non-null values; 55,648 null rows of 55,769; most frequent: x (121)",
+      "affected_pct": 0.0,
+      "actual_value": 1,
+      "expected_value": null,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-14T19:37:55",
+      "profile": {
+        "column": "SINGLE count PREMIUM LIGHT in TOTAL BEER",
+        "distinct_count": 1,
+        "null_rows": 55648,
+        "truncated": false,
+        "values": [
+          {
+            "value": "x",
+            "row_count": 121
+          }
+        ]
+      }
+    },
+    {
+      "check_id": "LIVE_MDM_MDM004_SMALL_count_PREMIUM_LIGHT_in_TOTAL_BEER",
+      "rule": "MDM004",
+      "stage": "MDM",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "INFO",
+      "message": "SMALL count PREMIUM LIGHT in TOTAL BEER: 1 distinct non-null values; 55,668 null rows of 55,769; most frequent: x (101)",
+      "error_message": "SMALL count PREMIUM LIGHT in TOTAL BEER: 1 distinct non-null values; 55,668 null rows of 55,769; most frequent: x (101)",
+      "affected_pct": 0.0,
+      "actual_value": 1,
+      "expected_value": null,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-14T19:37:55",
+      "profile": {
+        "column": "SMALL count PREMIUM LIGHT in TOTAL BEER",
+        "distinct_count": 1,
+        "null_rows": 55668,
+        "truncated": false,
+        "values": [
+          {
+            "value": "x",
+            "row_count": 101
+          }
+        ]
+      }
+    },
+    {
+      "check_id": "LIVE_MDM_MDM004_12_count_PREMIUM_REGULAR_in_TOTAL_BEER",
+      "rule": "MDM004",
+      "stage": "MDM",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "INFO",
+      "message": "12 count PREMIUM REGULAR in TOTAL BEER: 1 distinct non-null values; 55,725 null rows of 55,769; most frequent: x (44)",
+      "error_message": "12 count PREMIUM REGULAR in TOTAL BEER: 1 distinct non-null values; 55,725 null rows of 55,769; most frequent: x (44)",
+      "affected_pct": 0.0,
+      "actual_value": 1,
+      "expected_value": null,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-14T19:37:56",
+      "profile": {
+        "column": "12 count PREMIUM REGULAR in TOTAL BEER",
+        "distinct_count": 1,
+        "null_rows": 55725,
+        "truncated": false,
+        "values": [
+          {
+            "value": "x",
+            "row_count": 44
+          }
+        ]
+      }
+    },
+    {
+      "check_id": "LIVE_MDM_MDM004_LARGE_count_PREMIUM_REGULAR_in_TOTAL_BEER",
+      "rule": "MDM004",
+      "stage": "MDM",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "INFO",
+      "message": "LARGE count PREMIUM REGULAR in TOTAL BEER: 1 distinct non-null values; 55,709 null rows of 55,769; most frequent: x (60)",
+      "error_message": "LARGE count PREMIUM REGULAR in TOTAL BEER: 1 distinct non-null values; 55,709 null rows of 55,769; most frequent: x (60)",
+      "affected_pct": 0.0,
+      "actual_value": 1,
+      "expected_value": null,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-14T19:37:57",
+      "profile": {
+        "column": "LARGE count PREMIUM REGULAR in TOTAL BEER",
+        "distinct_count": 1,
+        "null_rows": 55709,
+        "truncated": false,
+        "values": [
+          {
+            "value": "x",
+            "row_count": 60
+          }
+        ]
+      }
+    },
+    {
+      "check_id": "LIVE_MDM_MDM004_MID_count_PREMIUM_REGULAR_in_TOTAL_BEER",
+      "rule": "MDM004",
+      "stage": "MDM",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "INFO",
+      "message": "MID count PREMIUM REGULAR in TOTAL BEER: 1 distinct non-null values; 55,729 null rows of 55,769; most frequent: x (40)",
+      "error_message": "MID count PREMIUM REGULAR in TOTAL BEER: 1 distinct non-null values; 55,729 null rows of 55,769; most frequent: x (40)",
+      "affected_pct": 0.0,
+      "actual_value": 1,
+      "expected_value": null,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-14T19:37:57",
+      "profile": {
+        "column": "MID count PREMIUM REGULAR in TOTAL BEER",
+        "distinct_count": 1,
+        "null_rows": 55729,
+        "truncated": false,
+        "values": [
+          {
+            "value": "x",
+            "row_count": 40
+          }
+        ]
+      }
+    },
+    {
+      "check_id": "LIVE_MDM_MDM004_SINGLE_count_PREMIUM_REGULAR_in_TOTAL_BEER",
+      "rule": "MDM004",
+      "stage": "MDM",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "INFO",
+      "message": "SINGLE count PREMIUM REGULAR in TOTAL BEER: 1 distinct non-null values; 55,684 null rows of 55,769; most frequent: x (85)",
+      "error_message": "SINGLE count PREMIUM REGULAR in TOTAL BEER: 1 distinct non-null values; 55,684 null rows of 55,769; most frequent: x (85)",
+      "affected_pct": 0.0,
+      "actual_value": 1,
+      "expected_value": null,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-14T19:37:58",
+      "profile": {
+        "column": "SINGLE count PREMIUM REGULAR in TOTAL BEER",
+        "distinct_count": 1,
+        "null_rows": 55684,
+        "truncated": false,
+        "values": [
+          {
+            "value": "x",
+            "row_count": 85
+          }
+        ]
+      }
+    },
+    {
+      "check_id": "LIVE_MDM_MDM004_SMALL_count_PREMIUM_REGULAR_in_TOTAL_BEER",
+      "rule": "MDM004",
+      "stage": "MDM",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "INFO",
+      "message": "SMALL count PREMIUM REGULAR in TOTAL BEER: 1 distinct non-null values; 55,698 null rows of 55,769; most frequent: x (71)",
+      "error_message": "SMALL count PREMIUM REGULAR in TOTAL BEER: 1 distinct non-null values; 55,698 null rows of 55,769; most frequent: x (71)",
+      "affected_pct": 0.0,
+      "actual_value": 1,
+      "expected_value": null,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-14T19:37:58",
+      "profile": {
+        "column": "SMALL count PREMIUM REGULAR in TOTAL BEER",
+        "distinct_count": 1,
+        "null_rows": 55698,
+        "truncated": false,
+        "values": [
+          {
+            "value": "x",
+            "row_count": 71
+          }
+        ]
+      }
+    },
+    {
+      "check_id": "LIVE_MDM_MDM004_12_count_SUPER_PREMIUM_in_TOTAL_BEER",
+      "rule": "MDM004",
+      "stage": "MDM",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "INFO",
+      "message": "12 count SUPER PREMIUM in TOTAL BEER: 1 distinct non-null values; 55,661 null rows of 55,769; most frequent: x (108)",
+      "error_message": "12 count SUPER PREMIUM in TOTAL BEER: 1 distinct non-null values; 55,661 null rows of 55,769; most frequent: x (108)",
+      "affected_pct": 0.0,
+      "actual_value": 1,
+      "expected_value": null,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-14T19:37:59",
+      "profile": {
+        "column": "12 count SUPER PREMIUM in TOTAL BEER",
+        "distinct_count": 1,
+        "null_rows": 55661,
+        "truncated": false,
+        "values": [
+          {
+            "value": "x",
+            "row_count": 108
+          }
+        ]
+      }
+    },
+    {
+      "check_id": "LIVE_MDM_MDM004_LARGE_count_SUPER_PREMIUM_in_TOTAL_BEER",
+      "rule": "MDM004",
+      "stage": "MDM",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "INFO",
+      "message": "LARGE count SUPER PREMIUM in TOTAL BEER: 1 distinct non-null values; 55,691 null rows of 55,769; most frequent: x (78)",
+      "error_message": "LARGE count SUPER PREMIUM in TOTAL BEER: 1 distinct non-null values; 55,691 null rows of 55,769; most frequent: x (78)",
+      "affected_pct": 0.0,
+      "actual_value": 1,
+      "expected_value": null,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-14T19:38:00",
+      "profile": {
+        "column": "LARGE count SUPER PREMIUM in TOTAL BEER",
+        "distinct_count": 1,
+        "null_rows": 55691,
+        "truncated": false,
+        "values": [
+          {
+            "value": "x",
+            "row_count": 78
+          }
+        ]
+      }
+    },
+    {
+      "check_id": "LIVE_MDM_MDM004_MID_count_SUPER_PREMIUM_in_TOTAL_BEER",
+      "rule": "MDM004",
+      "stage": "MDM",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "INFO",
+      "message": "MID count SUPER PREMIUM in TOTAL BEER: 1 distinct non-null values; 55,724 null rows of 55,769; most frequent: x (45)",
+      "error_message": "MID count SUPER PREMIUM in TOTAL BEER: 1 distinct non-null values; 55,724 null rows of 55,769; most frequent: x (45)",
+      "affected_pct": 0.0,
+      "actual_value": 1,
+      "expected_value": null,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-14T19:38:00",
+      "profile": {
+        "column": "MID count SUPER PREMIUM in TOTAL BEER",
+        "distinct_count": 1,
+        "null_rows": 55724,
+        "truncated": false,
+        "values": [
+          {
+            "value": "x",
+            "row_count": 45
+          }
+        ]
+      }
+    },
+    {
+      "check_id": "LIVE_MDM_MDM004_SINGLE_count_SUPER_PREMIUM_in_TOTAL_BEER",
+      "rule": "MDM004",
+      "stage": "MDM",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "INFO",
+      "message": "SINGLE count SUPER PREMIUM in TOTAL BEER: 1 distinct non-null values; 55,605 null rows of 55,769; most frequent: x (164)",
+      "error_message": "SINGLE count SUPER PREMIUM in TOTAL BEER: 1 distinct non-null values; 55,605 null rows of 55,769; most frequent: x (164)",
+      "affected_pct": 0.0,
+      "actual_value": 1,
+      "expected_value": null,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-14T19:38:01",
+      "profile": {
+        "column": "SINGLE count SUPER PREMIUM in TOTAL BEER",
+        "distinct_count": 1,
+        "null_rows": 55605,
+        "truncated": false,
+        "values": [
+          {
+            "value": "x",
+            "row_count": 164
+          }
+        ]
+      }
+    },
+    {
+      "check_id": "LIVE_MDM_MDM004_SMALL_count_SUPER_PREMIUM_in_TOTAL_BEER",
+      "rule": "MDM004",
+      "stage": "MDM",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "INFO",
+      "message": "SMALL count SUPER PREMIUM in TOTAL BEER: 1 distinct non-null values; 55,663 null rows of 55,769; most frequent: x (106)",
+      "error_message": "SMALL count SUPER PREMIUM in TOTAL BEER: 1 distinct non-null values; 55,663 null rows of 55,769; most frequent: x (106)",
+      "affected_pct": 0.0,
+      "actual_value": 1,
+      "expected_value": null,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-14T19:38:01",
+      "profile": {
+        "column": "SMALL count SUPER PREMIUM in TOTAL BEER",
+        "distinct_count": 1,
+        "null_rows": 55663,
+        "truncated": false,
+        "values": [
+          {
+            "value": "x",
+            "row_count": 106
+          }
+        ]
+      }
+    },
+    {
+      "check_id": "LIVE_MDM_MDM004_12_count_CIDER_in_FLAVORED_TAB",
+      "rule": "MDM004",
+      "stage": "MDM",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "INFO",
+      "message": "12 count CIDER in FLAVORED TAB: 1 distinct non-null values; 55,593 null rows of 55,769; most frequent: x (176)",
+      "error_message": "12 count CIDER in FLAVORED TAB: 1 distinct non-null values; 55,593 null rows of 55,769; most frequent: x (176)",
+      "affected_pct": 0.0,
+      "actual_value": 1,
+      "expected_value": null,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-14T19:38:02",
+      "profile": {
+        "column": "12 count CIDER in FLAVORED TAB",
+        "distinct_count": 1,
+        "null_rows": 55593,
+        "truncated": false,
+        "values": [
+          {
+            "value": "x",
+            "row_count": 176
+          }
+        ]
+      }
+    },
+    {
+      "check_id": "LIVE_MDM_MDM004_LARGE_count_CIDER_in_FLAVORED_TAB",
+      "rule": "MDM004",
+      "stage": "MDM",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "INFO",
+      "message": "LARGE count CIDER in FLAVORED TAB: 1 distinct non-null values; 55,758 null rows of 55,769; most frequent: x (11)",
+      "error_message": "LARGE count CIDER in FLAVORED TAB: 1 distinct non-null values; 55,758 null rows of 55,769; most frequent: x (11)",
+      "affected_pct": 0.0,
+      "actual_value": 1,
+      "expected_value": null,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-14T19:38:02",
+      "profile": {
+        "column": "LARGE count CIDER in FLAVORED TAB",
+        "distinct_count": 1,
+        "null_rows": 55758,
+        "truncated": false,
+        "values": [
+          {
+            "value": "x",
+            "row_count": 11
+          }
+        ]
+      }
+    },
+    {
+      "check_id": "LIVE_MDM_MDM004_MID_count_CIDER_in_FLAVORED_TAB",
+      "rule": "MDM004",
+      "stage": "MDM",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "INFO",
+      "message": "MID count CIDER in FLAVORED TAB: 1 distinct non-null values; 55,761 null rows of 55,769; most frequent: x (8)",
+      "error_message": "MID count CIDER in FLAVORED TAB: 1 distinct non-null values; 55,761 null rows of 55,769; most frequent: x (8)",
+      "affected_pct": 0.0,
+      "actual_value": 1,
+      "expected_value": null,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-14T19:38:03",
+      "profile": {
+        "column": "MID count CIDER in FLAVORED TAB",
+        "distinct_count": 1,
+        "null_rows": 55761,
+        "truncated": false,
+        "values": [
+          {
+            "value": "x",
+            "row_count": 8
+          }
+        ]
+      }
+    },
+    {
+      "check_id": "LIVE_MDM_MDM004_SINGLE_count_CIDER_in_FLAVORED_TAB",
+      "rule": "MDM004",
+      "stage": "MDM",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "INFO",
+      "message": "SINGLE count CIDER in FLAVORED TAB: 1 distinct non-null values; 54,759 null rows of 55,769; most frequent: x (1,010)",
+      "error_message": "SINGLE count CIDER in FLAVORED TAB: 1 distinct non-null values; 54,759 null rows of 55,769; most frequent: x (1,010)",
+      "affected_pct": 0.0,
+      "actual_value": 1,
+      "expected_value": null,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-14T19:38:04",
+      "profile": {
+        "column": "SINGLE count CIDER in FLAVORED TAB",
+        "distinct_count": 1,
+        "null_rows": 54759,
+        "truncated": false,
+        "values": [
+          {
+            "value": "x",
+            "row_count": 1010
+          }
+        ]
+      }
+    },
+    {
+      "check_id": "LIVE_MDM_MDM004_SMALL_count_CIDER_in_FLAVORED_TAB",
+      "rule": "MDM004",
+      "stage": "MDM",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "INFO",
+      "message": "SMALL count CIDER in FLAVORED TAB: 1 distinct non-null values; 53,661 null rows of 55,769; most frequent: x (2,108)",
+      "error_message": "SMALL count CIDER in FLAVORED TAB: 1 distinct non-null values; 53,661 null rows of 55,769; most frequent: x (2,108)",
+      "affected_pct": 0.0,
+      "actual_value": 1,
+      "expected_value": null,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-14T19:38:04",
+      "profile": {
+        "column": "SMALL count CIDER in FLAVORED TAB",
+        "distinct_count": 1,
+        "null_rows": 53661,
+        "truncated": false,
+        "values": [
+          {
+            "value": "x",
+            "row_count": 2108
+          }
+        ]
+      }
+    },
+    {
+      "check_id": "LIVE_MDM_MDM004_12_count_RTD_FULL_FLAVOR_in_FLAVORED_TAB",
+      "rule": "MDM004",
+      "stage": "MDM",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "INFO",
+      "message": "12 count RTD FULL FLAVOR in FLAVORED TAB: 1 distinct non-null values; 55,271 null rows of 55,769; most frequent: x (498)",
+      "error_message": "12 count RTD FULL FLAVOR in FLAVORED TAB: 1 distinct non-null values; 55,271 null rows of 55,769; most frequent: x (498)",
+      "affected_pct": 0.0,
+      "actual_value": 1,
+      "expected_value": null,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-14T19:38:05",
+      "profile": {
+        "column": "12 count RTD FULL FLAVOR in FLAVORED TAB",
+        "distinct_count": 1,
+        "null_rows": 55271,
+        "truncated": false,
+        "values": [
+          {
+            "value": "x",
+            "row_count": 498
+          }
+        ]
+      }
+    },
+    {
+      "check_id": "LIVE_MDM_MDM004_LARGE_count_RTD_FULL_FLAVOR_in_FLAVORED_TAB",
+      "rule": "MDM004",
+      "stage": "MDM",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "INFO",
+      "message": "LARGE count RTD FULL FLAVOR in FLAVORED TAB: 1 distinct non-null values; 55,678 null rows of 55,769; most frequent: x (91)",
+      "error_message": "LARGE count RTD FULL FLAVOR in FLAVORED TAB: 1 distinct non-null values; 55,678 null rows of 55,769; most frequent: x (91)",
+      "affected_pct": 0.0,
+      "actual_value": 1,
+      "expected_value": null,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-14T19:38:05",
+      "profile": {
+        "column": "LARGE count RTD FULL FLAVOR in FLAVORED TAB",
+        "distinct_count": 1,
+        "null_rows": 55678,
+        "truncated": false,
+        "values": [
+          {
+            "value": "x",
+            "row_count": 91
+          }
+        ]
+      }
+    },
+    {
+      "check_id": "LIVE_MDM_MDM004_MID_count_RTD_FULL_FLAVOR_in_FLAVORED_TAB",
+      "rule": "MDM004",
+      "stage": "MDM",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "INFO",
+      "message": "MID count RTD FULL FLAVOR in FLAVORED TAB: 1 distinct non-null values; 55,749 null rows of 55,769; most frequent: x (20)",
+      "error_message": "MID count RTD FULL FLAVOR in FLAVORED TAB: 1 distinct non-null values; 55,749 null rows of 55,769; most frequent: x (20)",
+      "affected_pct": 0.0,
+      "actual_value": 1,
+      "expected_value": null,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-14T19:38:06",
+      "profile": {
+        "column": "MID count RTD FULL FLAVOR in FLAVORED TAB",
+        "distinct_count": 1,
+        "null_rows": 55749,
+        "truncated": false,
+        "values": [
+          {
+            "value": "x",
+            "row_count": 20
+          }
+        ]
+      }
+    },
+    {
+      "check_id": "LIVE_MDM_MDM004_SINGLE_count_RTD_FULL_FLAVOR_in_FLAVORED_TAB",
+      "rule": "MDM004",
+      "stage": "MDM",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "INFO",
+      "message": "SINGLE count RTD FULL FLAVOR in FLAVORED TAB: 1 distinct non-null values; 53,902 null rows of 55,769; most frequent: x (1,867)",
+      "error_message": "SINGLE count RTD FULL FLAVOR in FLAVORED TAB: 1 distinct non-null values; 53,902 null rows of 55,769; most frequent: x (1,867)",
+      "affected_pct": 0.0,
+      "actual_value": 1,
+      "expected_value": null,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-14T19:38:06",
+      "profile": {
+        "column": "SINGLE count RTD FULL FLAVOR in FLAVORED TAB",
+        "distinct_count": 1,
+        "null_rows": 53902,
+        "truncated": false,
+        "values": [
+          {
+            "value": "x",
+            "row_count": 1867
+          }
+        ]
+      }
+    },
+    {
+      "check_id": "LIVE_MDM_MDM004_SMALL_count_RTD_FULL_FLAVOR_in_FLAVORED_TAB",
+      "rule": "MDM004",
+      "stage": "MDM",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "INFO",
+      "message": "SMALL count RTD FULL FLAVOR in FLAVORED TAB: 1 distinct non-null values; 54,666 null rows of 55,769; most frequent: x (1,103)",
+      "error_message": "SMALL count RTD FULL FLAVOR in FLAVORED TAB: 1 distinct non-null values; 54,666 null rows of 55,769; most frequent: x (1,103)",
+      "affected_pct": 0.0,
+      "actual_value": 1,
+      "expected_value": null,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-14T19:38:07",
+      "profile": {
+        "column": "SMALL count RTD FULL FLAVOR in FLAVORED TAB",
+        "distinct_count": 1,
+        "null_rows": 54666,
+        "truncated": false,
+        "values": [
+          {
+            "value": "x",
+            "row_count": 1103
+          }
+        ]
+      }
+    },
+    {
+      "check_id": "LIVE_MDM_MDM004_12_count_RTD_SELTZER_in_FLAVORED_TAB",
+      "rule": "MDM004",
+      "stage": "MDM",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "INFO",
+      "message": "12 count RTD SELTZER in FLAVORED TAB: 1 distinct non-null values; 55,101 null rows of 55,769; most frequent: x (668)",
+      "error_message": "12 count RTD SELTZER in FLAVORED TAB: 1 distinct non-null values; 55,101 null rows of 55,769; most frequent: x (668)",
+      "affected_pct": 0.0,
+      "actual_value": 1,
+      "expected_value": null,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-14T19:38:08",
+      "profile": {
+        "column": "12 count RTD SELTZER in FLAVORED TAB",
+        "distinct_count": 1,
+        "null_rows": 55101,
+        "truncated": false,
+        "values": [
+          {
+            "value": "x",
+            "row_count": 668
+          }
+        ]
+      }
+    },
+    {
+      "check_id": "LIVE_MDM_MDM004_LARGE_count_RTD_SELTZER_in_FLAVORED_TAB",
+      "rule": "MDM004",
+      "stage": "MDM",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "INFO",
+      "message": "LARGE count RTD SELTZER in FLAVORED TAB: 1 distinct non-null values; 55,693 null rows of 55,769; most frequent: x (76)",
+      "error_message": "LARGE count RTD SELTZER in FLAVORED TAB: 1 distinct non-null values; 55,693 null rows of 55,769; most frequent: x (76)",
+      "affected_pct": 0.0,
+      "actual_value": 1,
+      "expected_value": null,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-14T19:38:08",
+      "profile": {
+        "column": "LARGE count RTD SELTZER in FLAVORED TAB",
+        "distinct_count": 1,
+        "null_rows": 55693,
+        "truncated": false,
+        "values": [
+          {
+            "value": "x",
+            "row_count": 76
+          }
+        ]
+      }
+    },
+    {
+      "check_id": "LIVE_MDM_MDM004_MID_count_RTD_SELTZER_in_FLAVORED_TAB",
+      "rule": "MDM004",
+      "stage": "MDM",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "INFO",
+      "message": "MID count RTD SELTZER in FLAVORED TAB: 1 distinct non-null values; 55,749 null rows of 55,769; most frequent: x (20)",
+      "error_message": "MID count RTD SELTZER in FLAVORED TAB: 1 distinct non-null values; 55,749 null rows of 55,769; most frequent: x (20)",
+      "affected_pct": 0.0,
+      "actual_value": 1,
+      "expected_value": null,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-14T19:38:09",
+      "profile": {
+        "column": "MID count RTD SELTZER in FLAVORED TAB",
+        "distinct_count": 1,
+        "null_rows": 55749,
+        "truncated": false,
+        "values": [
+          {
+            "value": "x",
+            "row_count": 20
+          }
+        ]
+      }
+    },
+    {
+      "check_id": "LIVE_MDM_MDM004_SINGLE_count_RTD_SELTZER_in_FLAVORED_TAB",
+      "rule": "MDM004",
+      "stage": "MDM",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "INFO",
+      "message": "SINGLE count RTD SELTZER in FLAVORED TAB: 1 distinct non-null values; 55,071 null rows of 55,769; most frequent: x (698)",
+      "error_message": "SINGLE count RTD SELTZER in FLAVORED TAB: 1 distinct non-null values; 55,071 null rows of 55,769; most frequent: x (698)",
+      "affected_pct": 0.0,
+      "actual_value": 1,
+      "expected_value": null,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-14T19:38:09",
+      "profile": {
+        "column": "SINGLE count RTD SELTZER in FLAVORED TAB",
+        "distinct_count": 1,
+        "null_rows": 55071,
+        "truncated": false,
+        "values": [
+          {
+            "value": "x",
+            "row_count": 698
+          }
+        ]
+      }
+    },
+    {
+      "check_id": "LIVE_MDM_MDM004_SMALL_count_RTD_SELTZER_in_FLAVORED_TAB",
+      "rule": "MDM004",
+      "stage": "MDM",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "INFO",
+      "message": "SMALL count RTD SELTZER in FLAVORED TAB: 1 distinct non-null values; 55,039 null rows of 55,769; most frequent: x (730)",
+      "error_message": "SMALL count RTD SELTZER in FLAVORED TAB: 1 distinct non-null values; 55,039 null rows of 55,769; most frequent: x (730)",
+      "affected_pct": 0.0,
+      "actual_value": 1,
+      "expected_value": null,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-14T19:38:10",
+      "profile": {
+        "column": "SMALL count RTD SELTZER in FLAVORED TAB",
+        "distinct_count": 1,
+        "null_rows": 55039,
+        "truncated": false,
+        "values": [
+          {
+            "value": "x",
+            "row_count": 730
+          }
+        ]
+      }
+    },
+    {
+      "check_id": "LIVE_MDM_MDM004_12_count_RTD_SPIRITS_WINE_in_FLAVORED_TAB",
+      "rule": "MDM004",
+      "stage": "MDM",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "INFO",
+      "message": "12 count RTD SPIRITS/WINE in FLAVORED TAB: 1 distinct non-null values; 54,928 null rows of 55,769; most frequent: x (841)",
+      "error_message": "12 count RTD SPIRITS/WINE in FLAVORED TAB: 1 distinct non-null values; 54,928 null rows of 55,769; most frequent: x (841)",
+      "affected_pct": 0.0,
+      "actual_value": 1,
+      "expected_value": null,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-14T19:38:11",
+      "profile": {
+        "column": "12 count RTD SPIRITS/WINE in FLAVORED TAB",
+        "distinct_count": 1,
+        "null_rows": 54928,
+        "truncated": false,
+        "values": [
+          {
+            "value": "x",
+            "row_count": 841
+          }
+        ]
+      }
+    },
+    {
+      "check_id": "LIVE_MDM_MDM004_LARGE_count_RTD_SPIRITS_WINE_in_FLAVORED_TAB",
+      "rule": "MDM004",
+      "stage": "MDM",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "INFO",
+      "message": "LARGE count RTD SPIRITS/WINE in FLAVORED TAB: 1 distinct non-null values; 55,754 null rows of 55,769; most frequent: x (15)",
+      "error_message": "LARGE count RTD SPIRITS/WINE in FLAVORED TAB: 1 distinct non-null values; 55,754 null rows of 55,769; most frequent: x (15)",
+      "affected_pct": 0.0,
+      "actual_value": 1,
+      "expected_value": null,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-14T19:38:11",
+      "profile": {
+        "column": "LARGE count RTD SPIRITS/WINE in FLAVORED TAB",
+        "distinct_count": 1,
+        "null_rows": 55754,
+        "truncated": false,
+        "values": [
+          {
+            "value": "x",
+            "row_count": 15
+          }
+        ]
+      }
+    },
+    {
+      "check_id": "LIVE_MDM_MDM004_MID_count_RTD_SPIRITS_WINE_in_FLAVORED_TAB",
+      "rule": "MDM004",
+      "stage": "MDM",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "INFO",
+      "message": "MID count RTD SPIRITS/WINE in FLAVORED TAB: 1 distinct non-null values; 55,753 null rows of 55,769; most frequent: x (16)",
+      "error_message": "MID count RTD SPIRITS/WINE in FLAVORED TAB: 1 distinct non-null values; 55,753 null rows of 55,769; most frequent: x (16)",
+      "affected_pct": 0.0,
+      "actual_value": 1,
+      "expected_value": null,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-14T19:38:12",
+      "profile": {
+        "column": "MID count RTD SPIRITS/WINE in FLAVORED TAB",
+        "distinct_count": 1,
+        "null_rows": 55753,
+        "truncated": false,
+        "values": [
+          {
+            "value": "x",
+            "row_count": 16
+          }
+        ]
+      }
+    },
+    {
+      "check_id": "LIVE_MDM_MDM004_SINGLE_count_RTD_SPIRITS_WINE_in_FLAVORED_TAB",
+      "rule": "MDM004",
+      "stage": "MDM",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "INFO",
+      "message": "SINGLE count RTD SPIRITS/WINE in FLAVORED TAB: 1 distinct non-null values; 53,956 null rows of 55,769; most frequent: x (1,813)",
+      "error_message": "SINGLE count RTD SPIRITS/WINE in FLAVORED TAB: 1 distinct non-null values; 53,956 null rows of 55,769; most frequent: x (1,813)",
+      "affected_pct": 0.0,
+      "actual_value": 1,
+      "expected_value": null,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-14T19:38:12",
+      "profile": {
+        "column": "SINGLE count RTD SPIRITS/WINE in FLAVORED TAB",
+        "distinct_count": 1,
+        "null_rows": 53956,
+        "truncated": false,
+        "values": [
+          {
+            "value": "x",
+            "row_count": 1813
+          }
+        ]
+      }
+    },
+    {
+      "check_id": "LIVE_MDM_MDM004_SMALL_count_RTD_SPIRITS_WINE_in_FLAVORED_TAB",
+      "rule": "MDM004",
+      "stage": "MDM",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "INFO",
+      "message": "SMALL count RTD SPIRITS/WINE in FLAVORED TAB: 1 distinct non-null values; 52,877 null rows of 55,769; most frequent: x (2,892)",
+      "error_message": "SMALL count RTD SPIRITS/WINE in FLAVORED TAB: 1 distinct non-null values; 52,877 null rows of 55,769; most frequent: x (2,892)",
+      "affected_pct": 0.0,
+      "actual_value": 1,
+      "expected_value": null,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-14T19:38:13",
+      "profile": {
+        "column": "SMALL count RTD SPIRITS/WINE in FLAVORED TAB",
+        "distinct_count": 1,
+        "null_rows": 52877,
+        "truncated": false,
+        "values": [
+          {
+            "value": "x",
+            "row_count": 2892
+          }
+        ]
+      }
+    },
+    {
+      "check_id": "LIVE_MDM_MDM004_12_count_in_TOTAL_BEER",
+      "rule": "MDM004",
+      "stage": "MDM",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "INFO",
+      "message": "12 count in TOTAL BEER: 1 distinct non-null values; 51,572 null rows of 55,769; most frequent: x (4,197)",
+      "error_message": "12 count in TOTAL BEER: 1 distinct non-null values; 51,572 null rows of 55,769; most frequent: x (4,197)",
+      "affected_pct": 0.0,
+      "actual_value": 1,
+      "expected_value": null,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-14T19:38:14",
+      "profile": {
+        "column": "12 count in TOTAL BEER",
+        "distinct_count": 1,
+        "null_rows": 51572,
+        "truncated": false,
+        "values": [
+          {
+            "value": "x",
+            "row_count": 4197
+          }
+        ]
+      }
+    },
+    {
+      "check_id": "LIVE_MDM_MDM004_LARGE_count_in_TOTAL_BEER",
+      "rule": "MDM004",
+      "stage": "MDM",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "INFO",
+      "message": "LARGE count in TOTAL BEER: 1 distinct non-null values; 54,405 null rows of 55,769; most frequent: x (1,364)",
+      "error_message": "LARGE count in TOTAL BEER: 1 distinct non-null values; 54,405 null rows of 55,769; most frequent: x (1,364)",
+      "affected_pct": 0.0,
+      "actual_value": 1,
+      "expected_value": null,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-14T19:38:14",
+      "profile": {
+        "column": "LARGE count in TOTAL BEER",
+        "distinct_count": 1,
+        "null_rows": 54405,
+        "truncated": false,
+        "values": [
+          {
+            "value": "x",
+            "row_count": 1364
+          }
+        ]
+      }
+    },
+    {
+      "check_id": "LIVE_MDM_MDM004_MID_count_in_TOTAL_BEER",
+      "rule": "MDM004",
+      "stage": "MDM",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "INFO",
+      "message": "MID count in TOTAL BEER: 1 distinct non-null values; 55,024 null rows of 55,769; most frequent: x (745)",
+      "error_message": "MID count in TOTAL BEER: 1 distinct non-null values; 55,024 null rows of 55,769; most frequent: x (745)",
+      "affected_pct": 0.0,
+      "actual_value": 1,
+      "expected_value": null,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-14T19:38:15",
+      "profile": {
+        "column": "MID count in TOTAL BEER",
+        "distinct_count": 1,
+        "null_rows": 55024,
+        "truncated": false,
+        "values": [
+          {
+            "value": "x",
+            "row_count": 745
+          }
+        ]
+      }
+    },
+    {
+      "check_id": "LIVE_MDM_MDM004_SINGLE_count_in_TOTAL_BEER",
+      "rule": "MDM004",
+      "stage": "MDM",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "INFO",
+      "message": "SINGLE count in TOTAL BEER: 1 distinct non-null values; 45,634 null rows of 55,769; most frequent: x (10,135)",
+      "error_message": "SINGLE count in TOTAL BEER: 1 distinct non-null values; 45,634 null rows of 55,769; most frequent: x (10,135)",
+      "affected_pct": 0.0,
+      "actual_value": 1,
+      "expected_value": null,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-14T19:38:15",
+      "profile": {
+        "column": "SINGLE count in TOTAL BEER",
+        "distinct_count": 1,
+        "null_rows": 45634,
+        "truncated": false,
+        "values": [
+          {
+            "value": "x",
+            "row_count": 10135
+          }
+        ]
+      }
+    },
+    {
+      "check_id": "LIVE_MDM_MDM004_SMALL_count_in_TOTAL_BEER",
+      "rule": "MDM004",
+      "stage": "MDM",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "INFO",
+      "message": "SMALL count in TOTAL BEER: 1 distinct non-null values; 30,434 null rows of 55,769; most frequent: x (25,335)",
+      "error_message": "SMALL count in TOTAL BEER: 1 distinct non-null values; 30,434 null rows of 55,769; most frequent: x (25,335)",
+      "affected_pct": 0.0,
+      "actual_value": 1,
+      "expected_value": null,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-14T19:38:16",
+      "profile": {
+        "column": "SMALL count in TOTAL BEER",
+        "distinct_count": 1,
+        "null_rows": 30434,
+        "truncated": false,
+        "values": [
+          {
+            "value": "x",
+            "row_count": 25335
+          }
+        ]
+      }
+    },
+    {
+      "check_id": "LIVE_MDM_MDM004_12_count_in_FLAVORED_TAB",
+      "rule": "MDM004",
+      "stage": "MDM",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "INFO",
+      "message": "12 count in FLAVORED TAB: 1 distinct non-null values; 54,254 null rows of 55,769; most frequent: x (1,515)",
+      "error_message": "12 count in FLAVORED TAB: 1 distinct non-null values; 54,254 null rows of 55,769; most frequent: x (1,515)",
+      "affected_pct": 0.0,
+      "actual_value": 1,
+      "expected_value": null,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-14T19:38:16",
+      "profile": {
+        "column": "12 count in FLAVORED TAB",
+        "distinct_count": 1,
+        "null_rows": 54254,
+        "truncated": false,
+        "values": [
+          {
+            "value": "x",
+            "row_count": 1515
+          }
+        ]
+      }
+    },
+    {
+      "check_id": "LIVE_MDM_MDM004_LARGE_count_in_FLAVORED_TAB",
+      "rule": "MDM004",
+      "stage": "MDM",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "INFO",
+      "message": "LARGE count in FLAVORED TAB: 1 distinct non-null values; 55,576 null rows of 55,769; most frequent: x (193)",
+      "error_message": "LARGE count in FLAVORED TAB: 1 distinct non-null values; 55,576 null rows of 55,769; most frequent: x (193)",
+      "affected_pct": 0.0,
+      "actual_value": 1,
+      "expected_value": null,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-14T19:38:17",
+      "profile": {
+        "column": "LARGE count in FLAVORED TAB",
+        "distinct_count": 1,
+        "null_rows": 55576,
+        "truncated": false,
+        "values": [
+          {
+            "value": "x",
+            "row_count": 193
+          }
+        ]
+      }
+    },
+    {
+      "check_id": "LIVE_MDM_MDM004_MID_count_in_FLAVORED_TAB",
+      "rule": "MDM004",
+      "stage": "MDM",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "INFO",
+      "message": "MID count in FLAVORED TAB: 1 distinct non-null values; 55,705 null rows of 55,769; most frequent: x (64)",
+      "error_message": "MID count in FLAVORED TAB: 1 distinct non-null values; 55,705 null rows of 55,769; most frequent: x (64)",
+      "affected_pct": 0.0,
+      "actual_value": 1,
+      "expected_value": null,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-14T19:38:18",
+      "profile": {
+        "column": "MID count in FLAVORED TAB",
+        "distinct_count": 1,
+        "null_rows": 55705,
+        "truncated": false,
+        "values": [
+          {
+            "value": "x",
+            "row_count": 64
+          }
+        ]
+      }
+    },
+    {
+      "check_id": "LIVE_MDM_MDM004_SINGLE_count_in_FLAVORED_TAB",
+      "rule": "MDM004",
+      "stage": "MDM",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "INFO",
+      "message": "SINGLE count in FLAVORED TAB: 1 distinct non-null values; 50,381 null rows of 55,769; most frequent: x (5,388)",
+      "error_message": "SINGLE count in FLAVORED TAB: 1 distinct non-null values; 50,381 null rows of 55,769; most frequent: x (5,388)",
+      "affected_pct": 0.0,
+      "actual_value": 1,
+      "expected_value": null,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-14T19:38:18",
+      "profile": {
+        "column": "SINGLE count in FLAVORED TAB",
+        "distinct_count": 1,
+        "null_rows": 50381,
+        "truncated": false,
+        "values": [
+          {
+            "value": "x",
+            "row_count": 5388
+          }
+        ]
+      }
+    },
+    {
+      "check_id": "LIVE_MDM_MDM004_SMALL_count_in_FLAVORED_TAB",
+      "rule": "MDM004",
+      "stage": "MDM",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "INFO",
+      "message": "SMALL count in FLAVORED TAB: 1 distinct non-null values; 48,936 null rows of 55,769; most frequent: x (6,833)",
+      "error_message": "SMALL count in FLAVORED TAB: 1 distinct non-null values; 48,936 null rows of 55,769; most frequent: x (6,833)",
+      "affected_pct": 0.0,
+      "actual_value": 1,
+      "expected_value": null,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-14T19:38:19",
+      "profile": {
+        "column": "SMALL count in FLAVORED TAB",
+        "distinct_count": 1,
+        "null_rows": 48936,
+        "truncated": false,
+        "values": [
+          {
+            "value": "x",
+            "row_count": 6833
+          }
+        ]
+      }
+    },
+    {
+      "check_id": "LIVE_MDM_MDM005",
+      "rule": "MDM005",
+      "stage": "MDM",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "INFO",
+      "message": "For additional checks run the Streamlit MDM validation tool: https://mdm-validation-app.streamlit.app/",
+      "error_message": "For additional checks run the Streamlit MDM validation tool: https://mdm-validation-app.streamlit.app/",
+      "affected_pct": 0.0,
+      "actual_value": null,
+      "expected_value": null,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-14T19:38:19"
+    },
+    {
+      "check_id": "LIVE_PROJ_PRJ001",
+      "rule": "PRJ001",
+      "stage": "PROJ",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "INFO",
+      "message": "534 distinct geographies: 7-Eleven Corp + Franchise-RMA - Conv, 7-Eleven Corp Allegheny-RMA - Conv, 7-Eleven Corp Carolinas-RMA - Conv, 7-Eleven Corp Central Texas-RMA - Conv, 7-Eleven Corp Chicago-RMA - Conv, 7-Eleven Corp Colorado-RMA - Conv, 7-Eleven Corp East Florida-RMA - Conv, 7-Eleven Corp Eastern Zone-RMA - Conv, 7-Eleven Corp Great Lakes-RMA - Conv, 7-Eleven Corp Houston-RMA - Conv, 7-Eleven Corp Michigan-RMA - Conv, 7-Eleven Corp New England-RMA - Conv, 7-Eleven Corp North Texas-RMA - Conv, 7-Eleven Corp Northeast-RMA - Conv, 7-Eleven Corp Northern California-RMA - Conv \u2026",
+      "error_message": "534 distinct geographies: 7-Eleven Corp + Franchise-RMA - Conv, 7-Eleven Corp Allegheny-RMA - Conv, 7-Eleven Corp Carolinas-RMA - Conv, 7-Eleven Corp Central Texas-RMA - Conv, 7-Eleven Corp Chicago-RMA - Conv, 7-Eleven Corp Colorado-RMA - Conv, 7-Eleven Corp East Florida-RMA - Conv, 7-Eleven Corp Eastern Zone-RMA - Conv, 7-Eleven Corp Great Lakes-RMA - Conv, 7-Eleven Corp Houston-RMA - Conv, 7-Eleven Corp Michigan-RMA - Conv, 7-Eleven Corp New England-RMA - Conv, 7-Eleven Corp North Texas-RMA - Conv, 7-Eleven Corp Northeast-RMA - Conv, 7-Eleven Corp Northern California-RMA - Conv \u2026",
+      "affected_pct": 0.0,
+      "actual_value": 534,
+      "expected_value": null,
+      "sample_failing_rows": [
+        {
+          "cdm_geo": "7-Eleven Corp + Franchise-RMA - Conv",
+          "row_count": 669
+        },
+        {
+          "cdm_geo": "7-Eleven Corp Allegheny-RMA - Conv",
+          "row_count": 2
+        },
+        {
+          "cdm_geo": "7-Eleven Corp Carolinas-RMA - Conv",
+          "row_count": 8
+        },
+        {
+          "cdm_geo": "7-Eleven Corp Central Texas-RMA - Conv",
+          "row_count": 8
+        },
+        {
+          "cdm_geo": "7-Eleven Corp Chicago-RMA - Conv",
+          "row_count": 2
+        },
+        {
+          "cdm_geo": "7-Eleven Corp Colorado-RMA - Conv",
+          "row_count": 4
+        },
+        {
+          "cdm_geo": "7-Eleven Corp East Florida-RMA - Conv",
+          "row_count": 5
+        },
+        {
+          "cdm_geo": "7-Eleven Corp Eastern Zone-RMA - Conv",
+          "row_count": 66
+        },
+        {
+          "cdm_geo": "7-Eleven Corp Great Lakes-RMA - Conv",
+          "row_count": 5
+        },
+        {
+          "cdm_geo": "7-Eleven Corp Houston-RMA - Conv",
+          "row_count": 16
+        },
+        {
+          "cdm_geo": "7-Eleven Corp Michigan-RMA - Conv",
+          "row_count": 3
+        },
+        {
+          "cdm_geo": "7-Eleven Corp New England-RMA - Conv",
+          "row_count": 1
+        },
+        {
+          "cdm_geo": "7-Eleven Corp North Texas-RMA - Conv",
+          "row_count": 8
+        },
+        {
+          "cdm_geo": "7-Eleven Corp Northeast-RMA - Conv",
+          "row_count": 20
+        },
+        {
+          "cdm_geo": "7-Eleven Corp Northern California-RMA - Conv",
+          "row_count": 2
+        },
+        {
+          "cdm_geo": "7-Eleven Corp Northern New York-RMA - Conv",
+          "row_count": 4
+        },
+        {
+          "cdm_geo": "7-Eleven Corp Ohio-RMA - Conv",
+          "row_count": 1
+        },
+        {
+          "cdm_geo": "7-Eleven Corp Oklahoma City-RMA - Conv",
+          "row_count": 11
+        },
+        {
+          "cdm_geo": "7-Eleven Corp Pacific West-RMA - Conv",
+          "row_count": 8
+        },
+        {
+          "cdm_geo": "7-Eleven Corp Philadelphia/New Jersey-RMA - Conv",
+          "row_count": 5
+        },
+        {
+          "cdm_geo": "7-Eleven Corp South Florida-RMA - Conv",
+          "row_count": 3
+        },
+        {
+          "cdm_geo": "7-Eleven Corp South Texas-RMA - Conv",
+          "row_count": 2
+        },
+        {
+          "cdm_geo": "7-Eleven Corp Southern California All Other-RMA - Conv",
+          "row_count": 2
+        },
+        {
+          "cdm_geo": "7-Eleven Corp Southern Coast-RMA - Conv",
+          "row_count": 39
+        },
+        {
+          "cdm_geo": "7-Eleven Corp Sun Belt-RMA - Conv",
+          "row_count": 45
+        },
+        {
+          "cdm_geo": "7-Eleven Corp Tennessee-RMA - Conv",
+          "row_count": 4
+        },
+        {
+          "cdm_geo": "7-Eleven Corp Total-RMA - Conv",
+          "row_count": 124
+        },
+        {
+          "cdm_geo": "7-Eleven Corp Union-RMA - Conv",
+          "row_count": 7
+        },
+        {
+          "cdm_geo": "7-Eleven Corp Virginia-RMA - Conv",
+          "row_count": 21
+        },
+        {
+          "cdm_geo": "7-Eleven Corp West Florida-RMA - Conv",
+          "row_count": 2
+        },
+        {
+          "cdm_geo": "7-Eleven Corp Western Pennsylvania-RMA - Conv",
+          "row_count": 10
+        },
+        {
+          "cdm_geo": "7-Eleven Corp Western Zone-RMA - Conv",
+          "row_count": 58
+        },
+        {
+          "cdm_geo": "7-Eleven Franchise Arizona-RMA - Conv",
+          "row_count": 5
+        },
+        {
+          "cdm_geo": "7-Eleven Franchise Baltimore/Washington-RMA - Conv",
+          "row_count": 33
+        },
+        {
+          "cdm_geo": "7-Eleven Franchise Boston-RMA - Conv",
+          "row_count": 4
+        },
+        {
+          "cdm_geo": "7-Eleven Franchise Buffalo-RMA - Conv",
+          "row_count": 14
+        },
+        {
+          "cdm_geo": "7-Eleven Franchise Carolinas-RMA - Conv",
+          "row_count": 10
+        },
+        {
+          "cdm_geo": "7-Eleven Franchise Chicago-RMA - Conv",
+          "row_count": 24
+        },
+        {
+          "cdm_geo": "7-Eleven Franchise Coastal Desert-RMA - Conv",
+          "row_count": 45
+        },
+        {
+          "cdm_geo": "7-Eleven Franchise Colorado-RMA - Conv",
+          "row_count": 25
+        },
+        {
+          "cdm_geo": "7-Eleven Franchise Daytona Palm Beach-RMA - Conv",
+          "row_count": 11
+        },
+        {
+          "cdm_geo": "7-Eleven Franchise Detroit-RMA - Conv",
+          "row_count": 12
+        },
+        {
+          "cdm_geo": "7-Eleven Franchise Eastern Zone-RMA - Conv",
+          "row_count": 191
+        },
+        {
+          "cdm_geo": "7-Eleven Franchise Florida-RMA - Conv",
+          "row_count": 59
+        },
+        {
+          "cdm_geo": "7-Eleven Franchise Frontier-RMA - Conv",
+          "row_count": 39
+        },
+        {
+          "cdm_geo": "7-Eleven Franchise Greater Los Angeles-RMA - Conv",
+          "row_count": 32
+        },
+        {
+          "cdm_geo": "7-Eleven Franchise Heartland-RMA - Conv",
+          "row_count": 39
+        },
+        {
+          "cdm_geo": "7-Eleven Franchise Kansas/Missouri-RMA - Conv",
+          "row_count": 2
+        },
+        {
+          "cdm_geo": "7-Eleven Franchise Las Vegas-RMA - Conv",
+          "row_count": 13
+        },
+        {
+          "cdm_geo": "7-Eleven Franchise Liberty-RMA - Conv",
+          "row_count": 69
+        },
+        {
+          "cdm_geo": "7-Eleven Franchise Long Island/New Jersey-RMA - Conv",
+          "row_count": 27
+        },
+        {
+          "cdm_geo": "7-Eleven Franchise Metro New York-RMA - Conv",
+          "row_count": 2
+        },
+        {
+          "cdm_geo": "7-Eleven Franchise Miami-RMA - Conv",
+          "row_count": 13
+        },
+        {
+          "cdm_geo": "7-Eleven Franchise Mid-Atlantic-RMA - Conv",
+          "row_count": 60
+        },
+        {
+          "cdm_geo": "7-Eleven Franchise New England-RMA - Conv",
+          "row_count": 11
+        },
+        {
+          "cdm_geo": "7-Eleven Franchise New York-RMA - Conv",
+          "row_count": 18
+        },
+        {
+          "cdm_geo": "7-Eleven Franchise North Atlantic-RMA - Conv",
+          "row_count": 62
+        },
+        {
+          "cdm_geo": "7-Eleven Franchise Northern California All Other-RMA - Conv",
+          "row_count": 12
+        },
+        {
+          "cdm_geo": "7-Eleven Franchise Ohio/West Virginia/Blue Ridge-RMA - Conv",
+          "row_count": 8
+        },
+        {
+          "cdm_geo": "7-Eleven Franchise Oregon-RMA - Conv",
+          "row_count": 24
+        },
+        {
+          "cdm_geo": "7-Eleven Franchise Orlando-RMA - Conv",
+          "row_count": 9
+        },
+        {
+          "cdm_geo": "7-Eleven Franchise Pacific Mountain-RMA - Conv",
+          "row_count": 75
+        },
+        {
+          "cdm_geo": "7-Eleven Franchise Philadelphia-RMA - Conv",
+          "row_count": 12
+        },
+        {
+          "cdm_geo": "7-Eleven Franchise Pittsburgh/Appalachian-RMA - Conv",
+          "row_count": 10
+        },
+        {
+          "cdm_geo": "7-Eleven Franchise Richmond-RMA - Conv",
+          "row_count": 6
+        },
+        {
+          "cdm_geo": "7-Eleven Franchise Sacramento-RMA - Conv",
+          "row_count": 9
+        },
+        {
+          "cdm_geo": "7-Eleven Franchise San Antonio-RMA - Conv",
+          "row_count": 14
+        },
+        {
+          "cdm_geo": "7-Eleven Franchise San Diego-RMA - Conv",
+          "row_count": 39
+        },
+        {
+          "cdm_geo": "7-Eleven Franchise San Francisco-RMA - Conv",
+          "row_count": 22
+        },
+        {
+          "cdm_geo": "7-Eleven Franchise Seattle-RMA - Conv",
+          "row_count": 8
+        },
+        {
+          "cdm_geo": "7-Eleven Franchise South Bend-RMA - Conv",
+          "row_count": 1
+        },
+        {
+          "cdm_geo": "7-Eleven Franchise Southwest Florida-RMA - Conv",
+          "row_count": 11
+        },
+        {
+          "cdm_geo": "7-Eleven Franchise Southwest-RMA - Conv",
+          "row_count": 58
+        },
+        {
+          "cdm_geo": "7-Eleven Franchise Tampa-RMA - Conv",
+          "row_count": 15
+        },
+        {
+          "cdm_geo": "7-Eleven Franchise Total-RMA - Conv",
+          "row_count": 545
+        },
+        {
+          "cdm_geo": "7-Eleven Franchise United Zone-RMA - Conv",
+          "row_count": 176
+        },
+        {
+          "cdm_geo": "7-Eleven Franchise Utah-RMA - Conv",
+          "row_count": 14
+        },
+        {
+          "cdm_geo": "7-Eleven Franchise Virginia-RMA - Conv",
+          "row_count": 36
+        },
+        {
+          "cdm_geo": "7-Eleven Franchise Western Zone-RMA - Conv",
+          "row_count": 178
+        },
+        {
+          "cdm_geo": "7-Eleven Incorporated Allegheny-RMA - Conv",
+          "row_count": 12
+        },
+        {
+          "cdm_geo": "7-Eleven Incorporated Arizona All Other-RMA - Conv",
+          "row_count": 21
+        },
+        {
+          "cdm_geo": "7-Eleven Incorporated Carolinas-RMA - Conv",
+          "row_count": 44
+        },
+        {
+          "cdm_geo": "7-Eleven Incorporated Central Texas-RMA - Conv",
+          "row_count": 8
+        },
+        {
+          "cdm_geo": "7-Eleven Incorporated Chicago-RMA - Conv",
+          "row_count": 27
+        },
+        {
+          "cdm_geo": "7-Eleven Incorporated Colorado-RMA - Conv",
+          "row_count": 4
+        },
+        {
+          "cdm_geo": "7-Eleven Incorporated East Florida-RMA - Conv",
+          "row_count": 13
+        },
+        {
+          "cdm_geo": "7-Eleven Incorporated Eastern Zone-RMA - Conv",
+          "row_count": 280
+        },
+        {
+          "cdm_geo": "7-Eleven Incorporated Great Lakes-RMA - Conv",
+          "row_count": 103
+        },
+        {
+          "cdm_geo": "7-Eleven Incorporated Houston-RMA - Conv",
+          "row_count": 17
+        },
+        {
+          "cdm_geo": "7-Eleven Incorporated Indiana-RMA - Conv",
+          "row_count": 20
+        },
+        {
+          "cdm_geo": "7-Eleven Incorporated Kentucky-RMA - Conv",
+          "row_count": 16
+        },
+        {
+          "cdm_geo": "7-Eleven Incorporated Las Vegas-RMA - Conv",
+          "row_count": 1
+        },
+        {
+          "cdm_geo": "7-Eleven Incorporated Metro New York-RMA - Conv",
+          "row_count": 13
+        },
+        {
+          "cdm_geo": "7-Eleven Incorporated Michigan-RMA - Conv",
+          "row_count": 38
+        },
+        {
+          "cdm_geo": "7-Eleven Incorporated Minnesota-RMA - Conv",
+          "row_count": 18
+        },
+        {
+          "cdm_geo": "7-Eleven Incorporated New England-RMA - Conv",
+          "row_count": 11
+        },
+        {
+          "cdm_geo": "7-Eleven Incorporated New Mexico-RMA - Conv",
+          "row_count": 5
+        },
+        {
+          "cdm_geo": "7-Eleven Incorporated North Texas-RMA - Conv",
+          "row_count": 19
+        },
+        {
+          "cdm_geo": "7-Eleven Incorporated Northeast-RMA - Conv",
+          "row_count": 84
+        },
+        {
+          "cdm_geo": "7-Eleven Incorporated Northern California-RMA - Conv",
+          "row_count": 3
+        },
+        {
+          "cdm_geo": "7-Eleven Incorporated Northern New York-RMA - Conv",
+          "row_count": 27
+        },
+        {
+          "cdm_geo": "7-Eleven Incorporated Ohio-RMA - Conv",
+          "row_count": 58
+        },
+        {
+          "cdm_geo": "7-Eleven Incorporated Oklahoma City-RMA - Conv",
+          "row_count": 11
+        },
+        {
+          "cdm_geo": "7-Eleven Incorporated Pacific West-RMA - Conv",
+          "row_count": 39
+        },
+        {
+          "cdm_geo": "7-Eleven Incorporated Philadelphia/New Jersey-RMA - Conv",
+          "row_count": 17
+        },
+        {
+          "cdm_geo": "7-Eleven Incorporated South Florida-RMA - Conv",
+          "row_count": 7
+        },
+        {
+          "cdm_geo": "7-Eleven Incorporated South Texas-RMA - Conv",
+          "row_count": 60
+        },
+        {
+          "cdm_geo": "7-Eleven Incorporated Southern California All Other-RMA - Conv",
+          "row_count": 2
+        },
+        {
+          "cdm_geo": "7-Eleven Incorporated Southern Coast-RMA - Conv",
+          "row_count": 100
+        },
+        {
+          "cdm_geo": "7-Eleven Incorporated Sun Belt-RMA - Conv",
+          "row_count": 115
+        },
+        {
+          "cdm_geo": "7-Eleven Incorporated Tennessee-RMA - Conv",
+          "row_count": 10
+        },
+        {
+          "cdm_geo": "7-Eleven Incorporated Total-RMA - Conv",
+          "row_count": 537
+        },
+        {
+          "cdm_geo": "7-Eleven Incorporated Union-RMA - Conv",
+          "row_count": 96
+        },
+        {
+          "cdm_geo": "7-Eleven Incorporated Utah-RMA - Conv",
+          "row_count": 3
+        },
+        {
+          "cdm_geo": "7-Eleven Incorporated Virginia-RMA - Conv",
+          "row_count": 26
+        },
+        {
+          "cdm_geo": "7-Eleven Incorporated West Florida-RMA - Conv",
+          "row_count": 10
+        },
+        {
+          "cdm_geo": "7-Eleven Incorporated Western Pennsylvania-RMA - Conv",
+          "row_count": 16
+        },
+        {
+          "cdm_geo": "7-Eleven Incorporated Western Zone-RMA - Conv",
+          "row_count": 257
+        },
+        {
+          "cdm_geo": "7-Eleven Total Enterprise-RMA - Conv",
+          "row_count": 1082
+        },
+        {
+          "cdm_geo": "A Plus Appalachian-RMA - Conv",
+          "row_count": 1
+        },
+        {
+          "cdm_geo": "A Plus Northeast-RMA - Conv",
+          "row_count": 1
+        },
+        {
+          "cdm_geo": "A Plus Southern Coast-RMA - Conv",
+          "row_count": 2
+        },
+        {
+          "cdm_geo": "Alabama - Conv",
+          "row_count": 122
+        },
+        {
+          "cdm_geo": "Arizona - Conv",
+          "row_count": 320
+        },
+        {
+          "cdm_geo": "Arkansas - Conv",
+          "row_count": 76
+        },
+        {
+          "cdm_geo": "Atlanta, GA - Conv",
+          "row_count": 25
+        },
+        {
+          "cdm_geo": "Baltimore, MD/Washington D.C. - Conv",
+          "row_count": 177
+        },
+        {
+          "cdm_geo": "Birmingham/Montgomery, AL - Conv",
+          "row_count": 118
+        },
+        {
+          "cdm_geo": "Boston, MA - Conv",
+          "row_count": 74
+        },
+        {
+          "cdm_geo": "BP Arizona-RMA - Conv",
+          "row_count": 6
+        },
+        {
+          "cdm_geo": "BP Central California-RMA - Conv",
+          "row_count": 7
+        },
+        {
+          "cdm_geo": "BP Corp-RMA - Conv",
+          "row_count": 177
+        },
+        {
+          "cdm_geo": "BP Los Angeles-RMA - Conv",
+          "row_count": 62
+        },
+        {
+          "cdm_geo": "BP Nevada-RMA - Conv",
+          "row_count": 6
+        },
+        {
+          "cdm_geo": "BP Northern California-RMA - Conv",
+          "row_count": 51
+        },
+        {
+          "cdm_geo": "BP Northwest-RMA - Conv",
+          "row_count": 76
+        },
+        {
+          "cdm_geo": "BP Pacific Northwest-RMA - Conv",
+          "row_count": 25
+        },
+        {
+          "cdm_geo": "BP Portland-RMA - Conv",
+          "row_count": 7
+        },
+        {
+          "cdm_geo": "BP Sacramento-RMA - Conv",
+          "row_count": 36
+        },
+        {
+          "cdm_geo": "BP San Diego-RMA - Conv",
+          "row_count": 20
+        },
+        {
+          "cdm_geo": "BP San Francisco-RMA - Conv",
+          "row_count": 15
+        },
+        {
+          "cdm_geo": "BP Seattle-RMA - Conv",
+          "row_count": 18
+        },
+        {
+          "cdm_geo": "BP Southwest-RMA - Conv",
+          "row_count": 101
+        },
+        {
+          "cdm_geo": "BP Thorntons Corp-RMA - Conv",
+          "row_count": 15
+        },
+        {
+          "cdm_geo": "BP Thorntons Illinois-RMA - Conv",
+          "row_count": 7
+        },
+        {
+          "cdm_geo": "BP Thorntons Kentucky-RMA - Conv",
+          "row_count": 7
+        },
+        {
+          "cdm_geo": "BP Thorntons Tennessee-RMA - Conv",
+          "row_count": 1
+        },
+        {
+          "cdm_geo": "BP Thorntons Total-RMA - Conv",
+          "row_count": 192
+        },
+        {
+          "cdm_geo": "Buffalo/Rochester, NY - Conv",
+          "row_count": 60
+        },
+        {
+          "cdm_geo": "California - Conv",
+          "row_count": 769
+        },
+        {
+          "cdm_geo": "California - Standard - Conv",
+          "row_count": 769
+        },
+        {
+          "cdm_geo": "Casey's CEFCO-RMA - Conv",
+          "row_count": 16
+        },
+        {
+          "cdm_geo": "Casey's Corp w/CEFCO-RMA - Conv",
+          "row_count": 206
+        },
+        {
+          "cdm_geo": "Casey's Corp-RMA - Conv",
+          "row_count": 190
+        },
+        {
+          "cdm_geo": "Casey's Division 1-RMA - Conv",
+          "row_count": 54
+        },
+        {
+          "cdm_geo": "Casey's Division 2-RMA - Conv",
+          "row_count": 48
+        },
+        {
+          "cdm_geo": "Casey's Division 3-RMA - Conv",
+          "row_count": 50
+        },
+        {
+          "cdm_geo": "Casey's Division 4-RMA - Conv",
+          "row_count": 38
+        },
+        {
+          "cdm_geo": "Chicago, IL - Conv",
+          "row_count": 160
+        },
+        {
+          "cdm_geo": "Cincinnati/Dayton, OH - Conv",
+          "row_count": 66
+        },
+        {
+          "cdm_geo": "Circle K Arizona Non-Metro-RMA - Conv",
+          "row_count": 23
+        },
+        {
+          "cdm_geo": "Circle K Arizona-RMA - Conv",
+          "row_count": 125
+        },
+        {
+          "cdm_geo": "Circle K Coastal Carolinas-RMA - Conv",
+          "row_count": 68
+        },
+        {
+          "cdm_geo": "Circle K Corp Total w/ Alaska-RMA - Conv",
+          "row_count": 1061
+        },
+        {
+          "cdm_geo": "Circle K Corp Total-RMA - Conv",
+          "row_count": 1061
+        },
+        {
+          "cdm_geo": "Circle K Florida-RMA - Conv",
+          "row_count": 74
+        },
+        {
+          "cdm_geo": "Circle K Frontier-RMA - Conv",
+          "row_count": 59
+        },
+        {
+          "cdm_geo": "Circle K Grand Canyon-RMA - Conv",
+          "row_count": 135
+        },
+        {
+          "cdm_geo": "Circle K Great Lakes Total Great Lakes-RMA - Conv",
+          "row_count": 59
+        },
+        {
+          "cdm_geo": "Circle K Great Lakes Total New England-RMA - Conv",
+          "row_count": 27
+        },
+        {
+          "cdm_geo": "Circle K Great Lakes Total-RMA - Conv",
+          "row_count": 86
+        },
+        {
+          "cdm_geo": "Circle K Greater Twin Cities Northern Tier-RMA - Conv",
+          "row_count": 53
+        },
+        {
+          "cdm_geo": "Circle K Gulf Coast-RMA - Conv",
+          "row_count": 76
+        },
+        {
+          "cdm_geo": "Circle K Las Vegas-RMA - Conv",
+          "row_count": 10
+        },
+        {
+          "cdm_geo": "Circle K Midwest-RMA - Conv",
+          "row_count": 92
+        },
+        {
+          "cdm_geo": "Circle K Northern Tier w/ Alaska-RMA - Conv",
+          "row_count": 88
+        },
+        {
+          "cdm_geo": "Circle K Northern Tier-RMA - Conv",
+          "row_count": 88
+        },
+        {
+          "cdm_geo": "Circle K Phoenix Metro-RMA - Conv",
+          "row_count": 81
+        },
+        {
+          "cdm_geo": "Circle K Rocky Mountains-RMA - Conv",
+          "row_count": 73
+        },
+        {
+          "cdm_geo": "Circle K South Atlantic-RMA - Conv",
+          "row_count": 86
+        },
+        {
+          "cdm_geo": "Circle K Southeast-RMA - Conv",
+          "row_count": 75
+        },
+        {
+          "cdm_geo": "Circle K Texas-RMA - Conv",
+          "row_count": 121
+        },
+        {
+          "cdm_geo": "Circle K Tucson-RMA - Conv",
+          "row_count": 21
+        },
+        {
+          "cdm_geo": "Circle K Upper Midwest Northern Tier-RMA - Conv",
+          "row_count": 28
+        },
+        {
+          "cdm_geo": "Circle K West Coast-RMA - Conv",
+          "row_count": 28
+        },
+        {
+          "cdm_geo": "Circle K West Northern Tier-RMA - Conv",
+          "row_count": 7
+        },
+        {
+          "cdm_geo": "Colorado - Conv",
+          "row_count": 205
+        },
+        {
+          "cdm_geo": "Dallas/Ft. Worth, TX - Conv",
+          "row_count": 205
+        },
+        {
+          "cdm_geo": "Denver, CO - Conv",
+          "row_count": 161
+        },
+        {
+          "cdm_geo": "Detroit, MI - Conv",
+          "row_count": 72
+        },
+        {
+          "cdm_geo": "East North Central - US Census Bureau Division - Conv",
+          "row_count": 528
+        },
+        {
+          "cdm_geo": "East South Central - US Census Bureau Division - Conv",
+          "row_count": 264
+        },
+        {
+          "cdm_geo": "EG Group Certified OH-RMA - Conv",
+          "row_count": 1
+        },
+        {
+          "cdm_geo": "EG Group CFI Northeast-RMA - Conv",
+          "row_count": 52
+        },
+        {
+          "cdm_geo": "EG Group Corp-RMA - Conv",
+          "row_count": 102
+        },
+        {
+          "cdm_geo": "EG Group Cumberland Farms FL-RMA - Conv",
+          "row_count": 6
+        },
+        {
+          "cdm_geo": "EG Group Cumberland Farms North-RMA - Conv",
+          "row_count": 54
+        },
+        {
+          "cdm_geo": "EG Group Cumberland Farms South-RMA - Conv",
+          "row_count": 8
+        },
+        {
+          "cdm_geo": "EG Group Cumberland Farms-RMA - Conv",
+          "row_count": 62
+        },
+        {
+          "cdm_geo": "EG Group Fastrac-RMA - Conv",
+          "row_count": 2
+        }
+      ],
+      "logged_at": "2026-10-14T19:38:20"
+    },
+    {
+      "check_id": "LIVE_PROJ_PRJ002",
+      "rule": "PRJ002",
+      "stage": "PROJ",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "INFO",
+      "message": "4,032 distinct store_number; 0 null rows of 74,660",
+      "error_message": "4,032 distinct store_number; 0 null rows of 74,660",
+      "affected_pct": 0.0,
+      "actual_value": 4032,
+      "expected_value": null,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-14T19:38:20"
+    },
+    {
+      "check_id": "LIVE_PROJ_PRJ003",
+      "rule": "PRJ003",
+      "stage": "PROJ",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "INFO",
+      "message": "1 distinct outlets: CONV",
+      "error_message": "1 distinct outlets: CONV",
+      "affected_pct": 0.0,
+      "actual_value": 1,
+      "expected_value": null,
+      "sample_failing_rows": [
+        {
+          "outlet": "CONV",
+          "row_count": 74660
+        }
+      ],
+      "logged_at": "2026-10-14T19:38:21"
+    },
+    {
+      "check_id": "LIVE_PROJ_PRJ004",
+      "rule": "PRJ004",
+      "stage": "PROJ",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "INFO",
+      "message": "6 distinct geo levels: Country, Custom Region, Market, Region, RMA/CustomChain, State",
+      "error_message": "6 distinct geo levels: Country, Custom Region, Market, Region, RMA/CustomChain, State",
+      "affected_pct": 0.0,
+      "actual_value": 6,
+      "expected_value": null,
+      "sample_failing_rows": [
+        {
+          "geo_level": "Country",
+          "row_count": 7843
+        },
+        {
+          "geo_level": "Custom Region",
+          "row_count": 15575
+        },
+        {
+          "geo_level": "Market",
+          "row_count": 3680
+        },
+        {
+          "geo_level": "Region",
+          "row_count": 24000
+        },
+        {
+          "geo_level": "RMA/CustomChain",
+          "row_count": 16698
+        },
+        {
+          "geo_level": "State",
+          "row_count": 6864
+        }
+      ],
+      "logged_at": "2026-10-14T19:38:21"
+    },
+    {
+      "check_id": "LIVE_PROJ_PRJ005",
+      "rule": "PRJ005",
+      "stage": "PROJ",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "INFO",
+      "message": "1 distinct IRI weeks: 2442",
+      "error_message": "1 distinct IRI weeks: 2442",
+      "affected_pct": 0.0,
+      "actual_value": 1,
+      "expected_value": null,
+      "sample_failing_rows": [
+        {
+          "Iri_week": 2442,
+          "row_count": 74660
+        }
+      ],
+      "logged_at": "2026-10-14T19:38:22"
+    },
+    {
+      "check_id": "LIVE_PROJ_PRJ006",
+      "rule": "PRJ006",
+      "stage": "PROJ",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "CRITICAL",
+      "message": "Full row (13 columns): 0 duplicated rows (0 rows of 74,660)",
+      "error_message": "Full row (13 columns): 0 duplicated rows (0 rows of 74,660)",
+      "affected_pct": 0.0,
+      "actual_value": 0,
+      "expected_value": 0,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-14T19:38:25"
+    },
+    {
+      "check_id": "LIVE_PROJ_PRJ007",
+      "rule": "PRJ007",
+      "stage": "PROJ",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "INFO",
+      "message": "4 distinct versions: 38, 38.01, 38.02, 38.03",
+      "error_message": "4 distinct versions: 38, 38.01, 38.02, 38.03",
+      "affected_pct": 0.0,
+      "actual_value": 4,
+      "expected_value": null,
+      "sample_failing_rows": [
+        {
+          "version": 38.0,
+          "row_count": 47537
+        },
+        {
+          "version": 38.01,
+          "row_count": 21261
+        },
+        {
+          "version": 38.02,
+          "row_count": 2157
+        },
+        {
+          "version": 38.03,
+          "row_count": 3705
+        }
+      ],
+      "logged_at": "2026-10-14T19:38:26"
+    },
+    {
+      "check_id": "LIVE_POS_POS001",
+      "rule": "POS001",
+      "stage": "POS",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "INFO",
+      "message": "2,863 distinct stores and 9,155 distinct UPCs in 19,335,480 rows",
+      "error_message": "2,863 distinct stores and 9,155 distinct UPCs in 19,335,480 rows",
+      "affected_pct": 0.0,
+      "actual_value": 2863,
+      "expected_value": null,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-14T19:38:31"
+    },
+    {
+      "check_id": "LIVE_POS_POS002",
+      "rule": "POS002",
+      "stage": "POS",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "INFO",
+      "message": "19,335,480 non-null UPC rows, 9,155 distinct UPCs, 0 null UPC rows",
+      "error_message": "19,335,480 non-null UPC rows, 9,155 distinct UPCs, 0 null UPC rows",
+      "affected_pct": 0.0,
+      "actual_value": 19335480,
+      "expected_value": null,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-14T19:38:33"
+    },
+    {
+      "check_id": "LIVE_POS_POS003",
+      "rule": "POS003",
+      "stage": "POS",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "INFO",
+      "message": "52 distinct IRI weeks: 2337, 2338, 2339, 2340, 2341, 2342, 2343, 2344, 2345, 2346, 2347, 2348, 2349, 2350, 2351 \u2026",
+      "error_message": "52 distinct IRI weeks: 2337, 2338, 2339, 2340, 2341, 2342, 2343, 2344, 2345, 2346, 2347, 2348, 2349, 2350, 2351 \u2026",
+      "affected_pct": 0.0,
+      "actual_value": 52,
+      "expected_value": null,
+      "sample_failing_rows": [
+        {
+          "WEEK": "2337",
+          "row_count": 382875
+        },
+        {
+          "WEEK": "2338",
+          "row_count": 380876
+        },
+        {
+          "WEEK": "2339",
+          "row_count": 380371
+        },
+        {
+          "WEEK": "2340",
+          "row_count": 393836
+        },
+        {
+          "WEEK": "2341",
+          "row_count": 376363
+        },
+        {
+          "WEEK": "2342",
+          "row_count": 375533
+        },
+        {
+          "WEEK": "2343",
+          "row_count": 376200
+        },
+        {
+          "WEEK": "2344",
+          "row_count": 379135
+        },
+        {
+          "WEEK": "2345",
+          "row_count": 378593
+        },
+        {
+          "WEEK": "2346",
+          "row_count": 378910
+        },
+        {
+          "WEEK": "2347",
+          "row_count": 378311
+        },
+        {
+          "WEEK": "2348",
+          "row_count": 384253
+        },
+        {
+          "WEEK": "2349",
+          "row_count": 376065
+        },
+        {
+          "WEEK": "2350",
+          "row_count": 376220
+        },
+        {
+          "WEEK": "2351",
+          "row_count": 376024
+        },
+        {
+          "WEEK": "2352",
+          "row_count": 372618
+        },
+        {
+          "WEEK": "2353",
+          "row_count": 376514
+        },
+        {
+          "WEEK": "2354",
+          "row_count": 372918
+        },
+        {
+          "WEEK": "2355",
+          "row_count": 369218
+        },
+        {
+          "WEEK": "2356",
+          "row_count": 373946
+        },
+        {
+          "WEEK": "2357",
+          "row_count": 372613
+        },
+        {
+          "WEEK": "2358",
+          "row_count": 367496
+        },
+        {
+          "WEEK": "2359",
+          "row_count": 365565
+        },
+        {
+          "WEEK": "2360",
+          "row_count": 362240
+        },
+        {
+          "WEEK": "2361",
+          "row_count": 379168
+        },
+        {
+          "WEEK": "2362",
+          "row_count": 354034
+        },
+        {
+          "WEEK": "2363",
+          "row_count": 356887
+        },
+        {
+          "WEEK": "2364",
+          "row_count": 359808
+        },
+        {
+          "WEEK": "2365",
+          "row_count": 374593
+        },
+        {
+          "WEEK": "2366",
+          "row_count": 358621
+        },
+        {
+          "WEEK": "2367",
+          "row_count": 338535
+        },
+        {
+          "WEEK": "2368",
+          "row_count": 348035
+        },
+        {
+          "WEEK": "2369",
+          "row_count": 344186
+        },
+        {
+          "WEEK": "2370",
+          "row_count": 350717
+        },
+        {
+          "WEEK": "2371",
+          "row_count": 361048
+        },
+        {
+          "WEEK": "2372",
+          "row_count": 348604
+        },
+        {
+          "WEEK": "2373",
+          "row_count": 352490
+        },
+        {
+          "WEEK": "2374",
+          "row_count": 365584
+        },
+        {
+          "WEEK": "2375",
+          "row_count": 360919
+        },
+        {
+          "WEEK": "2376",
+          "row_count": 369618
+        },
+        {
+          "WEEK": "2377",
+          "row_count": 370942
+        },
+        {
+          "WEEK": "2378",
+          "row_count": 372806
+        },
+        {
+          "WEEK": "2379",
+          "row_count": 373027
+        },
+        {
+          "WEEK": "2380",
+          "row_count": 377096
+        },
+        {
+          "WEEK": "2381",
+          "row_count": 384954
+        },
+        {
+          "WEEK": "2382",
+          "row_count": 381537
+        },
+        {
+          "WEEK": "2383",
+          "row_count": 382866
+        },
+        {
+          "WEEK": "2384",
+          "row_count": 384163
+        },
+        {
+          "WEEK": "2385",
+          "row_count": 387250
+        },
+        {
+          "WEEK": "2386",
+          "row_count": 393364
+        },
+        {
+          "WEEK": "2387",
+          "row_count": 387878
+        },
+        {
+          "WEEK": "2388",
+          "row_count": 390057
+        }
+      ],
+      "logged_at": "2026-10-14T19:38:39"
+    },
+    {
+      "check_id": "LIVE_POS_POS004",
+      "rule": "POS004",
+      "stage": "POS",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "CRITICAL",
+      "message": "CURRENCY null on 0 of 19,335,480 rows (0.0%)",
+      "error_message": "CURRENCY null on 0 of 19,335,480 rows (0.0%)",
+      "affected_pct": 0.0,
+      "actual_value": 0,
+      "expected_value": 0,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-14T19:38:41"
+    },
+    {
+      "check_id": "LIVE_POS_POS005",
+      "rule": "POS005",
+      "stage": "POS",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "CRITICAL",
+      "message": "UNITS null on 0 of 19,335,480 rows (0.0%)",
+      "error_message": "UNITS null on 0 of 19,335,480 rows (0.0%)",
+      "affected_pct": 0.0,
+      "actual_value": 0,
+      "expected_value": 0,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-14T19:38:42"
+    },
+    {
+      "check_id": "LIVE_POS_POS006",
+      "rule": "POS006",
+      "stage": "POS",
+      "source": "LIVE",
+      "status": "PASS",
+      "passed": true,
+      "severity": "CRITICAL",
+      "message": "Full row (5 columns): 0 duplicated rows (0 rows of 19,335,480)",
+      "error_message": "Full row (5 columns): 0 duplicated rows (0 rows of 19,335,480)",
+      "affected_pct": 0.0,
+      "actual_value": 0,
+      "expected_value": 0,
+      "sample_failing_rows": [],
+      "logged_at": "2026-10-14T19:38:51"
+    }
+  ],
+  "rule_descriptions": {
+    "SA001": "Delivery IDs in SA match the expected delivery ID",
+    "SA002": "Task numbers in SA match the expected task number",
+    "SA003": "Delete_tstamp, Status_Cd and dropped_reason are null where category is not null",
+    "SA004": "IRI weeks in SA match the expected week(s)",
+    "SA005": "Every SA location resolves to one description in shelf_var_master (read-only lookup)",
+    "SA006": "No duplicates at declared grain or full-row level",
+    "SA007": "SA non-imputed store count equals collected store count (sample, imputed status null)",
+    "SA008": "Audit store sample (imputed Y + null) for the delivery matches SA stores",
+    "SA009": "Imputed stores: shelf feet, facings, capacity increase vs prior wave within threshold",
+    "SA010": "Count of imputed stores (imputed status = Y) in the audit store sample for the delivery",
+    "SA011": "Count of collected stores (imputed status null) in the audit store sample for the delivery",
+    "SA012": "Shelf feet not null where category is not null",
+    "SA013": "Facings not null where category is not null",
+    "SA014": "Distinct store_number count",
+    "SA015": "Distinct upc_number count",
+    "SA016": "Shelf feet = facings x upc_width / 12, both sides rounded to round_dp decimals",
+    "SA018": "Grain columns are not null where category is not null",
+    "SA017": "Capacity = facings x units_deep x units_high",
+    "MDM001": "UPC is unique in the product master (distinct UPC count listed)",
+    "MDM002": "sys(2) vendor(5) item(5) builds upc_number as bigint",
+    "MDM003": "No duplicate rows across all columns of the product master",
+    "MDM004": "Distinct non-null values and row counts for each selected Product column (listing for review, null rows counted separately)",
+    "MDM005": "Reminder: run the Streamlit MDM validation tool for additional MDM checks",
+    "PRJ001": "Distinct cdm_geo / geography",
+    "PRJ002": "Distinct store_number count",
+    "PRJ003": "Distinct outlet",
+    "PRJ004": "Distinct geo_level",
+    "PRJ005": "Distinct iri_week",
+    "PRJ006": "No duplicate rows across all columns of the projections table",
+    "PRJ007": "Distinct version in the projections table",
+    "POS001": "Distinct store_number and upc_number counts",
+    "POS002": "UPC count (non-null rows and distinct)",
+    "POS003": "IRI weeks sales were pulled for",
+    "POS004": "Dollars not null",
+    "POS005": "Units not null",
+    "POS006": "No duplicate rows across all columns of the POS table",
+    "IN-000": "Server reachable; SQL Server version recorded",
+    "IN-001": "Every mapped source table has at least one row",
+    "IN-002": "Store, UPC and Grain columns mapped on a source have no null rows (tested per source, per column)",
+    "IN-003": "No duplicates at declared grain (superseded by SA006)",
+    "IN-004": "Distinct store and UPC counts profiled (superseded by SA014/SA015/PRJ002/POS001)",
+    "IN-005": "Measures mapped on SA or POS have no negative values",
+    "IN-007": "Measure columns are non-null (superseded by SA012/SA013/POS004/POS005)",
+    "SA-005": "SA store count reconciles to expected collection sample (superseded by SA007)",
+    "IMP-001": "Share of imputed SA stores within threshold (superseded by SA008)",
+    "IMP-002": "Every imputed store in the sample exists in SA (superseded by SA008)",
+    "IMP-003": "Imputed store x UPC measures not overstated vs non-imputed average (superseded by SA009)",
+    "PRJ-001": "Projection weight column has no nulls, non-numeric or zero/negative values"
+  },
+  "expected_rules": {
+    "SA001": {
+      "stage": "SA",
+      "severity": "INFO"
+    },
+    "SA002": {
+      "stage": "SA",
+      "severity": "INFO"
+    },
+    "SA003": {
+      "stage": "SA",
+      "severity": "CRITICAL"
+    },
+    "SA004": {
+      "stage": "SA",
+      "severity": "INFO"
+    },
+    "SA005": {
+      "stage": "SA",
+      "severity": "INFO"
+    },
+    "SA006": {
+      "stage": "SA",
+      "severity": "CRITICAL"
+    },
+    "SA007": {
+      "stage": "SA",
+      "severity": "CRITICAL"
+    },
+    "SA008": {
+      "stage": "SA",
+      "severity": "CRITICAL"
+    },
+    "SA009": {
+      "stage": "SA",
+      "severity": "HIGH"
+    },
+    "SA010": {
+      "stage": "SA",
+      "severity": "INFO"
+    },
+    "SA011": {
+      "stage": "SA",
+      "severity": "INFO"
+    },
+    "SA012": {
+      "stage": "SA",
+      "severity": "HIGH"
+    },
+    "SA013": {
+      "stage": "SA",
+      "severity": "HIGH"
+    },
+    "SA014": {
+      "stage": "SA",
+      "severity": "INFO"
+    },
+    "SA015": {
+      "stage": "SA",
+      "severity": "INFO"
+    },
+    "SA016": {
+      "stage": "SA",
+      "severity": "CRITICAL"
+    },
+    "SA018": {
+      "stage": "SA",
+      "severity": "INFO"
+    },
+    "SA017": {
+      "stage": "SA",
+      "severity": "CRITICAL"
+    },
+    "MDM001": {
+      "stage": "MDM",
+      "severity": "CRITICAL"
+    },
+    "MDM002": {
+      "stage": "MDM",
+      "severity": "CRITICAL"
+    },
+    "MDM003": {
+      "stage": "MDM",
+      "severity": "CRITICAL"
+    },
+    "MDM004": {
+      "stage": "MDM",
+      "severity": "INFO"
+    },
+    "MDM005": {
+      "stage": "MDM",
+      "severity": "INFO"
+    },
+    "PRJ001": {
+      "stage": "PROJ",
+      "severity": "INFO"
+    },
+    "PRJ002": {
+      "stage": "PROJ",
+      "severity": "INFO"
+    },
+    "PRJ003": {
+      "stage": "PROJ",
+      "severity": "INFO"
+    },
+    "PRJ004": {
+      "stage": "PROJ",
+      "severity": "INFO"
+    },
+    "PRJ005": {
+      "stage": "PROJ",
+      "severity": "INFO"
+    },
+    "PRJ006": {
+      "stage": "PROJ",
+      "severity": "CRITICAL"
+    },
+    "PRJ007": {
+      "stage": "PROJ",
+      "severity": "INFO"
+    },
+    "POS001": {
+      "stage": "POS",
+      "severity": "INFO"
+    },
+    "POS002": {
+      "stage": "POS",
+      "severity": "INFO"
+    },
+    "POS003": {
+      "stage": "POS",
+      "severity": "INFO"
+    },
+    "POS004": {
+      "stage": "POS",
+      "severity": "CRITICAL"
+    },
+    "POS005": {
+      "stage": "POS",
+      "severity": "CRITICAL"
+    },
+    "POS006": {
+      "stage": "POS",
+      "severity": "CRITICAL"
+    }
+  },
+  "disabled_rules": [
+    "IN-003",
+    "IN-004",
+    "IN-007",
+    "SA-005",
+    "IMP-001",
+    "IMP-002",
+    "IMP-003"
+  ],
+  "skipped_rules": [
+    "SA005",
+    "SA009"
+  ],
+  "config": {
+    "report_name": "Molson",
+    "expected_sa_stores": "",
+    "expected_delivery_id": "3147",
+    "expected_task": "8939",
+    "expected_weeks": "2390",
+    "server": "10.106.10.49",
+    "database": "Imputations_sa",
+    "sources": {
+      "SA": {
+        "server": "10.106.10.49",
+        "database": "Imputations_sa",
+        "table": "Audit_Rollup_Final_3147",
+        "store_col": "STORE_NUMBER",
+        "upc_col": "UPC_NUMBER",
+        "grain": [
+          "STORE_NUMBER",
+          "UPC_NUMBER",
+          "AISLE",
+          "SIDE",
+          "SECTION",
+          "SHELF",
+          "LOCATION",
+          "UPC_SEQ",
+          "SHELF_FEET",
+          "Facing"
+        ],
+        "measures": [
+          "SHELF_FEET",
+          "Facing",
+          "CAPACITY"
+        ],
+        "delivery_col": "DELIVERY_ID",
+        "task_col": "TASK_NUMBER",
+        "week_col": "IRI_WEEK",
+        "location_col": "LOCATION",
+        "category_col": "CATEGORY",
+        "delete_tstamp_col": "DELETE_TSTAMP",
+        "status_cd_col": "STATUS_CD",
+        "dropped_reason_col": "DROPPED_REASON",
+        "shelf_feet_col": "SHELF_FEET",
+        "facings_col": "Facing",
+        "capacity_col": "CAPACITY",
+        "upc_width_col": "UPC_WIDTH",
+        "units_deep_col": "UNITS_DEEP",
+        "units_high_col": "UNITS_HIGH"
+      },
+      "IMP": {
+        "server": "10.106.10.49",
+        "database": "Imputations_sa",
+        "table": "Audit_Delivery_Store_Sample",
+        "store_col": "store_number",
+        "delivery_col": "delivery_id",
+        "status_col": "imputed_status",
+        "imputed_value": "Y"
+      },
+      "PRIOR": {
+        "server": "10.106.10.49",
+        "database": "Imputations_sa",
+        "table": "",
+        "store_col": "",
+        "shelf_feet_col": "",
+        "facings_col": "",
+        "capacity_col": ""
+      },
+      "SHELFVAR": {
+        "server": "10.106.10.49",
+        "database": "Imputations_sa",
+        "table": "",
+        "id_col": "",
+        "desc_col": ""
+      },
+      "MDM": {
+        "server": "10.106.11.180",
+        "database": "product_attributes",
+        "table": "MOLSON_BEER_MDM",
+        "upc_col": "upc_number",
+        "grain": [
+          "upc_number"
+        ],
+        "sys_col": "sys",
+        "vendor_col": "vendor",
+        "item_col": "item",
+        "product_col": [
+          "ISG_Delivery_Category_Flagging",
+          "12 count BUDGET/NEAR PREMIUM in TOTAL BEER",
+          "LARGE count BUDGET/NEAR PREMIUM in TOTAL BEER",
+          "MID count BUDGET/NEAR PREMIUM in TOTAL BEER",
+          "SINGLE count BUDGET/NEAR PREMIUM in TOTAL BEER",
+          "SMALL count BUDGET/NEAR PREMIUM in TOTAL BEER",
+          "12 count CRAFT in TOTAL BEER",
+          "LARGE count CRAFT in TOTAL BEER",
+          "MID count CRAFT in TOTAL BEER",
+          "SINGLE count CRAFT in TOTAL BEER",
+          "SMALL count CRAFT in TOTAL BEER",
+          "12 count IMPORT in TOTAL BEER",
+          "LARGE count IMPORT in TOTAL BEER",
+          "MID count IMPORT in TOTAL BEER",
+          "SINGLE count IMPORT in TOTAL BEER",
+          "SMALL count IMPORT in TOTAL BEER",
+          "12 count MALT LIQUOR in TOTAL BEER",
+          "LARGE count MALT LIQUOR in TOTAL BEER",
+          "MID count MALT LIQUOR in TOTAL BEER",
+          "SINGLE count MALT LIQUOR in TOTAL BEER",
+          "SMALL count MALT LIQUOR in TOTAL BEER",
+          "12 count PREMIUM LIGHT in TOTAL BEER",
+          "LARGE count PREMIUM LIGHT in TOTAL BEER",
+          "MID count PREMIUM LIGHT in TOTAL BEER",
+          "SINGLE count PREMIUM LIGHT in TOTAL BEER",
+          "SMALL count PREMIUM LIGHT in TOTAL BEER",
+          "12 count PREMIUM REGULAR in TOTAL BEER",
+          "LARGE count PREMIUM REGULAR in TOTAL BEER",
+          "MID count PREMIUM REGULAR in TOTAL BEER",
+          "SINGLE count PREMIUM REGULAR in TOTAL BEER",
+          "SMALL count PREMIUM REGULAR in TOTAL BEER",
+          "12 count SUPER PREMIUM in TOTAL BEER",
+          "LARGE count SUPER PREMIUM in TOTAL BEER",
+          "MID count SUPER PREMIUM in TOTAL BEER",
+          "SINGLE count SUPER PREMIUM in TOTAL BEER",
+          "SMALL count SUPER PREMIUM in TOTAL BEER",
+          "12 count CIDER in FLAVORED TAB",
+          "LARGE count CIDER in FLAVORED TAB",
+          "MID count CIDER in FLAVORED TAB",
+          "SINGLE count CIDER in FLAVORED TAB",
+          "SMALL count CIDER in FLAVORED TAB",
+          "12 count RTD FULL FLAVOR in FLAVORED TAB",
+          "LARGE count RTD FULL FLAVOR in FLAVORED TAB",
+          "MID count RTD FULL FLAVOR in FLAVORED TAB",
+          "SINGLE count RTD FULL FLAVOR in FLAVORED TAB",
+          "SMALL count RTD FULL FLAVOR in FLAVORED TAB",
+          "12 count RTD SELTZER in FLAVORED TAB",
+          "LARGE count RTD SELTZER in FLAVORED TAB",
+          "MID count RTD SELTZER in FLAVORED TAB",
+          "SINGLE count RTD SELTZER in FLAVORED TAB",
+          "SMALL count RTD SELTZER in FLAVORED TAB",
+          "12 count RTD SPIRITS/WINE in FLAVORED TAB",
+          "LARGE count RTD SPIRITS/WINE in FLAVORED TAB",
+          "MID count RTD SPIRITS/WINE in FLAVORED TAB",
+          "SINGLE count RTD SPIRITS/WINE in FLAVORED TAB",
+          "SMALL count RTD SPIRITS/WINE in FLAVORED TAB",
+          "12 count in TOTAL BEER",
+          "LARGE count in TOTAL BEER",
+          "MID count in TOTAL BEER",
+          "SINGLE count in TOTAL BEER",
+          "SMALL count in TOTAL BEER",
+          "12 count in FLAVORED TAB",
+          "LARGE count in FLAVORED TAB",
+          "MID count in FLAVORED TAB",
+          "SINGLE count in FLAVORED TAB",
+          "SMALL count in FLAVORED TAB"
+        ]
+      },
+      "PROJ": {
+        "server": "10.106.10.49",
+        "database": "Audit_projections",
+        "table": "MLSN_COORS_2026_2442_Projections_Translation_allver",
+        "store_col": "store_number",
+        "weight_col": "weight",
+        "grain": [
+          "store_number",
+          "acv",
+          "weight",
+          "cdm_geo",
+          "outlet",
+          "geo_level"
+        ],
+        "geo_col": "cdm_geo",
+        "outlet_col": "outlet",
+        "geo_level_col": "geo_level",
+        "week_col": "Iri_week",
+        "version_col": "version"
+      },
+      "POS": {
+        "server": "10.106.10.49",
+        "database": "Pointofsales_landing",
+        "table": "ISG_11717795433_Molson_2025_beer_thc_sales",
+        "store_col": "STORE",
+        "upc_col": "UPC",
+        "grain": [
+          "STORE",
+          "UPC"
+        ],
+        "measures": [
+          "UNITS",
+          "CURRENCY"
+        ],
+        "week_col": "WEEK",
+        "dollars_col": "CURRENCY",
+        "units_col": "UNITS"
+      }
+    },
+    "products": {
+      "SA": {
+        "owner": "",
+        "slo": ""
+      },
+      "MDM": {
+        "owner": "",
+        "slo": ""
+      },
+      "PROJ": {
+        "owner": "",
+        "slo": ""
+      },
+      "POS": {
+        "owner": "",
+        "slo": ""
+      },
+      "PREP": {
+        "owner": "",
+        "slo": ""
+      },
+      "STAGING": {
+        "owner": "",
+        "slo": ""
+      },
+      "PREDELIVERY": {
+        "owner": "",
+        "slo": ""
+      },
+      "DELIVERY": {
+        "owner": "",
+        "slo": ""
+      }
+    },
+    "rules_off": [
+      "SA005",
+      "SA009"
+    ],
+    "custom_checks": []
+  }
+}

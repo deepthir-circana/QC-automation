@@ -21,11 +21,16 @@ VERSIONS = {"11": "2012", "12": "2014", "13": "2016", "14": "2017", "15": "2019"
 SOURCES = ("SA", "MDM", "PROJ", "POS")
 LIST_MAX = 200
 CUSTOM_MAX = 10000  # custom SQL: failing rows counted up to this
+PROFILE_MAX = 5000  # MDM004: distinct values kept per Product column
 NO_GROUP = {"text", "ntext", "image", "xml", "geography", "geometry"}
 
 
 class Missing(Exception):
     """A table, column mapping or expected value the check needs is not set."""
+
+
+class Cancelled(BaseException):
+    """The user stopped the run. A BaseException so the per-check handlers (except Exception) do not turn it into a Blocked check."""
 
 
 # ---------------- helpers ----------------
@@ -87,6 +92,11 @@ def _id(s):
     return re.sub(r"\W", "_", str(s))
 
 
+def eg(vals, n=5):
+    v = [str(x) for x in vals]
+    return ", ".join(v[:n]) + (" …" if len(v) > n else "")
+
+
 # ---------------- connection ----------------
 def connect(server, database, user, password, timeout=15):
     """user=None: Windows authentication (the account running the app, no UID/PWD). Otherwise SQL login."""
@@ -137,27 +147,38 @@ def fq(src):
     return qt(src["table"] if len(parts) == 3 else f"{src['database']}." + (src["table"] if len(parts) == 2 else f"dbo.{src['table']}"))
 
 
+def pcol(m):
+    """Product column used by the ILD template: the first one selected (Product column(s) accepts several)."""
+    v = m.get("product_col")
+    return v[0] if isinstance(v, list) and v else v
+
+
 MDM_TOKEN = "{{MDM_MAP}}"
 _lit = lambda v: "'" + str(v).replace("'", "''") + "'"
 
 
-def _ild_parts(cfg, versions=""):
+def _ild_parts(cfg, versions="", msl=None):
     """Validate the SA / MDM / PROJ mapping and build the delivery and version filters. SA and PROJ must share a server;
     MDM may sit on another one (its UPC/Product rows are pulled into the query at run time)."""
     srcs = cfg.get("sources") or {}
     S, M, P = (srcs.get(k) or {} for k in ("SA", "MDM", "PROJ"))
-    need = (("SA", S, ("store_col", "upc_col", "facings_col", "shelf_feet_col")), ("MDM", M, ("upc_col", "product_col")),
-            ("PROJ", P, ("store_col", "weight_col", "geo_col")))
+    if msl is not None:  # MSL tab: SA + MDM only (msl = the SA location roles of the chosen rule)
+        need = (("SA", S, ("store_col", "upc_col", "facings_col", *msl)), ("MDM", M, ("upc_col", "product_col")))
+    else:
+        need = (("SA", S, ("store_col", "upc_col", "facings_col", "shelf_feet_col")), ("MDM", M, ("upc_col", "product_col")),
+                ("PROJ", P, ("store_col", "weight_col", "geo_col")))
     miss = [f"{core.INPUTS[k][0]} table" if not o.get("table") else f"{core.INPUTS[k][0]} → {core.ROLE[r]}"
             for k, o, roles in need for r in (("table",) if not o.get("table") else roles) if r == "table" or not o.get(r)]
     if miss:
         raise Missing("set " + "; ".join(dict.fromkeys(miss)))
     srv = lambda o: str(o.get("server") or "").strip().lower()
-    if srv(S) != srv(P):
+    if msl is None and srv(S) != srv(P):
         raise ValueError(f"Shelf audit ({S.get('server')}) and Projections ({P.get('server')}) must be on the same SQL Server: they are joined in SQL.")
     d, sa_w = str(cfg.get("expected_delivery_id") or "").strip(), ""
     if S.get("delivery_col") and d:
         sa_w = f" WHERE {kx(q(S['delivery_col']))} = {_lit(pkey(d))}"
+    if msl is not None:
+        return {"S": S, "M": M, "P": P, "sa_w": sa_w, "pr_w": "", "remote": srv(M) != srv(S)}
     ver, pr_w = [v.strip() for v in str(versions or "").split(",") if v.strip()], ""
     if ver:
         if not P.get("version_col"):
@@ -166,22 +187,39 @@ def _ild_parts(cfg, versions=""):
     return {"S": S, "M": M, "P": P, "sa_w": sa_w, "pr_w": pr_w, "remote": srv(M) != srv(S)}
 
 
-def ild_sql(cfg, kind, location="", versions="", top_n=100):
+def ild_sql(cfg, kind, location="", versions="", top_n=100, product="", product_vals=""):
     """T-SQL text for the SQL tab, built from the mapped SA / MDM / PROJ sources (read-only, editable by the user).
     kind: 'ild' grouped projected facings | 'rows' combined row sample | 'counts' row counts after each join + fan-out indicators.
     If MDM is on another server than SA, the md CTE holds the {{MDM_MAP}} token, expanded at run time by expand_maps()."""
     x = _ild_parts(cfg, versions)
     S, M, P, sa_w, pr_w = x["S"], x["M"], x["P"], x["sa_w"], x["pr_w"]
+    prod = product if product in (M.get("product_col") or []) else pcol(M)  # Product column chosen on the SQL tab (default: first mapped)
+    location = str(location or "").strip()
+    if location:  # Location filter: SA location column = value, matched through the Shelf var master description when it is mapped
+        if not S.get("location_col"):
+            raise Missing(f"set {core.INPUTS['SA'][0]} → {core.ROLE['location_col']} to filter by location")
+        lk, sh = q(S["location_col"]), ((cfg.get("sources") or {}).get("SHELFVAR") or {})
+        if sh.get("table") and sh.get("id_col") and sh.get("desc_col"):
+            if str(sh.get("server") or "").strip().lower() != str(S.get("server") or "").strip().lower():
+                raise ValueError(f"Shelf var master ({sh.get('server')}) is on another SQL Server than the Shelf audit ({S.get('server')}): "
+                                 "clear the Shelf var master table to filter on the raw location value instead.")
+            cond = (f"{kx(lk)} IN (SELECT {kx(q(sh['id_col']))} FROM {fq(sh)} "
+                    f"WHERE LTRIM(RTRIM(CAST({q(sh['desc_col'])} AS varchar(200)))) = {_lit(location)})")
+        else:
+            cond = f"LTRIM(RTRIM(CAST({lk} AS varchar(200)))) = {_lit(location)}"
+        sa_w = (sa_w + " AND " if sa_w else " WHERE ") + cond
+    pv = [v.strip() for v in str(product_vals or "").split(",") if v.strip()]
+    j1_w = f" WHERE CAST(md.product AS nvarchar(4000)) IN ({', '.join('N' + _lit(v) for v in pv)})" if pv else ""  # Product value filter
     md = (f"-- MDM is on {M.get('server')}: its UPC and Product rows are pulled at run time into md\n" if x["remote"] else "")
-    md_body = MDM_TOKEN if x["remote"] else f"SELECT {q(M['upc_col'])} AS u, {q(M['product_col'])} AS product FROM {fq(M)}"
+    md_body = MDM_TOKEN if x["remote"] else f"SELECT {q(M['upc_col'])} AS u, {q(prod)} AS product FROM {fq(M)}"
     cte = (md + f"WITH sa AS (SELECT {q(S['store_col'])} AS s, {q(S['upc_col'])} AS u, {q(S['facings_col'])} AS f, {q(S['shelf_feet_col'])} AS lf\n"
            f"            FROM {fq(S)}{sa_w}),\n"
            f"md AS ({md_body}),\n"
            f"pr AS (SELECT {q(P['store_col'])} AS s, {q(P['geo_col'])} AS geo, {q(P['weight_col'])} AS w FROM {fq(P)}{pr_w}),\n"
-           "j1 AS (SELECT sa.s, sa.u, sa.f, sa.lf, md.product FROM sa JOIN md ON md.u = sa.u),\n"
+           "j1 AS (SELECT sa.s, sa.u, sa.f, sa.lf, md.product FROM sa JOIN md ON md.u = sa.u" + j1_w + "),\n"
            "j2 AS (SELECT j1.s, j1.u, j1.f, j1.lf, j1.product, pr.geo, pr.w FROM j1 JOIN pr ON pr.s = j1.s)\n")
     if kind == "ild":
-        loc = f"{_lit(location)} AS Location,\n       " if str(location or "").strip() else ""
+        loc = f"{_lit(location)} AS Location,\n       " if location else ""
         return (cte + f"SELECT geo AS cdm_geo, product AS Product,\n       {loc}COUNT(DISTINCT u) AS UPCCount,\n"
                 f"       SUM(f * CAST(w AS {ILD_WEIGHT})) AS TotalFacings,\n       SUM(lf * CAST(w AS {ILD_WEIGHT})) AS TotalLinearFeet,\n"
                 "       COUNT(DISTINCT s) AS storecount\nFROM j2\nGROUP BY geo, product\nORDER BY geo, product")
@@ -200,13 +238,13 @@ def ild_sql(cfg, kind, location="", versions="", top_n=100):
     raise ValueError(f"Unknown template: {kind}")
 
 
-def expand_maps(sql, cfg, user, password, max_rows=20000):
+def expand_maps(sql, cfg, user, password, max_rows=20000, msl=None, product=None):
     """Replace {{MDM_MAP}} with the MDM (UPC, Product) rows for the UPCs in the shelf audit, as inline VALUES blocks, so the join
     runs on the SA server although MDM is on another one. Read-only: nothing is written anywhere. MDM duplicates are kept
     (the join fans out exactly as a same-server join would)."""
     if MDM_TOKEN not in str(sql or ""):
         return sql, {}
-    x = _ild_parts(cfg)
+    x = _ild_parts(cfg, msl=msl)
     S, M = x["S"], x["M"]
 
     def fetch(o, query):
@@ -222,7 +260,7 @@ def expand_maps(sql, cfg, user, password, max_rows=20000):
         finally:
             c.close()
     sa_upc = {pkey(r[0]) for r in fetch(S, f"SELECT DISTINCT {q(S['upc_col'])} FROM {fq(S)}{x['sa_w']}") if r[0] is not None}
-    mdm = fetch(M, f"SELECT {q(M['upc_col'])}, {q(M['product_col'])} FROM {fq(M)} WHERE {q(M['upc_col'])} IS NOT NULL")
+    mdm = fetch(M, f"SELECT {q(M['upc_col'])}, {q(product or pcol(M))} FROM {fq(M)} WHERE {q(M['upc_col'])} IS NOT NULL")
     rows = [(pkey(r[0]), r[1]) for r in mdm if pkey(r[0]) in sa_upc]
     if len(rows) > max_rows:
         raise ValueError(f"{len(rows):,} MDM rows match the shelf audit UPCs; the limit is {max_rows:,}. Filter the shelf audit (delivery ID) first.")
@@ -235,6 +273,81 @@ def expand_maps(sql, cfg, user, password, max_rows=20000):
     body = "\nUNION ALL\n".join(blocks) or f"SELECT CAST(NULL AS {kt}) AS u, CAST(NULL AS nvarchar(4000)) AS product WHERE 1 = 0"
     return str(sql).replace(MDM_TOKEN, body), {"server": M.get("server"), "sa_upcs": len(sa_upc), "mdm_rows": len(rows),
                                                "unmapped_upcs": len(sa_upc - {k for k, _ in rows})}
+
+
+# ---------------- MSL: mostly stocked together (SA x MDM, facings) ----------------
+MSL_SPLIT = "\n-- @@SPLIT@@\n"
+
+
+def msl_sql(cfg, level, rule):
+    """(main, counts) T-SQL for the MSL tab. Facings are summed per product x store x location (store + the rule's SA location columns);
+    the dominant location is the one with the most facings (ties: lowest location value); share = dominant facings / the product's
+    facings in that store. Rows with a null facings, product or location value are left out of the share and counted in `counts`.
+    If MDM is on another server, the md CTE holds {{MDM_MAP}} (expanded by expand_maps)."""
+    roles = core.MSL_RULES[rule]
+    x = _ild_parts(cfg, msl=roles)
+    S, M, sa_w = x["S"], x["M"], x["sa_w"]
+    if level not in (M.get("product_col") or []):
+        raise Missing(f"choose a Product mapped in Product master → {core.ROLE['product_col']}")
+    lc = [f"l{i}" for i in range(len(roles))]
+    L = ", ".join(lc)
+    nul = " OR ".join(f"{c} IS NULL" for c in lc)
+    md = MDM_TOKEN if x["remote"] else f"SELECT {q(M['upc_col'])} AS u, {q(level)} AS product FROM {fq(M)}"
+    base = (f"WITH sa AS (SELECT {kx(q(S['store_col']))} AS s, {q(S['upc_col'])} AS u, CAST({q(S['facings_col'])} AS float) AS f, "
+            + ", ".join(f"CAST({q(S[r])} AS varchar(100)) AS l{i}" for i, r in enumerate(roles)) + f"\n            FROM {fq(S)}{sa_w}),\n"
+            f"md AS ({md}),\n"
+            f"j AS (SELECT sa.s, sa.u, sa.f, {', '.join('sa.' + c for c in lc)}, md.product FROM sa JOIN md ON md.u = sa.u)")
+    main = (base + f",\nloc AS (SELECT product, s, {L}, SUM(f) AS fac FROM j WHERE product IS NOT NULL AND f IS NOT NULL AND NOT ({nul}) "
+            f"GROUP BY product, s, {L}),\n"
+            f"r AS (SELECT product, s, {L}, fac, SUM(fac) OVER (PARTITION BY product, s) AS tot, "
+            f"ROW_NUMBER() OVER (PARTITION BY product, s ORDER BY fac DESC, {L}) AS rn FROM loc)\n"
+            f"SELECT product, s AS store, {L}, fac, tot, 100.0 * fac / NULLIF(tot, 0) AS share_pct FROM r WHERE rn = 1 ORDER BY product, s")
+    counts = (base + "\nSELECT (SELECT COUNT_BIG(*) FROM sa) AS sa_rows, (SELECT COUNT_BIG(DISTINCT s) FROM sa) AS sa_stores,\n"
+              "       (SELECT COUNT_BIG(*) FROM sa WHERE NOT EXISTS (SELECT 1 FROM md WHERE md.u = sa.u)) AS sa_rows_no_mdm,\n"
+              "       (SELECT COUNT_BIG(*) FROM (SELECT u FROM md GROUP BY u HAVING COUNT_BIG(*) > 1) x) AS mdm_dup_upcs,\n"
+              "       (SELECT COUNT_BIG(*) FROM j) AS after_mdm_join,\n"
+              "       (SELECT COUNT_BIG(*) FROM j WHERE product IS NULL) AS null_product,\n"
+              "       (SELECT COUNT_BIG(*) FROM j WHERE f IS NULL) AS null_facings,\n"
+              f"       (SELECT COUNT_BIG(*) FROM j WHERE {nul}) AS null_location,\n"
+              "       (SELECT COUNT_BIG(*) FROM j WHERE product IS NOT NULL AND f IS NOT NULL "
+              f"AND NOT ({nul})) AS rows_used")
+    return main, counts
+
+
+def msl_summary(cols, rows, n_loc, threshold):
+    """Per product: stores tested, stores at or above the threshold, facings-weighted dominant share, most common dominant location."""
+    by = {}
+    for r in (dict(zip(cols, x)) for x in rows):
+        by.setdefault(r["product"], []).append(r)
+    out = []
+    for p, rs in sorted(by.items(), key=lambda kv: str(kv[0])):
+        ok = sum(1 for r in rs if num(r["share_pct"]) >= threshold)
+        cnt = {}
+        for r in rs:
+            k = " / ".join(str(r[f"l{i}"]) for i in range(n_loc))
+            cnt[k] = cnt.get(k, 0) + 1
+        top = max(cnt.items(), key=lambda kv: (kv[1], kv[0]))
+        out.append({"Product": p, "Stores": len(rs), "Stores at or above threshold": ok, "% stores at or above threshold": pct(ok, len(rs)),
+                    "Facings-weighted dominant share %": pct(sum(num(r["fac"]) for r in rs), sum(num(r["tot"]) for r in rs)),
+                    "Most common dominant location": top[0]})
+    return out
+
+
+def msl_run(cfg, level, rule, threshold, user, password, max_rows=100000, timeout=1800):
+    """Run the MSL test on the SA server (MDM pulled in when it is on another server). Raises if the result is cut at max_rows."""
+    roles = core.MSL_RULES[rule]
+    main, cnt = msl_sql(cfg, level, rule)
+    sql, info = expand_maps(main + MSL_SPLIT + cnt, cfg, user, password, msl=roles, product=level)
+    main, cnt = sql.split(MSL_SPLIT)
+    S = (cfg.get("sources") or {})["SA"]
+    res = run_query(S["server"], S["database"], user, password, main, max_rows, timeout)
+    if res["truncated"]:
+        raise ValueError(f"More than {max_rows:,} product x store rows. Use a higher Product level or filter the shelf audit (delivery ID).")
+    c = run_query(S["server"], S["database"], user, password, cnt, 1, timeout)
+    return {"level": level, "rule": rule, "threshold": threshold, "seconds": res["seconds"], "info": info,
+            "counts": dict(zip(c["columns"], c["rows"][0])) if c["rows"] else {},
+            "columns": res["columns"], "rows": res["rows"], "n_loc": len(roles),
+            "summary": msl_summary(res["columns"], res["rows"], len(roles), threshold)}
 
 
 # ---------------- SQL IDE (read-only) ----------------
@@ -290,7 +403,9 @@ class LiveRunner:
         self.on_check = on_check or (lambda c: None)
         self.results, self.prof, self.keys, self._conns = [], {}, {}, {}
         self.cfg, self._sample, self._sas, self._dval = {}, None, None, None
+        self.stop = None  # optional callable: returns True when the user asked to stop the run
         self.off = set()  # rules the user switched off for this run (Live input setup → Check readiness)
+        self.na = {}  # rules not applicable (optional source such as Prior wave not entered): {rule: reason}
 
     def rule(self, r):
         return self.rules.get(r, {})
@@ -323,20 +438,32 @@ class LiveRunner:
         r = self.rows(src, sql, params)
         return r[0] if r else {}
 
-    def add(self, stage, rule, sub, status, msg, pct_=0.0, actual=None, expected=None, sample=None):
+    def add(self, stage, rule, sub, status, msg, pct_=0.0, actual=None, expected=None, sample=None, profile=None, skipped=False):
         cid = f"LIVE_{stage}_{_id(rule)}" + (f"_{_id(sub)}" if sub else "")
         c = {"check_id": cid, "rule": rule, "stage": stage, "source": "LIVE", "status": status,
              "passed": status == "PASS", "severity": self.rule(rule).get("severity", "INFO"),
              "message": msg, "error_message": msg, "affected_pct": float(pct_),
              "actual_value": actual, "expected_value": expected, "sample_failing_rows": sample or [],
              "logged_at": dt.datetime.now().isoformat(timespec="seconds")}
+        if profile:
+            c["profile"] = profile
+        if skipped:
+            c["skipped"] = True  # switched off by the user: Manual, but not a blocker
         self.results.append(c)
         self.on_check(c)
+        if self.stop and self.stop():
+            raise Cancelled()
 
     def safe(self, stage, rule, fn, sub="", force=False):
+        if self.stop and self.stop():
+            raise Cancelled()
+        if not force and rule in self.na and self.rule(rule).get("enabled", True) is not False:
+            if not any(c["rule"] == rule for c in self.results):
+                self.add(stage, rule, "", "MANUAL_REQUIRED", f"{rule} not run: not applicable, {self.na[rule]}", skipped=True)
+            return
         if not force and not self.on(rule):
             if rule in self.off and not any(c["rule"] == rule and "switched off" in c["message"] for c in self.results):
-                self.add(stage, rule, "", "MANUAL_REQUIRED", f"{rule} not run: switched off for this run")
+                self.add(stage, rule, "", "MANUAL_REQUIRED", f"{rule} not run: switched off for this run", skipped=True)
             return
         try:
             fn()
@@ -396,7 +523,8 @@ class LiveRunner:
                 smp = self.rows(src, f"SELECT TOP 10 {gl}, COUNT_BIG(*) AS dup_count FROM {t} GROUP BY {gl} "
                                      f"HAVING COUNT_BIG(*) > 1 ORDER BY dup_count DESC") if dk else []
                 self.add(st, "IN-003", "", "FAIL" if dk else "PASS",
-                         f"{dk:,} duplicate keys ({dn:,} rows) at grain [{', '.join(g)}]", pct(dn, rows), dk, 0, smp)
+                         core.fmsg(f"{dk:,} duplicate keys at grain" if dk else "No duplicates at grain",
+                                   f"Rows in duplicate groups: {dn:,} of {rows:,}", f"Grain: {', '.join(g)}"), pct(dn, rows), dk, 0, smp)
             self.safe(st, "IN-003", c_dup)
 
         m = [x for x in (src.get("measures") or []) if x]
@@ -415,6 +543,8 @@ class LiveRunner:
                         self.add(st, "IN-005", c, "FAIL" if neg else "PASS", f"{c}: {neg:,} negative values", pct(neg, rows), neg, 0)
             if self.on("IN-007") or self.on("IN-005"):
                 self.safe(st, "IN-005", c_meas, force=True)
+            elif "IN-005" in self.off:
+                self.safe(st, "IN-005", c_meas)  # records the "switched off" Manual result
 
         if st == "SA":
             exp = str(cfg.get("expected_sa_stores") or "").replace(",", "").strip()
@@ -434,8 +564,9 @@ class LiveRunner:
                                   f"SUM(CASE WHEN {cw} <= 0 THEN 1 ELSE 0 END) AS np FROM {t}")
                 z, nn, npos = int(num(r.get("z"))), int(num(r.get("nn"))), int(num(r.get("np")))
                 bad = z + nn + npos
-                msg = f"{z:,} null, {nn:,} non-numeric, and {npos:,} zero/negative weights"
-                self.add("PROJ", "PRJ-001", "", "FAIL" if bad else "PASS", msg, pct(bad, rows), bad, 0)
+                self.add("PROJ", "PRJ-001", "", "FAIL" if bad else "PASS",
+                         core.fmsg(f"{bad:,} of {rows:,} projection weights are invalid" if bad else "All projection weights are valid",
+                                   f"Null: {z:,}", f"Non-numeric: {nn:,}", f"Zero or negative: {npos:,}"), pct(bad, rows), bad, 0)
             self.safe("PROJ", "PRJ-001", c_wgt)
 
     # ---- imputed stores (Audit_Delivery_Store_Sample) ----
@@ -518,7 +649,7 @@ class LiveRunner:
                 self.add("SA", "IMP-003", m, "FAIL" if n and p > mx else "PASS", msg, p, k, 0, smp)
             self.safe("SA", "IMP-003", c_over, m)
 
-    # ================= spec checks (SA001-SA015, MDM001-002, PRJ001-005, POS001-005) =================
+    # ================= spec checks (SA001-SA017, MDM001-002, PRJ001-005, POS001-005) =================
     def setup_custom(self, items):
         """Register user-added checks so severity and description flow through add() and rule_descriptions."""
         self.base_ids = set(self.rules)
@@ -531,7 +662,7 @@ class LiveRunner:
         for c in items:
             stage = c["source"] if c["source"] in core.CUSTOM_SRC else "SA"
             if not c["run"]:
-                self.add(stage, c["id"], "", "MANUAL_REQUIRED", f"{c['id']} not run: switched off for this run")
+                self.add(stage, c["id"], "", "MANUAL_REQUIRED", f"{c['id']} not run: switched off for this run", skipped=True)
             else:
                 self.safe(stage, c["id"], lambda c=c, t=set(taken): self.custom_one(c, t), force=True)
             taken.add(c["id"])
@@ -563,8 +694,9 @@ class LiveRunner:
             k, n, tot = int(num(r.get("k"))), int(num(r.get("n"))), int(num(r.get("tot")))
             smp = self.rows(o, f"SELECT TOP 10 {gl}, COUNT_BIG(*) AS dup_count FROM {tb} WHERE {nn} GROUP BY {gl} "
                                f"HAVING COUNT_BIG(*) > 1 ORDER BY dup_count DESC") if k else []
-            return self.add(s, rid, "", "FAIL" if k else "PASS", f"[{', '.join(cols)}]: {k:,} duplicate keys ({n:,} rows of {tot:,}); null keys ignored",
-                            pct(n, tot), k, 0, smp)
+            return self.add(s, rid, "", "FAIL" if k else "PASS",
+                            core.fmsg(f"{k:,} duplicate keys on [{', '.join(cols)}]" if k else f"No duplicates on [{', '.join(cols)}]",
+                                      f"Rows in duplicate groups: {n:,} of {tot:,}", "Null keys ignored"), pct(n, tot), k, 0, smp)
         col, prm = q(cols[0]), []
         if t == "Not null":
             bad, what = f"{col} IS NULL", "null"
@@ -607,23 +739,25 @@ class LiveRunner:
         vals = self.rows(o, f"SELECT TOP {LIST_MAX} {c} AS v, COUNT_BIG(*) AS row_count FROM {self.t(s)} GROUP BY {c} ORDER BY {c}", clean_vals=False)
         smp = [{o[role]: clean(v["v"]), "row_count": int(v["row_count"])} for v in vals]
         nn = [v for v in vals if v["v"] is not None]
-        txt = ", ".join(keystr(v["v"]) for v in nn[:15]) + (" …" if n > 15 else "")
-        nul = f"; {z:,} null rows" if z else ""
+        txt = eg([keystr(v["v"]) for v in nn], 15)
+        nul = f"Null rows: {z:,}" if z else ""
         if expected is None:
-            return self.add(stage, rule, "", "PASS", f"{n:,} distinct {label}: {txt}{nul}", 0, n, None, smp)
+            return self.add(stage, rule, "", "PASS", core.fmsg(f"{n:,} distinct {label}", f"Values: {txt}", nul), 0, n, None, smp)
         exp = [e.strip() for e in str(expected).split(",") if e.strip()]
         if not exp:
             return self.add(stage, rule, "", "MANUAL_REQUIRED",
-                            f"{n:,} distinct {label}: {txt}{nul}. No expected value entered; confirm against the requirement.", 0, n, None, smp)
+                            core.fmsg(f"{n:,} distinct {label}; no expected value entered", f"Values: {txt}", nul, "Confirm against the requirement"),
+                            0, n, None, smp)
         want = {pkey(e) for e in exp}
         bad_rows = sum(int(v["row_count"]) for v in nn if pkey(v["v"]) not in want) + z
         extra = sorted({keystr(v["v"]) for v in nn if pkey(v["v"]) not in want})
         miss = sorted(e for e in exp if pkey(e) not in {pkey(v["v"]) for v in nn})
         more = n > LIST_MAX
         ok = not (extra or miss or z or more)
-        msg = (f"{n:,} distinct {label} ({txt}) vs expected {', '.join(exp)}"
-               + (f"; unexpected: {', '.join(extra[:10])}" if extra else "") + (f"; expected but absent: {', '.join(miss)}" if miss else "")
-               + (f"; more than {LIST_MAX} values, not all compared" if more else "") + nul)
+        msg = core.fmsg(f"{label.capitalize()} match the expected value(s)" if ok else f"{label.capitalize()} do not match the expected value(s)",
+                        f"Found ({n:,}): {txt}", f"Expected: {', '.join(exp)}",
+                        f"Unexpected: {eg(extra, 10)}" if extra else "", f"Expected but absent: {', '.join(miss)}" if miss else "", nul,
+                        f"More than {LIST_MAX} values; not all compared" if more else "")
         self.add(stage, rule, "", "PASS" if ok else "FAIL", msg, pct(bad_rows, tot), n, ", ".join(exp), smp)
 
     def dcount(self, s, role):
@@ -635,8 +769,9 @@ class LiveRunner:
         self.need_rule(rule)
         n, nn, tot = self.dcount(s, role)
         k = self.keys.get(f"{s}.{kind}")
-        trim = f" ({len(k):,} after trimming leading zeros)" if k is not None and len(k) != n else ""
-        self.add(stage, rule, "", "PASS", f"{n:,} distinct {self.src(s)[role]}{trim}; {tot - nn:,} null rows of {tot:,}", 0, n)
+        self.add(stage, rule, "", "PASS", core.fmsg(f"{n:,} distinct {self.src(s)[role]}",
+                 f"After trimming leading zeros: {len(k):,}" if k is not None and len(k) != n else "",
+                 f"Null rows: {tot - nn:,} of {tot:,}"), 0, n)
 
     def not_null(self, stage, rule, s, role, cond=None, label=""):
         self.need_rule(rule)
@@ -653,13 +788,18 @@ class LiveRunner:
         self.need_rule("SA003")
         o = self.src("SA")
         cols = [o[r] for r in ("delete_tstamp_col", "status_cd_col", "dropped_reason_col")]
+        cc = f"{q(o['category_col'])} IS NOT NULL"
         anyc = " OR ".join(f"{q(c)} IS NOT NULL" for c in cols)
-        sel = ", ".join(f"SUM(CASE WHEN {q(c)} IS NOT NULL THEN 1 ELSE 0 END) AS n{i}" for i, c in enumerate(cols))
-        r = self.one(o, f"SELECT {sel}, SUM(CASE WHEN {anyc} THEN 1 ELSE 0 END) AS k, COUNT_BIG(*) AS tot FROM {self.t('SA')}")
+        sel = ", ".join(f"SUM(CASE WHEN {cc} AND {q(c)} IS NOT NULL THEN 1 ELSE 0 END) AS n{i}" for i, c in enumerate(cols))
+        r = self.one(o, f"SELECT {sel}, SUM(CASE WHEN {cc} AND ({anyc}) THEN 1 ELSE 0 END) AS k, "
+                        f"SUM(CASE WHEN {cc} THEN 1 ELSE 0 END) AS tot FROM {self.t('SA')}")
         k, tot = int(num(r.get("k"))), int(num(r.get("tot")))
-        per = "; ".join(f"{c}: {int(num(r.get(f'n{i}'))):,}" for i, c in enumerate(cols))
-        smp = self.rows(o, f"SELECT TOP 10 {self.idc('SA')}{', '.join(q(c) for c in cols)} FROM {self.t('SA')} WHERE {anyc}") if k else []
-        self.add("SA", "SA003", "", "FAIL" if k else "PASS", f"{k:,} of {tot:,} rows have a non-null value ({per})", pct(k, tot), k, 0, smp)
+        smp = self.rows(o, f"SELECT TOP 10 {self.idc('SA')}{q(o['category_col'])} AS category, {', '.join(q(c) for c in cols)} FROM {self.t('SA')} "
+                           f"WHERE {cc} AND ({anyc})") if k else []
+        head = (f"{k:,} of {tot:,} rows with a category have a value that should be null" if k
+                else f"All {tot:,} rows with a category have these columns null")
+        self.add("SA", "SA003", "", "FAIL" if k else "PASS",
+                 core.fmsg(head, *[f"{c}: {int(num(r.get(f'n{i}'))):,} non-null rows" for i, c in enumerate(cols)]), pct(k, tot), k, 0, smp)
 
     def sa005(self):
         self.need_rule("SA005")
@@ -683,11 +823,20 @@ class LiveRunner:
             else:
                 row["description"] = next(iter(d))
                 smp.append(row)
+        for r, why in ((un, "not found or blank description"), (amb, "more than one description"), (smp, "ok")):
+            for x in r:
+                x["issue"] = why
         bad = sum(r["sa_rows"] for r in un + amb)
-        msg = (f"{len(locs):,} distinct SA locations: {len(smp):,} resolve to one description, {len(un):,} not found or blank in "
-               f"shelf_var_master ({sum(r['sa_rows'] for r in un):,} rows), {len(amb):,} with more than one description "
-               f"(UPDATE would fan out); read-only, IDs compared after trimming leading zeros")
-        self.add("SA", "SA005", "", "FAIL" if un or amb else "PASS", msg, pct(bad, tot), len(un) + len(amb), 0, (un + amb + smp)[:50])
+        n_bad = len(un) + len(amb)
+        show = lambda rs: ", ".join("(null)" if r["location"] is None else str(r["location"]) for r in rs[:5]) + (" …" if len(rs) > 5 else "")
+        head = (f"{n_bad:,} of {len(locs):,} SA locations do not resolve to exactly one description ({bad:,} SA rows)" if n_bad
+                else f"All {len(locs):,} SA locations resolve to exactly one description")
+        lines = [head,
+                 f"- Resolved to one description: {len(smp):,}",
+                 f"- Not found in shelf_var_master, or description blank: {len(un):,} ({sum(r['sa_rows'] for r in un):,} SA rows)" + (f" → {show(un)}" if un else ""),
+                 f"- Matched more than one description: {len(amb):,} ({sum(r['sa_rows'] for r in amb):,} SA rows)" + (f" → {show(amb)}" if amb else ""),
+                 "- IDs compared after trimming leading zeros; read-only, nothing is updated"]
+        self.add("SA", "SA005", "", "FAIL" if n_bad else "PASS", "\n".join(lines), pct(bad, tot), n_bad, 0, (un + amb + smp)[:50])
 
     def sa006_grain(self):
         self.need_rule("SA006")
@@ -698,26 +847,30 @@ class LiveRunner:
         dk, dn, tot = int(num(r.get("k"))), int(num(r.get("n"))), int(num(r.get("tot")))
         smp = self.rows(o, f"SELECT TOP 10 {gl}, COUNT_BIG(*) AS dup_count FROM {self.t('SA')} GROUP BY {gl} "
                            f"HAVING COUNT_BIG(*) > 1 ORDER BY dup_count DESC") if dk else []
-        self.add("SA", "SA006", "grain", "FAIL" if dk else "PASS", f"Grain [{', '.join(g)}]: {dk:,} duplicate keys ({dn:,} rows of {tot:,})",
-                 pct(dn, tot), dk, 0, smp)
+        self.add("SA", "SA006", "grain", "FAIL" if dk else "PASS",
+                 core.fmsg(f"{dk:,} duplicate keys at grain" if dk else "No duplicates at grain",
+                           f"Rows in duplicate groups: {dn:,} of {tot:,}", f"Grain: {', '.join(g)}"), pct(dn, tot), dk, 0, smp)
 
-    def sa006_row(self):
-        o = self.src("SA")
+    def row_dup(self, stage, rule, s, sub=""):
+        """Duplicates across all (groupable) columns of a source table."""
+        o = self.src(s)
         if not o.get("table"):
-            raise Missing("set Shelf audit (SA) table")
+            raise Missing(f"set {core.INPUTS[s][0]} table")
+        t = self.t(s)
         cols = list_columns(o["server"], o["database"], o["table"], self.user, self.password)
         use = [c for c, tp in cols if str(tp).lower() not in NO_GROUP]
         skip = [c for c, tp in cols if str(tp).lower() in NO_GROUP]
         gl = ", ".join(q(c) for c in use)
-        r = self.one(o, f"SELECT COUNT_BIG(*) AS k, ISNULL(SUM(c), 0) AS n, (SELECT COUNT_BIG(*) FROM {self.t('SA')}) AS tot FROM "
-                        f"(SELECT COUNT_BIG(*) AS c FROM {self.t('SA')} GROUP BY {gl} HAVING COUNT_BIG(*) > 1) x")
+        r = self.one(o, f"SELECT COUNT_BIG(*) AS k, ISNULL(SUM(c), 0) AS n, (SELECT COUNT_BIG(*) FROM {t}) AS tot FROM "
+                        f"(SELECT COUNT_BIG(*) AS c FROM {t} GROUP BY {gl} HAVING COUNT_BIG(*) > 1) x")
         dk, dn, tot = int(num(r.get("k"))), int(num(r.get("n"))), int(num(r.get("tot")))
         show = ", ".join(q(c) for c in use[:10])
-        smp = self.rows(o, f"SELECT TOP 10 {show}, COUNT_BIG(*) AS dup_count FROM {self.t('SA')} GROUP BY {gl} "
+        smp = self.rows(o, f"SELECT TOP 10 {show}, COUNT_BIG(*) AS dup_count FROM {t} GROUP BY {gl} "
                            f"HAVING COUNT_BIG(*) > 1 ORDER BY dup_count DESC") if dk else []
-        self.add("SA", "SA006", "row", "FAIL" if dk else "PASS",
-                 f"Full row ({len(use)} columns): {dk:,} duplicated rows ({dn:,} rows of {tot:,})"
-                 + (f"; not comparable, excluded: {', '.join(skip)}" if skip else ""), pct(dn, tot), dk, 0, smp)
+        self.add(stage, rule, sub, "FAIL" if dk else "PASS",
+                 core.fmsg(f"{dk:,} duplicated row groups across all columns" if dk else "No duplicate rows across all columns",
+                           f"Rows in duplicate groups: {dn:,} of {tot:,}", f"Columns compared: {len(use)}",
+                           f"Excluded (cannot be compared): {', '.join(skip)}" if skip else ""), pct(dn, tot), dk, 0, smp)
 
     def delivery(self):
         if self._dval is not None:
@@ -767,9 +920,12 @@ class LiveRunner:
         a, b = sorted(C - S), sorted(non - C)
         ok = bool(C) and len(non) == len(C) and not a and not b
         self.prof.setdefault("SA", {})["collected_stores"] = len(C)
-        scope = f"delivery {d}" + ("" if filt else "; SA not filtered by delivery, no SA delivery column mapped")
-        msg = (f"SA non-imputed stores {len(non):,} vs collected stores {len(C):,} ({scope}); {len(a):,} collected stores missing from SA; "
-               f"{len(b):,} SA stores neither collected nor imputed" + ("; no collected stores in the sample for this delivery" if not C else ""))
+        msg = core.fmsg(f"SA non-imputed stores match collected stores ({len(C):,})" if ok
+                        else f"SA non-imputed stores ({len(non):,}) do not match collected stores ({len(C):,})",
+                        f"Delivery: {d}" + ("" if filt else " (SA not filtered: no SA delivery column mapped)"),
+                        f"Collected, missing from SA: {len(a):,}" + (f" → {eg(a)}" if a else ""),
+                        f"In SA, neither collected nor imputed: {len(b):,}" + (f" → {eg(b)}" if b else ""),
+                        "" if C else "No collected stores in the sample for this delivery")
         smp = [{"store": s, "issue": "collected, not in SA"} for s in a[:10]] + [{"store": s, "issue": "in SA, not in sample"} for s in b[:10]]
         self.add("SA", "SA007", "", "PASS" if ok else "FAIL", msg, pct(len(a) + len(b), max(len(C), 1)), len(non), len(C), smp)
 
@@ -781,12 +937,31 @@ class LiveRunner:
         a, b, both = sorted(U - S), sorted(S - U), sorted(C & I)
         ok = bool(U) and not (a or b or both)
         self.prof.setdefault("SA", {})["imputed_stores"] = len(I)
-        msg = (f"Sample for delivery {d}: {len(I):,} imputed ({iv}), {len(C):,} collected (null), {len(O):,} other status (excluded); "
-               f"{len(a):,} sample stores missing from SA; {len(b):,} SA stores not in the sample; {len(both):,} stores both imputed and collected"
-               + ("" if filt else "; SA not filtered by delivery") + ("; sample has no rows for this delivery" if not U else ""))
+        msg = core.fmsg(f"Sample and SA stores match ({len(U):,})" if ok else "Sample and SA stores do not match",
+                        f"Delivery: {d}" + ("" if filt else " (SA not filtered: no SA delivery column mapped)"),
+                        f"Sample: {len(I):,} imputed ({iv}), {len(C):,} collected (null), {len(O):,} other status (excluded)",
+                        f"In sample, missing from SA: {len(a):,}" + (f" → {eg(a)}" if a else ""),
+                        f"In SA, not in sample: {len(b):,}" + (f" → {eg(b)}" if b else ""),
+                        f"Both imputed and collected: {len(both):,}" + (f" → {eg(both)}" if both else ""),
+                        "" if U else "Sample has no rows for this delivery")
         smp = ([{"store": s, "issue": "in sample, not in SA"} for s in a[:10]] + [{"store": s, "issue": "in SA, not in sample"} for s in b[:10]]
                + [{"store": s, "issue": "imputed and collected"} for s in both[:10]])
         self.add("SA", "SA008", "", "PASS" if ok else "FAIL", msg, pct(len(a) + len(b) + len(both), max(len(U | S), 1)), len(U), len(S), smp)
+
+    def sa010(self):
+        self.need_rule("SA010")
+        C, I, O, d, iv = self.sample()
+        S, _ = self.sa_stores()
+        self.prof.setdefault("SA", {})["imputed_stores"] = len(I)
+        self.add("SA", "SA010", "", "PASS", core.fmsg(f"{len(I):,} imputed stores in the sample", f"Delivery: {d}; imputed status = {iv}",
+                 f"Also in SA: {len(I & S):,} of {len(I):,}"), 0, len(I))
+
+    def sa011(self):
+        self.need_rule("SA011")
+        C, I, O, d, _ = self.sample()
+        S, _ = self.sa_stores()
+        self.add("SA", "SA011", "", "PASS", core.fmsg(f"{len(C):,} collected stores in the sample", f"Delivery: {d}; imputed status null",
+                 f"Also in SA: {len(C & S):,} of {len(C):,}"), 0, len(C))
 
     def sa009(self):
         self.need_rule("SA009")
@@ -823,12 +998,14 @@ class LiveRunner:
                                      "per_change": round(ch, 2) if ch != float("inf") else "prior 0"}))
             flg.sort(key=lambda x: -x[0])
             n_cmp = len(I) - new - gone
-            msg = (f"{col}: {len(flg):,} of {n_cmp:,} imputed stores up more than {thr:g}% vs prior wave (store-level sum, change on {base}-wave base); "
-                   f"{new:,} imputed stores not in prior wave (not assessed); {gone:,} imputed stores not in current SA")
+            msg = core.fmsg(f"{col}: {len(flg):,} of {n_cmp:,} imputed stores up more than {thr:g}% vs prior wave" if flg
+                            else f"{col}: no imputed store up more than {thr:g}% vs prior wave ({n_cmp:,} compared)",
+                            f"Basis: store-level sum, change on {base}-wave base", f"Imputed stores not in prior wave (not assessed): {new:,}",
+                            f"Imputed stores not in current SA: {gone:,}")
             self.add("SA", "SA009", col, "FAIL" if flg else "PASS", msg, pct(len(flg), max(n_cmp, 1)), len(flg), 0, [x[1] for x in flg[:10]])
 
-    def sa016(self):
-        self.need_rule("SA016")
+    def sa018(self):
+        self.need_rule("SA018")
         o = self.src("SA")
         g, cat = list(dict.fromkeys(x for x in o["grain"] if x)), q(o["category_col"])
         sel = ", ".join(f"SUM(CASE WHEN {cat} IS NOT NULL AND {q(c)} IS NULL THEN 1 ELSE 0 END) AS n{i}" for i, c in enumerate(g))
@@ -838,7 +1015,7 @@ class LiveRunner:
             k = int(num(r.get(f"n{i}")))
             smp = self.rows(o, f"SELECT TOP 10 {self.idc('SA')}{cat} AS category, {q(c)} FROM {self.t('SA')} "
                                f"WHERE {cat} IS NOT NULL AND {q(c)} IS NULL") if k else []
-            self.add("SA", "SA016", c, "FAIL" if k else "PASS", f"{c} (grain) null on {k:,} of {tot:,} rows with a category ({pct(k, tot)}%)",
+            self.add("SA", "SA018", c, "FAIL" if k else "PASS", f"{c} (grain) null on {k:,} of {tot:,} rows with a category ({pct(k, tot)}%)",
                      pct(k, tot), k, 0, smp)
 
     def calc(self, rule, target, inputs, expr, label):
@@ -856,21 +1033,24 @@ class LiveRunner:
         smp = self.rows(o, f"SELECT TOP 10 {self.idc('SA')}{', '.join(q(o[x]) for x in inputs)}, {q(o[target])} AS stored, ({cx}) AS calculated, "
                            f"{tg} - ({cx}) AS diff FROM {self.t('SA')} WHERE {nn} AND {cond} ORDER BY ABS({tg} - ({cx})) DESC", (tol,)) if k else []
         self.add("SA", rule, "", "FAIL" if k else "PASS",
-                 f"{o[target]} vs {label}: {k:,} of {ev:,} evaluated rows differ (tolerance {tol:g}"
-                 + (f", both sides rounded to {int(dp)} dp" if dp is not None else "") + f"); {tot - ev:,} rows with a null input not evaluated",
-                 pct(k, ev), k, 0, smp)
+                 core.fmsg(f"{k:,} of {ev:,} evaluated rows: {o[target]} does not equal {label}" if k
+                           else f"{o[target]} equals {label} on all {ev:,} evaluated rows",
+                           f"Tolerance: {tol:g}" + (f", both sides rounded to {int(dp)} dp" if dp is not None else ""),
+                           f"Not evaluated (null input): {tot - ev:,} rows"), pct(k, ev), k, 0, smp)
 
     def mdm001(self):
         self.need_rule("MDM001")
         o, u = self.src("MDM"), q(self.src("MDM")["upc_col"])
         r = self.one(o, f"SELECT COUNT_BIG(*) AS k, ISNULL(SUM(c), 0) AS n, (SELECT COUNT_BIG(*) FROM {self.t('MDM')}) AS tot, "
+                        f"(SELECT COUNT_BIG(DISTINCT {u}) FROM {self.t('MDM')}) AS dn, "
                         f"(SELECT COUNT_BIG(*) FROM {self.t('MDM')} WHERE {u} IS NULL) AS z FROM "
                         f"(SELECT COUNT_BIG(*) AS c FROM {self.t('MDM')} WHERE {u} IS NOT NULL GROUP BY {u} HAVING COUNT_BIG(*) > 1) x")
-        k, n, tot, z = (int(num(r.get(x))) for x in ("k", "n", "tot", "z"))
+        k, n, tot, z, dn = (int(num(r.get(x))) for x in ("k", "n", "tot", "z", "dn"))
         smp = self.rows(o, f"SELECT TOP 10 {u}, COUNT_BIG(*) AS dup_count FROM {self.t('MDM')} WHERE {u} IS NOT NULL GROUP BY {u} "
                            f"HAVING COUNT_BIG(*) > 1 ORDER BY dup_count DESC") if k else []
-        self.add("MDM", "MDM001", "", "FAIL" if k or z else "PASS", f"{k:,} duplicated UPCs ({n:,} rows of {tot:,}); {z:,} null UPC rows",
-                 pct(n + z, tot), k, 0, smp)
+        self.add("MDM", "MDM001", "", "FAIL" if k or z else "PASS",
+                 core.fmsg(f"{k:,} duplicated UPCs, {z:,} null UPC rows" if k or z else "UPC is unique and complete",
+                           f"Distinct UPCs: {dn:,}", f"Rows of duplicated UPCs: {n:,} of {tot:,}", f"Null UPC rows: {z:,}"), pct(n + z, tot), k, 0, smp)
 
     def mdm002(self):
         self.need_rule("MDM002")
@@ -886,21 +1066,46 @@ class LiveRunner:
         agg = {r["cls"]: int(num(r["n"])) for r in self.rows(o, f"{cte} SELECT cls, COUNT_BIG(*) AS n FROM x GROUP BY cls")}
         tot, bad = sum(agg.values()), sum(v for k, v in agg.items() if k != "ok")
         smp = self.rows(o, f"{cte} SELECT TOP 10 * FROM x WHERE cls <> 'ok' ORDER BY cls") if bad else []
-        det = "; ".join(f"{k}: {v:,}" for k, v in sorted(agg.items()) if k != "ok")
         self.add("MDM", "MDM002", "", "FAIL" if bad else "PASS",
-                 f"{bad:,} of {tot:,} rows where sys|vendor|item (2-5-5, bigint) does not equal upc_number" + (f" ({det})" if det else ""),
+                 core.fmsg(f"{bad:,} of {tot:,} rows where sys|vendor|item does not build upc_number" if bad
+                           else f"sys|vendor|item builds upc_number on all {tot:,} rows",
+                           *[f"{k}: {v:,}" for k, v in sorted(agg.items()) if k != "ok"], "Build: sys (2) + vendor (5) + item (5), as bigint"),
                  pct(bad, tot), bad, 0, smp)
+
+    def mdm004(self):
+        self.need_rule("MDM004")
+        o, t = self.src("MDM"), self.t("MDM")
+        for col in dict.fromkeys(x for x in o["product_col"] if x):
+            try:
+                c = q(col)
+                r = self.one(o, f"SELECT COUNT_BIG(*) AS tot, SUM(CASE WHEN {c} IS NULL THEN 1 ELSE 0 END) AS z, COUNT_BIG(DISTINCT {c}) AS n FROM {t}")
+                tot, z, n = int(num(r.get("tot"))), int(num(r.get("z"))), int(num(r.get("n")))
+                vals = self.rows(o, f"SELECT TOP {PROFILE_MAX} {c} AS value, COUNT_BIG(*) AS row_count FROM {t} WHERE {c} IS NOT NULL "
+                                    f"GROUP BY {c} ORDER BY COUNT_BIG(*) DESC, {c}")
+            except Exception as e:  # e.g. text/ntext columns cannot be grouped: reported per column, other columns still run
+                self.add("MDM", "MDM004", col, "BLOCKED", f"MDM004 did not run for {col}: {str(e).splitlines()[0][:200]}")
+                continue
+            top = ", ".join(f"{v['value']} ({int(v['row_count']):,})" for v in vals[:5])
+            self.add("MDM", "MDM004", col, "PASS", core.fmsg(f"{col}: {n:,} distinct non-null values", f"Null rows: {z:,} of {tot:,}",
+                     f"Most frequent: {top}" if top else "", f"Only the first {PROFILE_MAX:,} values kept" if n > PROFILE_MAX else ""), 0, n, None, None,
+                     {"column": col, "distinct_count": n, "null_rows": z, "truncated": n > PROFILE_MAX,
+                      "values": [{"value": v["value"], "row_count": int(v["row_count"])} for v in vals]})
+
+    def mdm005(self):
+        self.need_rule("MDM005")
+        url = str(self.rule("MDM005").get("url") or "").strip()
+        self.add("MDM", "MDM005", "", "PASS", "For additional checks run the Streamlit MDM validation tool" + (f": {url}" if url else ""), 0)
 
     def pos001(self):
         self.need_rule("POS001")
         s, _, t1 = self.dcount("POS", "store_col")
         u, _, _ = self.dcount("POS", "upc_col")
-        self.add("POS", "POS001", "", "PASS", f"{s:,} distinct stores and {u:,} distinct UPCs in {t1:,} rows", 0, s)
+        self.add("POS", "POS001", "", "PASS", core.fmsg(f"{s:,} distinct stores, {u:,} distinct UPCs", f"Rows: {t1:,}"), 0, s)
 
     def pos002(self):
         self.need_rule("POS002")
         n, nn, tot = self.dcount("POS", "upc_col")
-        self.add("POS", "POS002", "", "PASS", f"{nn:,} non-null UPC rows, {n:,} distinct UPCs, {tot - nn:,} null UPC rows", 0, nn)
+        self.add("POS", "POS002", "", "PASS", core.fmsg(f"{n:,} distinct UPCs", f"Non-null UPC rows: {nn:,}", f"Null UPC rows: {tot - nn:,}"), 0, nn)
 
     def spec_checks(self):
         cfg = self.cfg
@@ -912,32 +1117,39 @@ class LiveRunner:
             ("SA", "SA004", lambda: self.list_check("SA", "SA004", "SA", "week_col", "IRI weeks", cfg.get("expected_weeks") or ""), ""),
             ("SA", "SA005", self.sa005, ""),
             ("SA", "SA006", self.sa006_grain, "grain"),
-            ("SA", "SA006", self.sa006_row, "row"),
+            ("SA", "SA006", lambda: self.row_dup("SA", "SA006", "SA", "row"), "row"),
             ("SA", "SA007", self.sa007, ""),
             ("SA", "SA008", self.sa008, ""),
             ("SA", "SA009", self.sa009, ""),
-            ("SA", "SA010", lambda: self.not_null("SA", "SA010", "SA", "shelf_feet_col", cat, " with a category"), ""),
-            ("SA", "SA011", lambda: self.not_null("SA", "SA011", "SA", "facings_col", cat, " with a category"), ""),
-            ("SA", "SA012", lambda: self.count_check("SA", "SA012", "SA", "store_col", "store"), ""),
-            ("SA", "SA013", lambda: self.count_check("SA", "SA013", "SA", "upc_col", "upc"), ""),
-            ("SA", "SA014", lambda: self.calc("SA014", "shelf_feet_col", ("facings_col", "upc_width_col"),
+            ("SA", "SA010", self.sa010, ""),
+            ("SA", "SA011", self.sa011, ""),
+            ("SA", "SA012", lambda: self.not_null("SA", "SA012", "SA", "shelf_feet_col", cat, " with a category"), ""),
+            ("SA", "SA013", lambda: self.not_null("SA", "SA013", "SA", "facings_col", cat, " with a category"), ""),
+            ("SA", "SA014", lambda: self.count_check("SA", "SA014", "SA", "store_col", "store"), ""),
+            ("SA", "SA015", lambda: self.count_check("SA", "SA015", "SA", "upc_col", "upc"), ""),
+            ("SA", "SA016", lambda: self.calc("SA016", "shelf_feet_col", ("facings_col", "upc_width_col"),
                                               lambda f: f"{f[0]} * {f[1]} / 12.0", "facings x upc_width / 12"), ""),
-            ("SA", "SA015", lambda: self.calc("SA015", "capacity_col", ("facings_col", "units_deep_col", "units_high_col"),
+            ("SA", "SA017", lambda: self.calc("SA017", "capacity_col", ("facings_col", "units_deep_col", "units_high_col"),
                                               lambda f: f"{f[0]} * {f[1]} * {f[2]}", "facings x units_deep x units_high"), ""),
-            ("SA", "SA016", self.sa016, ""),
+            ("SA", "SA018", self.sa018, ""),
             ("MDM", "MDM001", self.mdm001, ""),
             ("MDM", "MDM002", self.mdm002, ""),
+            ("MDM", "MDM003", lambda: self.row_dup("MDM", "MDM003", "MDM"), ""),
+            ("MDM", "MDM004", self.mdm004, ""),
+            ("MDM", "MDM005", self.mdm005, ""),
             ("PROJ", "PRJ001", lambda: self.list_check("PROJ", "PRJ001", "PROJ", "geo_col", "geographies", None), ""),
             ("PROJ", "PRJ002", lambda: self.count_check("PROJ", "PRJ002", "PROJ", "store_col", "store"), ""),
             ("PROJ", "PRJ003", lambda: self.list_check("PROJ", "PRJ003", "PROJ", "outlet_col", "outlets", None), ""),
             ("PROJ", "PRJ004", lambda: self.list_check("PROJ", "PRJ004", "PROJ", "geo_level_col", "geo levels", None), ""),
             ("PROJ", "PRJ005", lambda: self.list_check("PROJ", "PRJ005", "PROJ", "week_col", "IRI weeks", None), ""),
-            ("PROJ", "PRJ006", lambda: self.list_check("PROJ", "PRJ006", "PROJ", "version_col", "versions", None), ""),
+            ("PROJ", "PRJ006", lambda: self.row_dup("PROJ", "PRJ006", "PROJ"), ""),
+            ("PROJ", "PRJ007", lambda: self.list_check("PROJ", "PRJ007", "PROJ", "version_col", "versions", None), ""),
             ("POS", "POS001", self.pos001, ""),
             ("POS", "POS002", self.pos002, ""),
             ("POS", "POS003", lambda: self.list_check("POS", "POS003", "POS", "week_col", "IRI weeks", None), ""),
             ("POS", "POS004", lambda: self.not_null("POS", "POS004", "POS", "dollars_col"), ""),
             ("POS", "POS005", lambda: self.not_null("POS", "POS005", "POS", "units_col"), ""),
+            ("POS", "POS006", lambda: self.row_dup("POS", "POS006", "POS"), ""),
         ]
         for stage, rule, fn, sub in plan:
             self.safe(stage, rule, fn, sub)
@@ -966,6 +1178,7 @@ class LiveRunner:
         custom = [c for c in (cfg.get("custom_checks") or []) if c.get("id")]
         self.setup_custom(custom)
         self.off = {r for r in (cfg.get("rules_off") or []) if r in self.rules and self.rule(r).get("enabled", True) is not False}
+        self.na = {r: why for r, why in core.not_applicable(cfg).items() if r in self.rules}
         try:
             for st in SOURCES:
                 src = (cfg.get("sources") or {}).get(st) or {}
@@ -993,10 +1206,6 @@ class LiveRunner:
                 s = time.time()
                 self.custom_checks(custom)
                 rt["CUSTOM"] = round(time.time() - s, 1)
-            self.safe("MDM", "XS-001", lambda: self.cmp("MDM", "XS-001", "SA.upc", "MDM.upc", "upc"))
-            self.safe("PROJ", "XS-002", lambda: self.cmp("PROJ", "XS-002", "SA.store", "PROJ.store", "store"))
-            self.safe("POS", "XS-003", lambda: (self.cmp("POS", "XS-003", "SA.store", "POS.store", "store", True),
-                                                 self.cmp("POS", "XS-003", "SA.upc", "POS.upc", "upc", True)))
         finally:
             for c in self._conns.values():
                 try:
@@ -1035,7 +1244,7 @@ class LiveRunner:
             "expected_rules": {k: {"stage": v.get("stage"), "severity": v.get("severity")} for k, v in self.rules.items()
                                if v.get("required") and v.get("enabled", True) is not False},
             "disabled_rules": [k for k, v in self.rules.items() if v.get("enabled", True) is False],
-            "skipped_rules": sorted(self.off | {c["id"] for c in custom if not c["run"]}),
+            "skipped_rules": sorted(self.off | {r for r in self.na if self.rule(r).get("enabled", True) is not False} | {c["id"] for c in custom if not c["run"]}),
             "config": cfg,
         }
         if results_dir:

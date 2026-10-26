@@ -15,11 +15,17 @@ XR_DESC = {"XR-001": "Live SA counts match the SA the IS run processed",
 XR_TOL = 5.0
 DIMS = ["accuracy", "completeness", "consistency", "timeliness", "uniqueness", "validity"]  # rule -> dimension map lives in checks_input.json
 
+
+def fmsg(head, *bullets):
+    """Check message: one-line verdict, then one '- ' bullet per fact. Empty bullets are dropped. The Checks table shows line 1 only."""
+    return "\n".join([head] + [f"- {b}" for b in bullets if b])
+
 # ---- live input sources, column roles and what each spec check needs ----
 INPUTS = {
     "SA": ("Shelf audit (SA)", ["store_col", "upc_col", "grain", "measures", "delivery_col", "task_col", "week_col", "location_col",
                                 "category_col", "delete_tstamp_col", "status_cd_col", "dropped_reason_col", "shelf_feet_col",
-                                "facings_col", "capacity_col", "upc_width_col", "units_deep_col", "units_high_col"]),
+                                "facings_col", "capacity_col", "upc_width_col", "units_deep_col", "units_high_col",
+                                "aisle_col", "side_col", "section_col", "shelf_col"]),
     "IMP": ("Imputed store sample", ["store_col", "delivery_col", "status_col", "imputed_value"]),
     "PRIOR": ("Prior wave SA", ["store_col", "shelf_feet_col", "facings_col", "capacity_col"]),
     "SHELFVAR": ("Shelf var master", ["id_col", "desc_col"]),
@@ -36,23 +42,25 @@ ROLE = {"store_col": "Store column", "upc_col": "UPC column", "grain": "Grain (u
         "imputed_value": "Imputed status value", "id_col": "Shelf var ID column", "desc_col": "Description column",
         "sys_col": "Sys column", "gen_col": "Gen column", "vendor_col": "Vendor column", "item_col": "Item column",
         "weight_col": "Projection weight column", "geo_col": "CDM geo / geography column", "outlet_col": "Outlet column",
-        "geo_level_col": "Geo level column", "dollars_col": "Dollars column", "units_col": "Units column", "product_col": "Product column", "version_col": "Version column"}
+        "geo_level_col": "Geo level column", "dollars_col": "Dollars column", "units_col": "Units column", "product_col": "Product column(s)", "version_col": "Version column",
+        "aisle_col": "Aisle column", "side_col": "Side column", "section_col": "Section column", "shelf_col": "Shelf column"}
 _IMP = [("IMP", "store_col"), ("IMP", "delivery_col"), ("IMP", "status_col")]
 _M3 = ["shelf_feet_col", "facings_col", "capacity_col"]
 REQ = {
     "SA001": [("SA", "delivery_col")], "SA002": [("SA", "task_col")],
-    "SA003": [("SA", "delete_tstamp_col"), ("SA", "status_cd_col"), ("SA", "dropped_reason_col")],
+    "SA003": [("SA", "category_col"), ("SA", "delete_tstamp_col"), ("SA", "status_cd_col"), ("SA", "dropped_reason_col")],
     "SA004": [("SA", "week_col")], "SA005": [("SA", "location_col"), ("SHELFVAR", "id_col"), ("SHELFVAR", "desc_col")],
     "SA006": [("SA", "grain")], "SA007": [("SA", "store_col")] + _IMP, "SA008": [("SA", "store_col")] + _IMP,
+    "SA010": [("SA", "store_col")] + _IMP, "SA011": [("SA", "store_col")] + _IMP,
     "SA009": [("SA", "store_col")] + [("SA", r) for r in _M3] + [("PRIOR", "store_col")] + [("PRIOR", r) for r in _M3] + _IMP,
-    "SA010": [("SA", "category_col"), ("SA", "shelf_feet_col")], "SA011": [("SA", "category_col"), ("SA", "facings_col")],
-    "SA012": [("SA", "store_col")], "SA016": [("SA", "category_col"), ("SA", "grain")], "SA013": [("SA", "upc_col")],
-    "SA014": [("SA", "shelf_feet_col"), ("SA", "facings_col"), ("SA", "upc_width_col")],
-    "SA015": [("SA", "capacity_col"), ("SA", "facings_col"), ("SA", "units_deep_col"), ("SA", "units_high_col")],
-    "MDM001": [("MDM", "upc_col")], "MDM002": [("MDM", r) for r in ("upc_col", "sys_col", "vendor_col", "item_col")],
+    "SA012": [("SA", "category_col"), ("SA", "shelf_feet_col")], "SA013": [("SA", "category_col"), ("SA", "facings_col")],
+    "SA014": [("SA", "store_col")], "SA018": [("SA", "category_col"), ("SA", "grain")], "SA015": [("SA", "upc_col")],
+    "SA016": [("SA", "shelf_feet_col"), ("SA", "facings_col"), ("SA", "upc_width_col")],
+    "SA017": [("SA", "capacity_col"), ("SA", "facings_col"), ("SA", "units_deep_col"), ("SA", "units_high_col")],
+    "MDM001": [("MDM", "upc_col")], "MDM003": [("MDM", "table")], "MDM005": [("MDM", "table")], "MDM004": [("MDM", "product_col")], "MDM002": [("MDM", r) for r in ("upc_col", "sys_col", "vendor_col", "item_col")],
     "PRJ001": [("PROJ", "geo_col")], "PRJ002": [("PROJ", "store_col")], "PRJ003": [("PROJ", "outlet_col")],
-    "PRJ004": [("PROJ", "geo_level_col")], "PRJ005": [("PROJ", "week_col")], "PRJ006": [("PROJ", "version_col")],
-    "POS001": [("POS", "store_col"), ("POS", "upc_col")], "POS002": [("POS", "upc_col")], "POS003": [("POS", "week_col")],
+    "PRJ004": [("PROJ", "geo_level_col")], "PRJ005": [("PROJ", "week_col")], "PRJ006": [("PROJ", "table")], "PRJ007": [("PROJ", "version_col")],
+    "POS001": [("POS", "store_col"), ("POS", "upc_col")], "POS006": [("POS", "table")], "POS002": [("POS", "upc_col")], "POS003": [("POS", "week_col")],
     "POS004": [("POS", "dollars_col")], "POS005": [("POS", "units_col")],
 }
 REQ_INPUT = {"SA001": ("expected_delivery_id", "Expected delivery ID"), "SA002": ("expected_task", "Expected task number"),
@@ -116,7 +124,86 @@ def custom_problem(c, cfg, builtin_ids, taken):
     return ""
 
 
-NEEDS_DELIVERY = {"SA007", "SA008", "SA009"}
+# ---- MSL tab: location grain (store is always part of the grain; the roles below are the SA location columns added by each rule) ----
+MSL_RULES = {"Rule 1: Store, aisle": ["aisle_col"],
+             "Rule 2: Store, aisle, side": ["aisle_col", "side_col"],
+             "Rule 3: Store, aisle, side, section": ["aisle_col", "side_col", "section_col"],
+             "Rule 4: Store, aisle, side, section, shelf": ["aisle_col", "side_col", "section_col", "shelf_col"],
+             "Rule 5: Store, location": ["location_col"]}
+MSL_THRESHOLDS = [50, 55, 60, 65, 70]
+
+# Worked example shown in the MSL tab (illustrative numbers, not client data): facings of one product, one row per physical position.
+MSL_EX_COLS = ["Store", "Aisle", "Side", "Section", "Shelf", "Location", "Facings"]
+MSL_EX_BASE = [("101", "4", "L", "2", "3", "L1", 24), ("101", "4", "L", "2", "5", "L2", 10), ("101", "4", "R", "1", "2", "L3", 6),
+               ("102", "4", "L", "2", "3", "L1", 35), ("102", "4", "L", "2", "5", "L2", 5)]
+MSL_EX_IDX = {"aisle_col": 1, "side_col": 2, "section_col": 3, "shelf_col": 4, "location_col": 5}
+MSL_EX_LBL = {"aisle_col": "Aisle", "side_col": "Side", "section_col": "Section", "shelf_col": "Shelf", "location_col": "Location"}
+
+
+def msl_example(rule, threshold):
+    """Same arithmetic as msl_sql on the worked-example rows: facings summed per store x the rule's location grain; dominant = most
+    facings (ties: lowest location value); share = 100 x dominant facings / store total facings."""
+    idx, out = [MSL_EX_IDX[r] for r in MSL_RULES[rule]], []
+    for s in dict.fromkeys(r[0] for r in MSL_EX_BASE):
+        g = {}
+        for r in (x for x in MSL_EX_BASE if x[0] == s):
+            k = tuple(r[i] for i in idx)
+            g[k] = g.get(k, 0) + r[6]
+        rows = sorted(g.items(), key=lambda kv: (-kv[1], kv[0]))
+        tot = sum(g.values())
+        share = 100.0 * rows[0][1] / tot
+        out.append({"store": s, "groups": [(" / ".join(k), f) for k, f in rows], "total": tot, "dominant": " / ".join(rows[0][0]),
+                    "dom_fac": rows[0][1], "share": share, "passes": share >= threshold})
+    return out
+
+
+def msl_missing(cfg, rule, level=""):
+    """Mappings the MSL tab still needs from SA and MDM. Empty list = ready to run."""
+    srcs, out = cfg.get("sources") or {}, []
+    for s, roles in (("SA", ["store_col", "upc_col", "facings_col", *MSL_RULES[rule]]), ("MDM", ["upc_col", "product_col"])):
+        o = srcs.get(s) or {}
+        if not o.get("table"):
+            out.append(f"{INPUTS[s][0]} table")
+            continue
+        out += [f"{INPUTS[s][0]} → {ROLE[r]}" for r in roles if not o.get(r)]
+    if level and level not in ((srcs.get("MDM") or {}).get("product_col") or []):
+        out.append(f"Product '{level}' is not one of the mapped Product master → {ROLE['product_col']}")
+    return list(dict.fromkeys(out))
+
+
+NEEDS_DELIVERY = {"SA007", "SA008", "SA009", "SA010", "SA011"}
+OPTIONAL = {"PRIOR": "no prior wave table entered"}  # a source that may legitimately not exist: its checks are not applicable, not Manual
+
+
+def not_applicable(cfg):
+    """{rule: reason} for spec checks that depend on an optional source whose table is blank."""
+    srcs = cfg.get("sources") or {}
+    return {r: OPTIONAL[s] for r, req in REQ.items() for s, _ in req if s in OPTIONAL and not (srcs.get(s) or {}).get("table")}
+
+# Input checks that run automatically on every mapped source (not in REQ: an unmapped source is skipped, never Manual)
+GEN = {"IN-001": {"roles": None, "cols": ["row count"]},
+       "IN-002": {"roles": ["store_col", "upc_col", "grain"]},
+       "IN-005": {"roles": ["measures"]},
+       "PRJ-001": {"roles": ["weight_col"], "only": ["PROJ"]}}
+
+
+def generic_runs(rule, cfg):
+    """{source: [columns]} an input check will test with the current mapping. Empty = it will not run."""
+    g, out = GEN[rule], {}
+    for s in ("SA", "MDM", "PROJ", "POS"):
+        o = (cfg.get("sources") or {}).get(s) or {}
+        if not o.get("table") or (g.get("only") and s not in g["only"]):
+            continue
+        if g["roles"] is None:
+            out[s] = list(g["cols"])
+            continue
+        cols = []
+        for r in g["roles"]:
+            v = o.get(r)
+            cols += [x for x in (v if isinstance(v, list) else [v]) if x]
+        if cols:
+            out[s] = list(dict.fromkeys(cols))
+    return out
 
 
 def missing_for(rule, cfg):
@@ -135,8 +222,13 @@ def missing_for(rule, cfg):
     return list(dict.fromkeys(out))
 
 
+def skipped(c):
+    """A check the user switched off in Check readiness. Shown as Manual, never a blocker (older saved runs: matched by message)."""
+    return bool(c.get("skipped")) or "switched off for this run" in str(c.get("message") or "")
+
+
 def blocks(c):
-    if c["status"] == "PASS":
+    if c["status"] == "PASS" or skipped(c):
         return False
     if c["status"] == "BLOCKED":
         return True
@@ -167,6 +259,17 @@ def dim_matrix(checks, dims):
             k, cur = (c["stage"], d), out.get((c["stage"], d), "PASS")
             out[k] = c["status"] if ST_O.get(c["status"], 9) < ST_O.get(cur, 9) else cur
     return out
+
+
+def dim_detail(checks, dims):
+    """Every non-passing check behind the dimension grid: one row per check, worst first. Same rule -> dimension map as dim_matrix."""
+    r2d = {r: d for d, rs in (dims or {}).items() for r in rs}
+    rows = [{"stage": c["stage"], "dimension": r2d[c["rule"]], "rule": c.get("rule"), "check_id": c["check_id"], "status": c["status"],
+             "severity": c.get("severity"), "message": str(c.get("message") or "").splitlines()[0] if c.get("message") else ""}
+            for c in checks if c.get("rule") in r2d and c["status"] != "PASS"]
+    rows.sort(key=lambda r: (STAGE_ORDER.get(r["stage"], len(STAGES)), DIMS.index(r["dimension"]) if r["dimension"] in DIMS else 99,
+                             ST_O.get(r["status"], 9), SEV_O.get(r["severity"], 9), r["rule"] or ""))
+    return rows
 
 
 def trend(check_id, report_name, runs):
@@ -253,20 +356,26 @@ def cross(L, J):
                     "actual_value": a, "expected_value": e, "sample_failing_rows": []})
 
     if lp.get("stores") is not None and c["saS"] is not None:
-        mk("XR_SA_stores", "XR-001", "SA", "CRITICAL", lp["stores"] == c["saS"],
-           f"IS run processed {fmt(c['saS'])} SA stores; live SA table has {fmt(lp['stores'])}", pc(c["saS"], lp["stores"]), c["saS"], lp["stores"])
+        ok = lp["stores"] == c["saS"]
+        mk("XR_SA_stores", "XR-001", "SA", "CRITICAL", ok,
+           fmsg("IS run and live SA have the same store count" if ok else "IS run and live SA store counts differ",
+                f"IS run processed: {fmt(c['saS'])}", f"Live SA table: {fmt(lp['stores'])}"), pc(c["saS"], lp["stores"]), c["saS"], lp["stores"])
     if lp.get("upcs") is not None and c["saU"] is not None:
-        mk("XR_SA_upcs", "XR-001", "SA", "CRITICAL", lp["upcs"] == c["saU"],
-           f"IS run processed {fmt(c['saU'])} SA UPCs; live SA table has {fmt(lp['upcs'])}", pc(c["saU"], lp["upcs"]), c["saU"], lp["upcs"])
+        ok = lp["upcs"] == c["saU"]
+        mk("XR_SA_upcs", "XR-001", "SA", "CRITICAL", ok,
+           fmsg("IS run and live SA have the same UPC count" if ok else "IS run and live SA UPC counts differ",
+                f"IS run processed: {fmt(c['saU'])}", f"Live SA table: {fmt(lp['upcs'])}"), pc(c["saU"], lp["upcs"]), c["saU"], lp["upcs"])
     base = (lp["stores"], "live SA") if lp.get("stores") is not None else (c["saS"], "IS SA") if c["saS"] is not None else None
     if base and c["prep"] is not None:
         d = pc(c["prep"], base[0])
         mk("XR_PREP_stores", "XR-002", "PREP", "WARNING", d <= XR_TOL,
-           f"Prep stores {fmt(c['prep'])} vs {base[1]} {fmt(base[0])} ({d:.2f}% absolute change, tol {XR_TOL:g}%)", d, c["prep"], base[0])
+           fmsg(f"Prep store count is within {XR_TOL:g}% of {base[1]}" if d <= XR_TOL else f"Prep store count moved more than {XR_TOL:g}% from {base[1]}",
+                f"Prep: {fmt(c['prep'])}", f"{base[1]}: {fmt(base[0])}", f"Absolute change: {d:.2f}%"), d, c["prep"], base[0])
     if c["prep"] is not None and c["stg"] is not None:
         d = pc(c["stg"], c["prep"])
         mk("XR_STG_stores", "XR-002", "STAGING", "WARNING", d <= XR_TOL,
-           f"Staging all-stores {fmt(c['stg'])} vs Prep {fmt(c['prep'])} ({d:.2f}% absolute change, tol {XR_TOL:g}%)", d, c["stg"], c["prep"])
+           fmsg(f"Staging store count is within {XR_TOL:g}% of Prep" if d <= XR_TOL else f"Staging store count moved more than {XR_TOL:g}% from Prep",
+                f"Staging (all stores): {fmt(c['stg'])}", f"Prep: {fmt(c['prep'])}", f"Absolute change: {d:.2f}%"), d, c["stg"], c["prep"])
     return out
 
 
@@ -276,7 +385,7 @@ def recount(ch):
             "critical_failures": sum(c.get("severity") == "CRITICAL" and c["status"] == "FAIL" for c in ch),
             "high_failures": sum(c.get("severity") == "HIGH" and c["status"] == "FAIL" for c in ch),
             "manual_required": k("MANUAL_REQUIRED"), "blocked": k("BLOCKED"),
-            "critical_unresolved": sum(c.get("severity") == "CRITICAL" and c["status"] != "PASS" for c in ch),
+            "critical_unresolved": sum(c.get("severity") == "CRITICAL" and c["status"] != "PASS" and not skipped(c) for c in ch),
             "blocking": sum(blocks(c) for c in ch), "suspect": sum(suspect(c) for c in ch)}
 
 
@@ -298,7 +407,7 @@ def build(L, J, live_runs, is_runs, live_enabled=True):
         if L.get("disabled_rules"):
             guard.append(f"Disabled in checks_input.json, not run: {', '.join(L['disabled_rules'])}.")
         if L.get("skipped_rules"):
-            guard.append(f"Switched off for this run, shown as Manual: {', '.join(L['skipped_rules'])}.")
+            guard.append(f"Switched off or not applicable for this run, shown as Manual and not blocking. Put them in the release notes: {', '.join(L['skipped_rules'])}.")
     x = {"L": L, "J": J, "checks": checks, "diff": {}, "issues": [],
          "desc": {**((J or {}).get("rule_descriptions") or {}), **((L or {}).get("rule_descriptions") or {}), **XR_DESC}}
 
@@ -348,12 +457,12 @@ def build(L, J, live_runs, is_runs, live_enabled=True):
     rc = recount(checks)
     if rc["critical_unresolved"] > rc["critical_failures"]:
         iss.append(f"{rc['critical_unresolved'] - rc['critical_failures']} CRITICAL checks are unresolved (manual or blocked) and still block release.")
-    hi = sum(c["status"] == "MANUAL_REQUIRED" and c.get("severity") == "HIGH" for c in checks)
+    hi = sum(c["status"] == "MANUAL_REQUIRED" and c.get("severity") == "HIGH" and not skipped(c) for c in checks)
     if hi:
         iss.append(f"{hi} HIGH checks are Manual (not mapped, or switched off) and block release.")
     for c in checks:
         if suspect(c):
-            iss.append(f"{c['stage']} {c['rule']} passed with a negative change: \"{c['message']}\". Confirm it tests absolute deviation.")
+            iss.append(f"{c['stage']} {c['rule']} passed with a negative change: \"{str(c['message']).splitlines()[0]}\". Confirm it tests absolute deviation.")
 
     x["counts"] = rc
     x["blocking"] = [c for c in checks if blocks(c)]
